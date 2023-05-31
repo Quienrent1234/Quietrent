@@ -1,0 +1,191 @@
+{% extends 'admin/content-admin.html' %}
+{% load static %}
+{% block content2 %}
+<!--    Links pour les templates de register    -->
+    <link rel="stylesheet" type="text/css" href="{% static 'register/assets/css/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'register/assets/css/card.css' %}">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'register/assets/css/bootstrap.min.css' %}">
+
+    <!-- External Css -->
+    <link rel="stylesheet" href="{% static 'register/assets/css/line-awesome.min.css' %}">
+    
+    <!-- Custom Css -->
+    <link rel="stylesheet" type="text/css" href="{% static 'register/assets/css/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'register/assets/css/theme-1.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'register/assets/css/kyc-2.css' %}">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'register/assets/images/favicon.png' %}">
+    <link rel="apple-touch-icon" href="{% static 'register/assets/images/apple-touch-icon.png' %}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{% static 'register/assets/images/icon-72x72.png' %}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{% static 'register/assets/images/icon-114x114.png' %}">
+
+<div class="ugf-content">
+  <a href="../return-loc/{{ demande.id }}/" class="prev-page">Retour</a>
+  <h2>Le Bail</h2>
+  <p>Entrez les informations de votre bail</p>
+  <form action="" class="account-form" method="post" id="form-bail" novalidate>
+    {% csrf_token %}
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+        <label for="inputAddress">Adresse de la location</label>
+        <input type="text" placeholder="e.g. Smith" class="form-control" id="inputAddress" name="inputAddress" value="{{adresse}}">
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="inputCode">Code Postal</label>
+          <input type="text" placeholder="e.g. Smith" class="form-control" id="inputCode" name="inputCode" value="{{codePostal}}">
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="inputCity">Ville</label>
+          <input type="text" placeholder="e.g. Smith" class="form-control" id="inputCity" name="inputCity" value="{{city}}">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group" id="lease-effective-date">
+          <label for="inputDate">Date d'effet du bail</label>
+          <div class="birth-date">
+            <div class="select-input birth-date-input">
+              <span></span>
+              <select id="inputDate" class="form-control" name="mois">
+                <option value="" selected disabled hidden>mois</option>
+                <option value=1>01</option>
+                <option value=2>02</option>
+                <option value=3>03</option>
+                <option value=4>04</option>
+                <option value=5>05</option>
+                <option value=6>06</option>
+                <option value=7>07</option>
+                <option value=8>08</option>
+                <option value=9>09</option>
+                <option value=10>10</option>
+                <option value=11>11</option>
+                <option value=12>12</option>
+              </select>
+            </div>
+            <div class="select-input birth-date-input">
+              <span></span>
+              <select id="inputDate" class="form-control" name="annee">
+                <option value="" selected disabled hidden>année</option>
+                <option value=2015>2015</option>
+                <option value=2016>2016</option>
+                <option value=2017>2017</option>
+                <option value=2018>2018</option>
+                <option value=2019>2019</option>
+                <option value=2020>2020</option>
+                <option value=2021>2021</option>
+                <option value=2022>2022</option>
+                <option value=2023>2023</option>
+                <option value=2024>2024</option>
+                <option value=2025>2025</option>
+                <option value=2026>2026</option>
+                <option value=2027>2027</option>
+                <option value=2028>2028</option>
+                <option value=2029>2029</option>
+              </select>
+            </div>
+          </div>
+          <label>
+            <input type="checkbox" name="negotiation" id="negotiation">
+            <span>Bail en cours de négociation</span>
+          </label>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="loyer">Montant du loyer annuel HT HC</label>
+          <input type="text" placeholder="e.g. Smith" class="form-control" id="loyer" name="loyer">
+        </div>
+      </div>
+      <div class="col-sm-6">
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="garantie">Montant du dépôt de garantie initialement prévu</label>
+          <input type="text" placeholder="e.g. Smith" class="form-control" id="garantie" name="garantie">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="garantieMois">Soit en mois de loyers<br> &nbsp</label>
+          <div class="birth-date">
+            <div class="select-input birth-date-input">
+              <span></span>
+              <select id="loyerMois" class="form-control" name="garantieMois">
+                <option value=0>0</option>
+                <option value=1>1</option>
+                <option value=2>2</option>
+                <option value=3>3</option>
+                <option value=4>4</option>
+                <option value=5>5</option>
+                <option value=6>6</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="caution">Montant de la caution bancaire initialement prévue</label>
+          <input type="text" placeholder="e.g. Smith" class="form-control" id="caution" name="caution">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="cautionMois">Soit en mois de loyers <br> &nbsp</label>
+          <div class="birth-date">
+            <div class="select-input birth-date-input">
+              <span></span>
+              <select id="cautionMois" class="form-control" name="cautionMois">
+                <option value=0>0</option>
+                <option value=1>1</option>
+                <option value=2>2</option>
+                <option value=3>3</option>
+                <option value=4>4</option>
+                <option value=5>5</option>
+                <option value=6>6</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+        </div>
+      </div>
+    </div>
+    <button type="submit" class="btn"><span>Suivant</span> <i class="las la-arrow-right"></i></button>
+  </form>
+</div>
+{% endblock %}
+
+{% block js %}
+<script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous">
+    </script>
+<!--        Links pour les templates de register            -->
+    <script src="{% static 'register/assets/js/popper.min.js' %}"></script>
+    <script src="{% static 'register/assets/js/bootstrap.min.js' %}"></script>
+
+    <script src="{% static 'register/assets/js/owl.carousel.min.js' %}"></script>
+
+    <!--<script src="{% static 'register/assets/js/custom.js' %}"></script>-->
+    <script src="{% static 'register/assets/js/upload.js' %}"></script>
+    <script type="module" src="{% static 'register/assets/js/landlord.js' %}" defer></script>
+{% endblock %}

@@ -1,0 +1,9 @@
+django
+xhtml2pdf
+feedparser
+api-insee
+jwt
+docusign_esign
+djangorestframework
+python-jose
+pyquery

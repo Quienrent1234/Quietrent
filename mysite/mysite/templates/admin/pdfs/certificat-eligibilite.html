@@ -1,0 +1,73 @@
+{% extends 'admin/pdfs/header.html' %}
+{% load static %}
+
+{% block header %}
+<table>
+    <tr>
+        <td>
+            {{ block.super }}
+        </td>
+        <td class="header-right">
+            <p style="font-size: 16pt;">CERTIFICAT D'ÉLIGIBILITÉ <br> QuietRent Pro</p>
+        </td>
+    </tr>
+</table>
+{% endblock %}
+
+{% block content %}
+<!--body-->
+<div class="content">
+    <p> 
+        Le Cabinet INSOR, dont le siège social est au 14 rue de Richelieu 75001 Paris, atteste par la présente
+        que Les Bailleurs de la société {{ demande.social_reason }}, au capital de ...... €, ayant son siège
+        social au {{ demande.inputAddress }} {{ demande.inputCode }} à {{ demande.inputCity }}, immatriculée au registre du commerce et des sociétés de ------------- sous le
+        numéro {{demande.inputSIREN}}, sont éligibles au contrat groupe n° 1P0011962 sur les bases suivantes :
+    </p>
+    <table class="table-content">
+        <tr>
+            <th>Garantie</th>
+            <th>Indemnisation</th>
+            <th>Plafond des sommes garanties</th>
+            <th>Période de garantie</th>
+            <th>Seuil d'intervention</th>
+            <th>Franchise</th>
+        </tr>
+        <tr style="border:none">
+            <td>Garantie</td>
+            <td>Manquement du locataire à ses obligations locatives</td>
+            <td>100 %</td>
+            <td>Dépôt de Garantie (3 à 6 mois) ou Garantie à Première Demande (6 mois)</td>
+            <td>3 ans (renouvelables)</td>
+            <td>Néant</td>
+        </tr>
+        <tr style="border:none">
+            <td>Frais de procédure contentieuse</td>
+            <td>100 %</td>
+            <td>5.000 €</td>
+            <td>Sans limitation</td>
+            <td>Néant</td>
+            <td>Néant</td>
+        </tr>
+    </table>
+    <p class="asterisk">* La garantie est plafonnée en € pour un montant équivalent aux plafonds ci-dessus.</p>
+    <p>
+        En cas de manquement du locataire à ses obligations locatives, le cabinet INSOR interviendra en
+        partenariat avec SADA Assurances (Société Anonyme de Défense et d'Assurance - Entreprise régie
+        par le Code des Assurances - SA à Directoire et Conseil de Surveillance au capital de 32 388 700 € -
+        RCS Nîmes B 580 201 127) ci-après désignée par « la Compagnie », pour indemniser le propriétaire
+        bailleur dans les conditions fixées au Bulletin Individuel d'Adhésion qui sera transmis.
+    </p>
+    <p>
+        La garantie sera effective à compter de la date d'effet de l'adhésion du propriétaire bailleur au contrat
+        Groupe, sous réserve que le contrat référencé ci-dessus ne soit ni suspendu, ni résilié. Elle n'implique
+        qu'une présomption de garanti à la charge de l'assureur. L'acceptation et la délivrance de l'attestion
+        définitive vous sera notifiée par courriel sous réserve du bon paiement des cotisations par le locataire.
+    </p>
+    <p>
+        Si les conditions ci-dessus ne sont pas respectées, le cabinet INSOR se réserve la faculté de rétractatation
+        et de ne pas délivrer l'attestation définitive.
+    </p>
+    <p>Fait à Paris, le 24 mars 2021.</p>
+    <p class="title-signature">Pour la Compagnie, <br> Par délégation</p>
+</div>
+{% endblock %}

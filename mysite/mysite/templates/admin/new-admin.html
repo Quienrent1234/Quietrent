@@ -1,0 +1,91 @@
+{% extends 'admin/content-admin.html' %}
+{% load static %}
+{% block content2 %}
+<!--    Links pour les templates de register    -->
+    <link rel="stylesheet" type="text/css" href="{% static 'register/assets/css/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'register/assets/css/card.css' %}">
+
+    
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="{% static 'register/assets/css/bootstrap.min.css' %}"> -->
+
+    <!-- External Css -->
+    <link rel="stylesheet" href="{% static 'register/assets/css/line-awesome.min.css' %}">
+    
+    <!-- Custom Css -->
+    <link rel="stylesheet" type="text/css" href="{% static 'register/assets/css/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'register/assets/css/theme-1.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'register/assets/css/kyc-2.css' %}">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'register/assets/images/favicon.png' %}">
+    <link rel="apple-touch-icon" href="{% static 'register/assets/images/apple-touch-icon.png' %}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{% static 'register/assets/images/icon-72x72.png' %}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{% static 'register/assets/images/icon-114x114.png' %}">
+
+<style>
+.prev-page{
+    font-size: 1.5rem;
+    font-weight: 700;
+    font-family: "Roboto", sans-serif;
+    color: #b2becc;
+    text-transform: uppercase;
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 50px;
+} 
+.prev-page::before{
+    position: absolute;
+    top: 1px;
+    left: 0;
+    content: url(../../static/register/assets/images/arrow-left-grey.png);
+}
+</style>    
+
+
+<div class="ugf-content" style="display: flex;-webkit-box-pack: center;justify-content: center;-webkit-box-align: center;align-items: center;-webkit-box-orient: vertical;-webkit-box-direction: normal;flex-direction: column;min-height: 100vh;text-align: center;">
+    
+
+    <p>Enregistrer un nouvel administrateur</p>
+    <form class="my-4" method="post">
+      {% csrf_token %}
+      <div class="form-group mb-3 text-center">
+        {{form}}
+      </div><!--end form-group-->
+
+      <div class="form-group mb-0 row">
+          <div class="col-12">
+              <button class="btn text-white w-100" style="background-color: #4C9082" type="submit">Enregistrer<i class="fas fa-sign-in-alt ms-1"></i></button>
+              <a href="../dashboard-admin-analytique/"></a><button type="button" style="margin: auto;" class="btn"><span>Annuler</span> <i class="las la-arrow-right"></i></button>
+          </div><!--end col-->
+      </div> <!--end form-group-->
+  </form><!--end form-->
+
+</div>
+
+{% endblock %}
+
+{% block js %}
+<script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous">
+    </script>
+<!--        Links pour les templates de register            -->
+    <script src="{% static 'register/assets/js/popper.min.js' %}"></script>
+    <script src="{% static 'register/assets/js/bootstrap.min.js' %}"></script>
+
+    <script src="{% static 'register/assets/js/owl.carousel.min.js' %}"></script>
+
+    <!--<script src="{% static 'register/assets/js/custom.js' %}"></script>-->
+    <!-- <script src="{% static 'register/assets/js/upload.js' %}"></script> -->
+{% endblock %}

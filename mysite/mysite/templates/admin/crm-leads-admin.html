@@ -1,0 +1,821 @@
+{% extends 'admin/content-admin.html' %}
+{% load static %}
+{% load poll_extras %}
+
+{% block css %}
+<!-- Sweet Alert -->
+<link href="../../static/admin/assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css">
+<link href="../../static/admin/assets/css/custom-admin-style.css" rel="stylesheet" type="text/css">
+<link href="../../static/admin/assets/plugins/animate/animate.min.css" rel="stylesheet" type="text/css">
+<link href="../../static/admin/assets/css/popup.css" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block content2 %}
+
+<style>
+.bouton
+{
+    margin: 0;
+    padding: 0;
+    line-height: 100%; 
+    border: 0;
+    background: none;
+    width: 100%; 
+    display:flex;
+}
+
+.button > * {
+    vertical-align: middle;
+}
+
+</style>
+
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="row align-items-center">
+                    <div class="col">                      
+                        <h4 class="card-title">All Leads</h4>                      
+                    </div><!--end col-->                                        
+                </div>  <!--end row-->                                  
+            </div><!--end card-header-->
+            <div class="card-body">                             
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Nom</th>
+                                <th>Id</th>
+                                <th>Mail</th>
+                                <th>n° tel</th>                                                  
+                                <th>Entreprise</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr><!--end tr-->
+                        </thead>
+                        <tbody id="tbody-{{elem.id}}">
+                           {% for elem in AllDemande %}
+                           {% if elem.isadministrator == '0' %} 
+                           {% if elem.etat == 'Rejeté' %}
+                           {% define 'btn btn-outline-dark' as classe %}
+                           {% endif %}
+
+                           {% if elem.etat == 'Mise en contact' %}
+                           {% define 'btn btn-outline-info' as classe %}
+                           {% endif %}
+
+                           {% if elem.etat == 'En cours de complétion' %}
+                           {% define 'btn btn-outline-pink' as classe %}
+                           {% endif %}
+
+                           {% if elem.etat == 'En cours de traitement' %}
+                           {% define 'btn btn-outline-purple' as classe %}
+                           {% endif %}
+
+                           {% if elem.etat == 'Documents manquants' %}
+                           {% define 'bg-soft-blue' as classe %}
+                           {% endif %}
+                           {% if elem.etat == 'Validé' %}
+                           {% define 'btn btn-outline-success' as classe %}
+                           {% endif %}
+
+                        <tr id="lead-elem-{{elem.id}}">
+                            
+                            <td style="display:flex;">
+                                <form method="post" action="../modify-user-super-admin-choice/" style="width: 100%;">
+                                    {% csrf_token %}
+                                <button type="submit" name="choice" class="bouton" value="{{ elem.id }}"> 
+                                    <span class="thumb-xl justify-content-center d-flex align-items-center bg-soft-info rounded-circle me-2" style="text-transform: uppercase;">{{ elem.inputFirstName|first }}{{ elem.inputName|first }}</span>
+                                    <span style="margin: auto 0;padding: 0 8px;">{{elem.inputFirstName}} {{elem.inputName}}</span>
+                                    <small style="margin:auto;" class="badge bg-soft-pink ms-1">New</small></td>
+                                </button>
+                                </form>
+                            <td>{{elem.id}}</td>
+                            <td id="inputMail-{{elem.id}}">{{elem.inputMail}}</td>
+                            <td id ="inputPhone-{{elem.id}}">{{elem.inputPhone}}</td>
+                            <td id="inputSocialReason-{{elem.id}}">{{elem.social_reason}}</td>
+                            <td>
+                                {% if request.user.type == '1' %}
+                                    <button id="status-{{elem.id}}" type="button" class="btn btn-outline-secondary btn-round dropdown-toggle {{classe}}" data-bs-toggle="dropdown" aria-expanded="false">{{elem.etat}} <i class="mdi mdi-chevron-down"></i></button>{% if elem.etat == 'Validé' %}{% if elem.administrator == None %}<button type="button" class="btn btn-de-info" onClick="attribuer('{{elem.id}}');" data-bs-toggle="modal" data-bs-target="#exampleModalLarge">Attribuer</button> {%endif%}{%endif%}
+                                    <div class="dropdown-menu">
+                                        <button class="dropdown-item" onclick="WarningConfirm(5,'{{elem.id}}')">Validé</button>
+                                        <button class="dropdown-item" onclick="WarningConfirm(4,'{{elem.id}}')">En cours de complétion</button>
+                                        <button class="dropdown-item" onclick="WarningConfirm(3,'{{elem.id}}')">Documents manquants</button>
+                                        <button class="dropdown-item" onclick="WarningConfirm(2,'{{elem.id}}')">En cours de traitemant</button>
+                                        <button class="dropdown-item" onclick="WarningConfirm(1,'{{elem.id}}')">Mise en contact</button>
+                                        <button class="dropdown-item" onclick="WarningConfirm(0,'{{elem.id}}')">Rejeté</button>
+                                        <!-- <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#">Separated link</a> -->
+                                    </div>
+                                    <!-- <span class="badge bg-soft-primary">{{elem.etat}}</span> -->
+                                {% elif request.user.type == '2' %}
+                                    <span class="btn btn-outline-secondary btn-round dropdown-toggle {{classe}}" data-bs-toggle="dropdown" aria-expanded="false">{{elem.etat}}</span>
+                                {% endif %}
+                            </td>
+                            <td class="lastTd"> 
+                                <button type="button" style="font-size: small; border: none; margin:1px;" class="badge badge-soft-blue" id="{{elem.id}}" onClick="viewbutton('{{elem.id}}');" data-bs-toggle="modal" data-bs-target="#exampleModalLogin" >
+                                    <i class="ti ti-eye text-secondary font-16"></i>
+                                </button>  
+                                <form method="post" action="../upload-choice/">
+                                    {% csrf_token %}
+                                    <button style="font-size: small; border: none; margin:1px;" class="badge badge-soft-blue" type="submit" value="{{elem.id}}" name="choice"><i class="las la-pen text-secondary font-16"></i></button>
+                                </form>
+                                <form method="post" action="../message-choice/">
+                                    {% csrf_token %}
+                                    <button style="font-size: small; border: none; margin:1px;"  class="badge badge-soft-blue" type="submit" value="{{elem.id}}" name="choice"><i class="ti ti-mail text-secondary font-16"></i></button>
+                                </form>                                                   
+                            </td>
+                        </tr><!--end tr-->
+                        {%endif%}
+                        {% endfor%} 
+                                                                                        
+                        </tbody>
+                    </table>                    
+                </div>                                          
+            </div><!--end card-body--> 
+        </div><!--end card--> 
+    </div><!--end col-->
+</div><!--end row-->
+
+<!--modal-->
+
+<div class="modal fade" id="exampleModalLogin" tabindex="-1" role="dialog" aria-labelledby="exampleModalDefaultLogin" aria-hidden="true">
+    <div class="modal-dialog" role="document" style="max-width: 600px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title m-0" id="exampleModalDefaultLogin">view lead </h6>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div><!--end modal-header-->
+            <div class="modal-body">
+                <div class="card-body p-0 auth-header-box">
+                    <!-- <div class="text-center">
+                        <a href="index.html" class="logo logo-admin">
+                            <img src="../../static/admin/assets/images/logo-sm.png" height="50" alt="logo" class="auth-logo">
+                        </a>
+                        <h4 class="mt-3 mb-1 font-weight-semibold font-18">Let's Get Started Metrica</h4>   
+                        <p class="text-muted  mb-0">Sign in to continue to Metrica.</p>  
+                    </div> -->
+                </div>
+                <div class="card-body" id="seeAllElemOfADemande">
+                    <ul class="nav-border nav nav-pills" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active font-weight-semibold" data-bs-toggle="tab" href="#Locataire" role="tab">Locataire</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link font-weight-semibold" data-bs-toggle="tab" href="#Bail" role="tab">Bail</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link font-weight-semibold" data-bs-toggle="tab" href="#Éligibilité" role="tab">Éligibilité</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link font-weight-semibold" data-bs-toggle="tab" href="#Documents" role="tab">Documents</a>
+                        </li>
+                    </ul>
+                     <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active p-3 pt-3" id="Locataire" role="tabpanel">                                        
+                            <form class="form-horizontal auth-form my-4" id="modifyDemandeLocataire-form" action="" method="post">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <label for="username">Personne physique ou moral</label>
+                                    <div class="input-group mb-3">                                                                                         
+                                        <input type="text" class="form-control" name="physical_moral" id="physical_moral" placeholder="Enter physical-moral" value="">
+                                    </div>                                    
+                                </div><!--end form-group--> 
+    
+                                <div class="form-group">
+                                    <label for="username">Forme Juridique</label>
+                                    <div class="input-group mb-3">                                                                                         
+                                        <input type="text" class="form-control" name="juridical_form" id="juridical_form" placeholder="Enter juridical" value="">
+                                    </div>                                    
+                                </div><!--end form-group--> 
+    
+                                <div class="form-group">
+                                    <label for="username">Raison Sociale</label>
+                                    <div class="input-group mb-3">                                                                                         
+                                        <input type="text" class="form-control" name="social_reason" id="social_reason" placeholder="Enter social" value="">
+                                    </div>                                    
+                                </div>
+                                <div class="form-group">
+                                    <label for="username">Siren</label>
+                                    <div class="input-group mb-3">                                                                                         
+                                        <input type="number" class="form-control" name="inputSIREN" id="inputSIREN" value="">
+                                    </div>                                    
+                                </div>
+
+                                <div class="row paddingTopBottom">
+                                    <label class="col-md-6 my-1 control-label">Monsieur/Madame</label>
+                                    <div class="col-md-6">                                                
+                                        <input type="radio" class="btn-check" name="gender" id="gender-monsieur" autocomplete="off" value="male">
+                                        <label class="btn btn-outline-secondary btn-sm" for="gender-monsieur" style="padding: 1em 2em;" >Monsieur</label>
+        
+                                        <input type="radio" class="btn-check" name="gender" id="gender-madame" value="female" autocomplete="off">
+                                        <label class="btn btn-outline-secondary btn-sm" for="gender-madame" style="padding: 1em 2em;" >Madame</label>   
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="username">Nom</label>
+                                    <div class="input-group mb-3">                                                                                         
+                                        <input type="text" class="form-control" name="inputName" id="inputName" placeholder="name" value="">
+                                    </div>                                    
+                                </div>
+                                <div class="form-group">
+                                    <label for="username">Prénom</label>
+                                    <div class="input-group mb-3">                                                                                         
+                                        <input type="text" class="form-control" name="inputFirstName" id="inputFirstName" placeholder="firstName" value="">
+                                    </div>                                    
+                                </div>
+                                <div class="form-group">
+                                    <label for="username">E-mail</label>
+                                    <div class="input-group mb-3">                                                                                         
+                                        <input type="text" class="form-control" name="inputMail" id="inputMail" placeholder="mail" value="">
+                                    </div>                                    
+                                </div>
+                                <div class="form-group">
+                                    <label for="username">Tel</label>
+                                    <div class="input-group mb-3">                                                                                         
+                                        <input type="text" class="form-control" name="inputPhone" id="inputPhone" placeholder="tel" value="">
+                                    </div>                                    
+                                </div>
+                                <div class="form-group">
+                                    <label for="username">Secteur d'activité</label>
+                                    <div class="input-group mb-3">                                                                                         
+                                        <input type="text" class="form-control" name="inputActivity" id="inputActivity" placeholder="activity" value="">
+                                    </div>                                    
+                                </div>
+                                <div class="form-group">
+                                    <label for="username">Site internet</label>
+                                    <div class="input-group mb-3">                                                                                         
+                                        <input type="text" class="form-control" name="inputWebSite" id="inputWebSite" placeholder="site" value="">
+                                    </div>                                    
+                                </div>
+
+                                <div class="form-group mb-0 row">
+                                    <div class="col-12 mt-2">
+                                        <div class="d-grid">
+                                            <button class="btn btn-de-primary" name="modifyDemandeLocataire" type="submit">Modifier les informations <i class="fas fa-sign-in-alt ml-1"></i></button>
+                                        </div>
+                                    </div><!--end col--> 
+                                </div> <!--end form-group-->  
+                               
+                            </form><!--end form-->
+    
+                        </div>
+                        <div class="tab-pane px-3 pt-3" id="Bail" role="tabpanel">
+                            <form class="form-horizontal auth-form my-4" id="modifyDemandeBail-form" action="" method="post">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <label for="username">Adresse</label>
+                                    <div class="input-group mb-3">                                                                                         
+                                        <input type="text" class="form-control" name="inputAdress" id="inputAdress" placeholder="Enter adresse" value="">
+                                    </div>                                    
+                                </div><!--end form-group--> 
+
+                                <div class="form-group">
+                                    <label for="useremail">Code Postal</label>
+                                    <div class="input-group mb-3">                                                                                         
+                                        <input type="number" class="form-control" name="inputCode" id="inputCode" value=0>
+                                    </div>                                    
+                                </div><!--end form-group-->
+    
+                                <div class="form-group">
+                                    <label for="userpassword">Ville</label>                                            
+                                    <div class="input-group mb-3">                                  
+                                        <input type="text" class="form-control" name="inputCity" id="inputCity" placeholder="ville" value="">
+                                    </div>                               
+                                </div><!--end form-group--> 
+
+                                <div class="form-group">
+                                    <label for="conf_password">Date d'effet du bail (mois)</label>                                            
+                                    <div class="input-group mb-3">                                   
+                                        <input type="text" class="form-control" name="mois" id="mois" placeholder="Enter bail-mois" value="">
+                                    </div>
+                                </div><!--end form-group-->
+                                <div class="form-group">
+                                    <label for="username">Date d'effet du bail (année)</label>
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" name="annee" id="annee" placeholder="Enter bail-annee" value="">
+                                    </div>                                    
+                                </div><!--end form-group--> 
+
+                                <div class="form-group">
+                                    <label for="username">Montant du loyer</label>
+                                    <div class="input-group mb-3">                                                                                         
+                                        <input type="text" class="form-control" name="loyer" id="loyer" placeholder="Enter username" value="">
+                                    </div>                                    
+                                </div><!--end form-group--> 
+                                
+                                <div class="form-group">
+                                    <label for="username">Montant de la garantie</label>
+                                    <div class="input-group mb-3">                                                                                         
+                                        <input type="text" class="form-control" name="garantie" id="garantie" placeholder="Enter garantie" value="">
+                                    </div>                                    
+                                </div><!--end form-group--> 
+                                
+                                <div class="form-group">
+                                    <label for="username">soit en mois de loyer</label>
+                                    <div class="input-group mb-3">                                                                                         
+                                        <input type="text" class="form-control" name="garantieMois" id="garantieMois" placeholder="Enter garantie-mois" value="">
+                                    </div>                                    
+                                </div><!--end form-group--> 
+
+                                <div class="form-group">
+                                    <label for="username">Montant de la caution bancaire</label>
+                                    <div class="input-group mb-3">                                                                                         
+                                        <input type="text" class="form-control" name="caution" id="caution" placeholder="Enter caution" value="">
+                                    </div>                                    
+                                </div><!--end form-group--> 
+                                
+                                <div class="form-group">
+                                    <label for="username">soit en mois de loyer</label>
+                                    <div class="input-group mb-3">                                                                                         
+                                        <input type="text" class="form-control" name="cautionMois" id="cautionMois" placeholder="Enter loyer-mois" value="">
+                                    </div>                                    
+                                </div><!--end form-group--> 
+    
+                                <div class="form-group mb-0 row">
+                                    <div class="col-12 mt-2">
+                                        <div class="d-grid">
+                                            <button class="btn btn-de-primary" name="modifyDemandeBail" type="submit"> Modifier les Informations <i class="fas fa-sign-in-alt ml-1"></i></button>
+                                        </div>
+                                    </div><!--end col--> 
+                                </div> <!--end form-group-->                           
+                            </form><!--end form-->                                              
+                        </div>
+                        <div class="tab-pane px-3 pt-3" id="Éligibilité" role="tabpanel">
+                            <form class="form-horizontal auth-form my-4" id="modifyDemandeEligibility-form" action="" method="post">
+                                {% csrf_token %}
+                                <div class="row">
+                                    <label class="col-md-8 my-1 control-label">Garantie souhaité</label>
+                                    <div class="col-md-4">                                                
+                                        <input type="checkbox" class="btn-check" name="substitution0" id="Partenaire" autocomplete="off" >
+                                        <label class="btn btn-outline-secondary btn-sm" for="Partenaire">Partenaire</label>
+                                        <input type="checkbox" class="btn-check" name="substitution1" id="Courtier" autocomplete="off">
+                                        <label class="btn btn-outline-secondary btn-sm" for="Courtier">Courtier</label><br>
+                                    </div>
+                                </div> <!--end row-->  
+                                
+                                <div class="row paddingTopBottom">
+                                    <label class="col-md-9 my-1 control-label">Le client a fait l'objet d'incident de paiement ou litige avec son bailleur dans les 12 derniers mois </label>
+                                    <div class="col-md-3">                                                
+                                        <input type="radio" class="btn-check" name="incident" id="incident-yes" autocomplete="off" value="yes">
+                                        <label class="btn btn-outline-success btn-sm" for="incident-yes">yes</label>
+        
+                                        <input type="radio" class="btn-check" name="incident" id="incident-no" value="no" autocomplete="off">
+                                        <label class="btn btn-outline-danger btn-sm" for="incident-no">no</label>   
+                                    </div>
+                                </div>
+
+                                <div class="row paddingTopBottom">
+                                    <label class="col-md-9 my-1 control-label">Le client correspond aux critères des sociétés en difficulté </label>
+                                    <div class="col-md-3">                                                
+                                        <input type="radio" class="btn-check" name="difficulte" id="difficulte-yes" autocomplete="off" value="yes">
+                                        <label class="btn btn-outline-success btn-sm" for="difficulte-yes">yes</label>
+        
+                                        <input type="radio" class="btn-check" name="difficulte" id="difficulte-no" value="no" autocomplete="off">
+                                        <label class="btn btn-outline-danger btn-sm" for="difficulte-no">no</label>   
+                                    </div>
+                                </div> 
+
+                                <div class="row paddingTopBottom">
+                                    <label class="col-md-9 my-1 control-label">Le client a reçu ou donné un préavis de congé portant sur le bail visé par la présente étude </label>
+                                    <div class="col-md-3">                                                
+                                        <input type="radio" class="btn-check" name="preavis" id="preavis-yes" autocomplete="off" value="yes">
+                                        <label class="btn btn-outline-success btn-sm" for="preavis-yes">yes</label>
+        
+                                        <input type="radio" class="btn-check" name="preavis" id="preavis-no" value="no" autocomplete="off">
+                                        <label class="btn btn-outline-danger btn-sm" for="preavis-no">no</label>   
+                                    </div>
+                                </div> 
+                                
+                                <div class="row paddingTopBottom">
+                                    <label class="col-md-9 my-1 control-label">Le client a une échéance triennale au cours des 12 prochains mois </label>
+                                    <div class="col-md-3">                                                
+                                        <input type="radio" class="btn-check" name="echeance" id="echeance-yes" autocomplete="off" value="yes">
+                                        <label class="btn btn-outline-success btn-sm" for="echeance-yes">yes</label>
+        
+                                        <input type="radio" class="btn-check" name="echeance" id="echeance-no" value="no" autocomplete="off">
+                                        <label class="btn btn-outline-danger btn-sm" for="echeance-no">no</label>   
+                                    </div>
+                                </div> 
+
+                                
+                                <div class="row paddingTopBottom" id="renouveler-hidden" hidden="true">
+                                    <label class="col-md-9 my-1 control-label">Le client souhaite renouveler ce contrat de bail</label>
+                                    <div class="col-md-3">                                                
+                                        <input type="radio" class="btn-check" name="renouveler" id="renouveler-yes" autocomplete="off" value="yes">
+                                        <label class="btn btn-outline-success btn-sm" for="renouveler-yes">yes</label>
+        
+                                        <input type="radio" class="btn-check" name="renouveler" id="renouveler-no" value="no" autocomplete="off">
+                                        <label class="btn btn-outline-danger btn-sm" for="renouveler-no">no</label>   
+                                    </div>
+                                </div> 
+                                
+                                <div class="row paddingTopBottom">
+                                    <label class="col-md-9 my-1 control-label">QuietSolution</label>
+                                    <div class="col-md-3">                                                
+                                        <input type="radio" class="btn-check" name="QuietSolution" id="QuietSolution-yes" autocomplete="off" value="yes">
+                                        <label class="btn btn-outline-success btn-sm" for="QuietSolution-yes">yes</label>
+        
+                                        <input type="radio" class="btn-check" name="QuietSolution" id="QuietSolution-no" value="no" autocomplete="off">
+                                        <label class="btn btn-outline-danger btn-sm" for="QuietSolution-no">no</label>   
+                                    </div>
+                                </div>
+
+
+                                <div class="row paddingTopBottom">
+                                    <label class="col-md-9 my-1 control-label">L'entreprise a plus de deux ans</label>
+                                    <div class="col-md-3">                                                
+                                        <input type="radio" class="btn-check" name="plusDeuxAns" id="plusDeuxAns-yes" autocomplete="off" value="yes">
+                                        <label class="btn btn-outline-success btn-sm" for="plusDeuxAns-yes">yes</label>
+        
+                                        <input type="radio" class="btn-check" name="plusDeuxAns" id="plusDeuxAns-no" value="no" autocomplete="off">
+                                        <label class="btn btn-outline-danger btn-sm" for="plusDeuxAns-no">no</label>   
+                                    </div>
+                                </div>
+                                
+                                <div id="plusDeuxAns-Yes-hidden" hidden="true">
+                                <div class="form-group">
+                                    <label for="username">Chiffre d'affaire 2021</label>
+                                    <div class="input-group mb-3">                                                                                         
+                                        <input type="text" class="form-control" name="ca2021" id="ca2021" placeholder="Enter ca2021">
+                                    </div>                                    
+                                </div><!--end form-group--> 
+
+                                <div class="form-group">
+                                    <label for="username">Benefice / Pertes 2021</label>
+                                    <div class="input-group mb-3">                                                                                         
+                                        <input type="text" class="form-control" name="beneficePerte2021" id="beneficePerte2021" placeholder="Enter beneficePerte202">
+                                    </div>                                    
+                                </div><!--end form-group--> 
+
+                                <div class="form-group">
+                                    <label for="username">Chiffre d'affaire 2020</label>
+                                    <div class="input-group mb-3">                                                                                         
+                                        <input type="text" class="form-control" name="ca2020" id="ca2020" placeholder="Enter ca2020">
+                                    </div>                                    
+                                </div><!--end form-group--> 
+
+                                <div class="form-group">
+                                    <label for="username">Benefice / Pertes 2020 </label>
+                                    <div class="input-group mb-3">                                                                                         
+                                        <input type="text" class="form-control" name="beneficePerte2020" id="beneficePerte2020" placeholder="Enter beneficePerte2020">
+                                    </div>                                    
+                                </div><!--end form-group--> 
+
+                                <div class="row paddingTopBottom">
+                                    <label class="col-md-9 my-1 control-label">Le client a des congés sur ses locaux actuellement loué</label>
+                                    <div class="col-md-3">                                                
+                                        <input type="radio" class="btn-check" name="conges" id="conges-yes" autocomplete="off" value="yes">
+                                        <label class="btn btn-outline-success btn-sm" for="conges-yes">yes</label>
+        
+                                        <input type="radio" class="btn-check" name="conges" id="conges-no" value="no" autocomplete="off">
+                                        <label class="btn btn-outline-danger btn-sm" for="conges-no">no</label>   
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group" id="conges-yes-hidden" hidden="true">
+                                    <label for="username">Le loyer toutes charges comprises</label>
+                                    <div class="input-group mb-3">                                                                                         
+                                        <input type="text" class="form-control" name="CC" id="CC" placeholder="Enter CC">
+                                    </div>                                    
+                                </div><!--end form-group--> 
+                                </div>
+                                <div id="plusDeuxAns-No-hidden" hidden="true">
+                                <div class="row paddingTopBottom">
+                                    <label class="col-md-9 my-1 control-label">Le client peut emettre une caution personelle ou d'une entreprise de plus de 2 ans solvable</label>
+                                    <div class="col-md-3">                                                
+                                        <input type="radio" class="btn-check" name="cautionPerso" id="cautionPerso-yes" autocomplete="off" value="yes">
+                                        <label class="btn btn-outline-success btn-sm" for="cautionPerso-yes">yes</label>
+        
+                                        <input type="radio" class="btn-check" name="cautionPerso" id="cautionPerso-no" value="no" autocomplete="off">
+                                        <label class="btn btn-outline-danger btn-sm" for="cautionPerso-no">no</label>   
+                                    </div>
+                                </div>
+                            </div>
+                                
+
+                                <div class="form-group mb-0 row">
+                                    <div class="col-12 mt-2">
+                                        <div class="d-grid">
+                                            <button name="modifyDemandeEligibility" class="btn btn-de-primary" type="submit">Modifier les informations <i class="fas fa-sign-in-alt ml-1"></i></button>
+                                        </div>
+                                    </div><!--end col--> 
+                                </div> <!--end form-group--> 
+
+                            </form><!--end form-->                                              
+                        </div>
+                        <div class="tab-pane px-3 pt-3" id="Documents" role="tabpanel">
+                            <div class="tab-pane fade show {% if demande.id == active %}active{% endif %}" id="files-projects{{ demande.id }}">
+                                <div class="card-title mt-0 mb-3" style="display: flex;"><h4 >Pièces d'identité</h4> 
+                                <form method="post" action=""  style="margin-left: auto;" name="form-file"  method="post">
+                                    {% csrf_token %}
+                                    <button type="submit" id="buttonPiece" name="buttonPiece"  style="border: solid red 2px;" class="btn btn-de-danger text-center"><i class="mdi mdi-delete-outline" style="font-size: medium;"></i></button>
+                                    </form>
+                                </div>
+                                <div class="file-box-content" style="display: flex;flex-wrap: wrap;">
+                                    {% for elem in AllDemande %}
+                                    {% if elem.Piece_identite %}
+                                    {% for id_piece, id_demande in elem.Piece_identite.items %}
+                                    {% if id_demande == request.COOKIES.clicked_id %}
+                                    <div class="file-box">
+                                        
+                                        <a id="a-adresse_doc-{{id_piece}}" href="" target="_blank">
+                                        <div class="text-center">                                            
+                                            <i class="lar la-file text-success"></i>
+                                            <h6 class="text-truncate"><span id="h6-adresse_doc-{{id_piece}}">Erreur lors de l'affichage de l'adresse</span></h6>
+                                            <small class="text-muted"> <span id="small-date-{{id_piece}}"> Erreur lors de l'affichage de la date </span> / <span span id="small-size-{{number}}"> Erreur lors de l'affichage de la taille </span>ko</small>
+                                        </div>
+                                        <div style="display: flex; justify-content: center; align-content: center; align-items: center;">
+                                            <form method="post" action="{% url 'delete_admin' id_piece %}">
+                                                {% csrf_token %}
+                                                <button type="submit" style="border: solid red 2px;" class="btn btn-de-danger text-center"><i class="mdi mdi-delete-outline" style="font-size: medium;"></i></button>
+                                                </form>
+                                            <a id="a-download-adresse_doc-{{id_piece}}" href=""  style="border: solid blue 2px;" download class="btn btn-de-blue m-1">
+                                                <i style="font-size: medium;" class="mdi mdi-cloud-download-outline"></i>
+                                            </a>
+                                        </div>
+            
+                                        </a>
+                                    </div>
+                                    {% endif%}
+                                    {% endfor %}
+                                    {% endif%}
+                                    {% endfor%}
+                                </div>
+                                <br>
+                                <div class="card-title mt-0 mb-3" style="display: flex;"><h4 >KBIS / 2 derniers bilans / Bail ou projet de bail</h4> 
+                                    <form method="post" action=""  style="margin-left: auto;" name="form-file"  method="post">
+                                        {% csrf_token %}
+                                        <button type="submit" id="buttonKbis" name="buttonKbis" value="" style="border: solid red 2px;" class="btn btn-de-danger text-center"><i class="mdi mdi-delete-outline" style="font-size: medium;"></i></button>
+                                        </form>
+                                    </div>
+                                <div class="file-box-content" style="display: flex;flex-wrap: wrap;" >
+                                    {% for elem in AllDemande %}
+                                    {% if elem.Kbis %}
+                                    {% for id_Kbis, id_demande in elem.Kbis.items %}
+                                    {% if id_demande == request.COOKIES.clicked_id %}
+                                    <div class="file-box">
+                                        <h5 class="text-muted"> Kbis </h5>
+                                        <a id="a-adresse_doc-{{id_Kbis}}" href="" target="_blank">
+                                        <div class="text-center">
+                                            <i class="lar la-file-pdf text-success"></i>
+                                            <h6 class="text-truncate"><span id="h6-adresse_doc-{{id_Kbis}}">Erreur lors de l'affichage de l'adresse</span></h6>
+                                            <small class="text-muted"> <span id="small-date-{{id_Kbis}}"> Erreur lors de l'affichage de la date </span> / <span span id="small-size-{{number}}"> Erreur lors de l'affichage de la taille </span>ko</small>
+                                        </div>
+                                            <div style="display: flex; justify-content: center; align-content: center; align-items: center;">
+                                            <form method="post" action="{% url 'delete_admin' id_Kbis %}">
+                                            {% csrf_token %}
+                                            <button type="submit" style="border: solid red 2px;" class="btn btn-de-danger text-center"><i class="mdi mdi-delete-outline" style="font-size: medium;"></i></button>
+                                            </form>
+                                            <a id="a-download-adresse_doc-{{id_Kbis}}" href="" style="border: solid blue 2px;" download class="btn btn-de-blue m-1">
+                                                <i style="font-size: medium;" class="mdi mdi-cloud-download-outline"></i>
+                                            </a>
+                                        </div>
+                                        </a>
+                                    </div>
+                                    {% endif %}
+                                    {% endfor %}
+                                    {% endif %}
+
+                                    {% if elem.Bilan %}
+                                    {% for id_piece, id_demande in elem.Bilan.items %}
+                                    {% if id_demande == request.COOKIES.clicked_id %}
+                                    <div class="file-box">
+                                        <h5 class="text-muted"> Bilan </h5>
+                                        <a id="a-adresse_doc-{{id_piece}}" href="" target="_blank">
+                                        <div class="text-center">                                            
+                                            <i class="lar la-file text-success"></i>
+                                            <h6 class="text-truncate"><span id="h6-adresse_doc-{{id_piece}}">Erreur lors de l'affichage de l'adresse</span></h6>
+                                            <small class="text-muted"> <span id="small-date-{{id_piece}}"> Erreur lors de l'affichage de la date </span> / <span span id="small-size-{{number}}"> Erreur lors de l'affichage de la taille </span>ko</small>
+                                        </div>
+                                        <div style="display: flex; justify-content: center; align-content: center; align-items: center;">
+                                            <form method="post" action="{% url 'delete_admin' id_piece %}">
+                                                {% csrf_token %}
+                                                <button type="submit" style="border: solid red 2px;" class="btn btn-de-danger text-center"><i class="mdi mdi-delete-outline" style="font-size: medium;"></i></button>
+                                                </form>
+                                            <a id="a-download-adresse_doc-{{id_piece}}" href=""  style="border: solid blue 2px;" download class="btn btn-de-blue m-1">
+                                                <i style="font-size: medium;" class="mdi mdi-cloud-download-outline"></i>
+                                            </a>
+                                        </div>
+            
+                                        </a>
+                                    </div>
+                                    {% endif%}
+                                    {% endfor %}
+                                    {% endif%}
+
+                                    {% if elem.Projet_de_bail_ou_LOI %}
+                                    {% for id_piece, id_demande in elem.Projet_de_bail_ou_LOI.items %}
+                                    {% if id_demande == request.COOKIES.clicked_id %}
+                                    <div class="file-box">
+                                        <h5 class="text-muted"> Projet de Bail </h5>
+                                        <a id="a-adresse_doc-{{id_piece}}" href="" target="_blank">
+                                        <div class="text-center">                                            
+                                            <i class="lar la-file text-success"></i>
+                                            <h6 class="text-truncate"><span id="h6-adresse_doc-{{id_piece}}">Erreur lors de l'affichage de l'adresse</span></h6>
+                                            <small class="text-muted"> <span id="small-date-{{id_piece}}"> Erreur lors de l'affichage de la date </span> / <span span id="small-size-{{number}}"> Erreur lors de l'affichage de la taille </span>ko</small>
+                                        </div>
+                                        <div style="display: flex; justify-content: center; align-content: center; align-items: center;">
+                                            <form method="post" action="{% url 'delete_admin' id_piece %}">
+                                                {% csrf_token %}
+                                                <button type="submit" style="border: solid red 2px;" class="btn btn-de-danger text-center"><i class="mdi mdi-delete-outline" style="font-size: medium;"></i></button>
+                                                </form>
+                                            <a id="a-download-adresse_doc-{{id_piece}}" href=""  style="border: solid blue 2px;" download class="btn btn-de-blue m-1">
+                                                <i style="font-size: medium;" class="mdi mdi-cloud-download-outline"></i>
+                                            </a>
+                                        </div>
+            
+                                        </a>
+                                    </div>
+                                    {% endif%}
+                                    {% endfor %}
+                                    {% endif%}
+                                    {% endfor %}
+                                </div>
+                                <br>
+                                
+                                <div class="card-title mt-0 mb-3" style="display: flex;"><h4 >Statut / Business Plan / Présentation  </h4> 
+                                    <form method="post" action=""  style="margin-left: auto;" name="form-file"  method="post">
+                                        {% csrf_token %}
+                                        <button type="submit" name="buttonStatut" value="" style="border: solid red 2px;" class="btn btn-de-danger text-center"><i class="mdi mdi-delete-outline" style="font-size: medium;"></i></button>
+                                        </form>
+                                    </div>
+                                <div class="file-box-content" style="display: flex;flex-wrap: wrap;" >
+                                    {% for elem in AllDemande %}
+                                    {% if elem.Statut_societe %}
+                                    {% for id_Kbis, id_demande in elem.Statut_societe.items %}
+                                    {% if id_demande == request.COOKIES.clicked_id %}
+                                    <div class="file-box">
+                                        <h5 class="text-muted"> Statut </h5>
+                                        <a id="a-adresse_doc-{{id_Kbis}}" href="" target="_blank">
+                                        <div class="text-center">
+                                            <i class="lar la-file-pdf text-success"></i>
+                                            <h6 class="text-truncate"><span id="h6-adresse_doc-{{id_Kbis}}">Erreur lors de l'affichage de l'adresse</span></h6>
+                                            <small class="text-muted"> <span id="small-date-{{id_Kbis}}"> Erreur lors de l'affichage de la date </span> / <span span id="small-size-{{number}}"> Erreur lors de l'affichage de la taille </span>ko</small>
+                                        </div>
+                                            <div style="display: flex; justify-content: center; align-content: center; align-items: center;">
+                                            <form method="post" action="{% url 'delete_admin' id_Kbis %}">
+                                            {% csrf_token %}
+                                            <button type="submit" style="border: solid red 2px;" class="btn btn-de-danger text-center"><i class="mdi mdi-delete-outline" style="font-size: medium;"></i></button>
+                                            </form>
+                                            <a id="a-download-adresse_doc-{{id_Kbis}}" href="" style="border: solid blue 2px;" download class="btn btn-de-blue m-1">
+                                                <i style="font-size: medium;" class="mdi mdi-cloud-download-outline"></i>
+                                            </a>
+                                        </div>
+                                        </a>
+                                    </div>
+                                    {% endif %}
+                                    {% endfor %}
+                                    {% endif %}
+
+                                    {% if elem.Business_plan %}
+                                    {% for id_piece, id_demande in elem.Business_plan.items %}
+                                    {% if id_demande == request.COOKIES.clicked_id %}
+                                    <div class="file-box">
+                                        <h5 class="text-muted"> Business Plan </h5>
+                                        <a id="a-adresse_doc-{{id_piece}}" href="" target="_blank">
+                                        <div class="text-center">                                            
+                                            <i class="lar la-file text-success"></i>
+                                            <h6 class="text-truncate"><span id="h6-adresse_doc-{{id_piece}}">Erreur lors de l'affichage de l'adresse</span></h6>
+                                            <small class="text-muted"> <span id="small-date-{{id_piece}}"> Erreur lors de l'affichage de la date </span> / <span span id="small-size-{{number}}"> Erreur lors de l'affichage de la taille </span>ko</small>
+                                        </div>
+                                        <div style="display: flex; justify-content: center; align-content: center; align-items: center;">
+                                            <form method="post" action="{% url 'delete_admin' id_piece %}">
+                                                {% csrf_token %}
+                                                <button type="submit" style="border: solid red 2px;" class="btn btn-de-danger text-center"><i class="mdi mdi-delete-outline" style="font-size: medium;"></i></button>
+                                                </form>
+                                            <a id="a-download-adresse_doc-{{id_piece}}" href=""  style="border: solid blue 2px;" download class="btn btn-de-blue m-1">
+                                                <i style="font-size: medium;" class="mdi mdi-cloud-download-outline"></i>
+                                            </a>
+                                        </div>
+            
+                                        </a>
+                                    </div>
+                                    {% endif%}
+                                    {% endfor %}
+                                    {% endif%}
+
+                                    {% if elem.Presentation_entreprise %}
+                                    {% for id_piece, id_demande in elem.Presentation_entreprise.items %}
+                                    {% if id_demande == request.COOKIES.clicked_id %}
+                                    <div class="file-box">
+                                        <h5 class="text-muted"> Presentation Entreprise </h5>
+                                        <a id="a-adresse_doc-{{id_piece}}" href="" target="_blank">
+                                        <div class="text-center">                                            
+                                            <i class="lar la-file text-success"></i>
+                                            <h6 class="text-truncate"><span id="h6-adresse_doc-{{id_piece}}">Erreur lors de l'affichage de l'adresse</span></h6>
+                                            <small class="text-muted"> <span id="small-date-{{id_piece}}"> Erreur lors de l'affichage de la date </span> / <span span id="small-size-{{number}}"> Erreur lors de l'affichage de la taille </span>ko</small>
+                                        </div>
+                                        <div style="display: flex; justify-content: center; align-content: center; align-items: center;">
+                                            <form method="post" action="{% url 'delete_admin' id_piece %}">
+                                                {% csrf_token %}
+                                                <button type="submit" style="border: solid red 2px;" class="btn btn-de-danger text-center"><i class="mdi mdi-delete-outline" style="font-size: medium;"></i></button>
+                                                </form>
+                                            <a id="a-download-adresse_doc-{{id_piece}}" href=""  style="border: solid blue 2px;" download class="btn btn-de-blue m-1">
+                                                <i style="font-size: medium;" class="mdi mdi-cloud-download-outline"></i>
+                                            </a>
+                                        </div>
+            
+                                        </a>
+                                    </div>
+                                    {% endif%}
+                                    {% endfor %}
+                                    {% endif%}
+                                    {% endfor %}
+                                </div>
+                                <br>
+                                <div class="card-title mt-0 mb-3" style="display: flex;"><h4 >Autre</h4> 
+                                    <form method="post" action=""  style="margin-left: auto;" name="form-file"  method="post">
+                                        {% csrf_token %}
+                                        <button type="submit" name="buttonAutre"  style="border: solid red 2px;" class="btn btn-de-danger text-center"><i class="mdi mdi-delete-outline" style="font-size: medium;"></i></button>
+                                        </form>
+                                    </div>
+                                    <div class="file-box-content" style="display: flex;flex-wrap: wrap;">
+                                        {% for elem in AllDemande %}
+                                        {% if elem.Autre_document %}
+                                        {% for id_piece, id_demande in elem.Autre_document.items %}
+                                        {% if id_demande == request.COOKIES.clicked_id %}
+                                        <div class="file-box">
+                                            
+                                            <a id="a-adresse_doc-{{id_piece}}" href="" target="_blank">
+                                            <div class="text-center">                                            
+                                                <i class="lar la-file text-success"></i>
+                                                <h6 class="text-truncate"><span id="h6-adresse_doc-{{id_piece}}">Erreur lors de l'affichage de l'adresse</span></h6>
+                                                <small class="text-muted"> <span id="small-date-{{id_piece}}"> Erreur lors de l'affichage de la date </span> / <span span id="small-size-{{number}}"> Erreur lors de l'affichage de la taille </span>ko</small>
+                                            </div>
+                                            <div style="display: flex; justify-content: center; align-content: center; align-items: center;">
+                                                <form method="post" action="{% url 'delete_admin' id_piece %}">
+                                                    {% csrf_token %}
+                                                    <button type="submit" style="border: solid red 2px;" class="btn btn-de-danger text-center"><i class="mdi mdi-delete-outline" style="font-size: medium;"></i></button>
+                                                    </form>
+                                                <a id="a-download-adresse_doc-{{id_piece}}" href=""  style="border: solid blue 2px;" download class="btn btn-de-blue m-1">
+                                                    <i style="font-size: medium;" class="mdi mdi-cloud-download-outline"></i>
+                                                </a>
+                                            </div>
+                                            </a>
+                                        </div>
+                                        {% endif %}
+                                        {% endfor %}
+                                        {% endif%}
+                                        {% endfor%}
+                                    </div>
+                            </div><!--end tab-pane-->
+                        </div>
+                    </div>
+                </div><!--end card-body-->                                                 
+            </div><!--end modal-body-->
+        </div><!--end modal-content-->
+    </div><!--end modal-dialog-->
+</div><!--end modal-->
+
+<div class="modal fade" id="exampleModalLarge" tabindex="-1" role="dialog" aria-labelledby="exampleModalSuccess1" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header"  style="background-color: #4C9082;">
+                <h6 class="modal-title m-0 text-white" id="exampleModalSuccess1">Attribuer l'utilisateur</h6>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div><!--end modal-header-->
+            <div class="modal-body">
+                <div class="row">
+                    <div class="text-center align-self-center">
+                        <img src="../../static/admin/assets/images/logoonly.png" alt="" class="img-fluid">
+                    </div><!--end col-->
+                    <div class="">
+                        <form class="pb-70" method="post" id="form-admin-select" action="">
+                            {% csrf_token %}
+                            <h4 class="text-center mt-5 ">À quel administrateur voulez vous attribuer cet demande?</h4>
+                            <div style="display: flex; justify-content: center; align-items: center;">
+                            <select style="background-color: #4C9082; font-size: medium; width: 100%" class="select" name="admin" id="admin" required>
+                                <option class="" value="">Choisissez votre administrateur</option>
+                                {% for admin in admins %}
+                                <option value="{{ admin.id }}">Admin N°{{ admin.id}} : {{admin.email}}</option>
+                                {% endfor %}
+                            </select>
+                            </div>
+                            <div class="col-sm-12 text-end">
+                                <button type="submit" class="btn btn-de-success px-4 font-15">Validé</button>
+                            </div>
+                        </form>
+                    </div><!--end col-->
+                </div><!--end row-->
+            </div><!--end modal-body-->
+        </div><!--end modal-content-->
+    </div><!--end modal-dialog-->
+</div><!--end modal-->
+
+
+
+<script 
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous">
+    </script>
+<script src="../../static/admin/assets/js/super-admin.js"></script>
+<!-- Sweet-Alert  -->
+<script src="../../static/admin/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
+<!-- <script src="../../static/admin/assets/pages/sweet-alert.init.js"></script> -->
+
+{% endblock %}

@@ -1,0 +1,114 @@
+{% extends 'admin/content.html' %}
+
+{% block css %}
+<link href="../../static/admin/assets/plugins/hopscotch/hopscotch.css" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block content2 %}
+    <div class="col-lg-12">
+        <div class="card">
+              <div class="card-header">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <h4 class="card-title">Mes Demandes</h4>
+                    </div><!--end col-->
+                    <div class="col-auto">
+                        <div class="dropdown">
+                            <a href="../new-demande-loc/"><button type="button" class="btn btn-de-info">Nouvelle demande +</button></a>
+                        </div>
+                    </div><!--end col-->
+                </div><!--end row-->
+              </div><!--end card-header-->
+        </div><!--end card-->
+                <div class="table-responsive">
+                    <table class="table table-bordered mb-0 table-centered">
+                        <thead>
+                        <tr>
+                            <th>Id. Demande</th>
+                            {% if socialReasonDemand %}
+                            <th>Nom de la société</th>
+                            {% endif %}
+                            <th>Adresse</th>
+                            <th>Date de la demande</th>
+                            <th>Statut de la demande</th>
+                            <th class="text-end">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for demande in demandes %}
+                        <tr>
+                            <td>{{ demande.id}}</td>
+                            {% if socialReasonDemand %}
+                            <td>{{ demande.social_reason }}</td>
+                            {% endif %}
+                            <td>{{ demande.inputAddress }}</td>
+                            <td>{{ demande.date_demande }}</td>
+                            <td>
+                                {% if demande.etat == 0 %}
+                                    <span style="font-size:small" class="badge badge-soft-danger">Rejetée</span>
+                                {% elif demande.etat == 1 %}
+                                    <span style="font-size:small" class="badge badge-soft-info"><a href="../../base/contact-us/">Nous contacter</a></span>
+                                {% elif demande.etat == 2 %}
+                                    <span style="font-size:small" class="badge badge-soft-purple">En cours</span>
+                                {% elif demande.etat == 3 %}
+                                    <form method="post" action="../upload-choice/">
+                                        {% csrf_token %}
+                                        <button style="font-size: small; border: none;" class="badge badge-soft-blue" type="submit" value="{{ demande.id }}" name="choice">Documents manquants</button>
+                                    </form>
+                                {% elif demande.etat == 4 %}
+                                    <form style="float: left;" method="post" action="../update-choice/">
+                                        {% csrf_token %}
+                                        <button style="font-size: small; border: none;" class="badge badge-soft-pink" type="submit" value="{{ demande.id }}" name="choice">Continuer ma demande</button>
+                                    </form>
+                                    <form style="float: left; margin-left: 3px;" method="post" action="{% url 'delete-demande' demande.id %}">
+                                        {% csrf_token %}
+                                        <button style="font-size: small; border: none;" class="badge badge-soft-danger" type="submit" value="{{ demande.id }}" name="choice">Annuler ma demande</button>
+                                    </form>
+                                {% elif demande.etat == 5 %}
+                                    <span style="font-size: small" class="badge badge-soft-success">Validée<span>
+                                {% else %}
+                                    <span style="font-size: small" class="badge badge-soft-success">Financée</span>
+                                {% endif %}
+                            </td>
+                            <td class="text-end flex flex-row-reverse">
+                                <form style="float: right;" method="post" action="../consulting-choice/">
+                                    {% csrf_token %}
+                                    <a title="Consulter ma demande"><button style="margin-left:10px" class="btn btn-de-light shadow-dark" type="submit" value="{{ demande.id }}" name="choice"><img style="width: 25px;" src="../../static/admin/assets/images/magnifying-glass.png"></button></a>
+                                </form>
+                                {% if demande.etat == 3 %}
+                                    <form method="post" action="../upload-choice/">
+                                        {% csrf_token %}
+                                        <button title="Ajouter des documents" style="margin-left:10px" class="btn btn-de-light shadow-dark" type="submit" value="{{ demande.id }}" name="choice"><img style="width: 25px;" src="../../static/admin/assets/images/add-file.png"></button>
+                                    </form>
+                                {% elif demande.etat == 5 %}
+                                    <form style="float:right" method="post" action="../download-doc/facture-solde-frais-dossier/">
+                                        {% csrf_token %}
+                                        <a title="Télécharger mon contrat"><button style="margin-left:10px" class="btn btn-de-light shadow-dark" type="submit" value="{{ demande.id }}" name="choice"><img style="width: 25px;" src="../../static/admin/assets/images/down-arrow.png"></button></a>
+                                    </form>
+                                {% elif demande.etat == 7 %}
+                                    <form style="float:right" method="post" action="../download-doc/bulletin-adhesion/">
+                                        {% csrf_token %}
+                                        <a title="Télécharger mon contrat"><button style="margin-left:10px" class="btn btn-de-light shadow-dark" type="submit" value="{{ demande.id }}" name="choice"><img style="width: 25px;" src="../../static/admin/assets/images/down-arrow.png"></button></a>
+                                    </form>
+                                    <form style="float:right" method="post" action="../download-doc/contrat-prestation-service/">
+                                        {% csrf_token %}
+                                        <a title="Télécharger mon contrat"><button style="margin-left:10px" class="btn btn-de-light shadow-dark" type="submit" value="{{ demande.id }}" name="choice"><img style="width: 25px;" src="../../static/admin/assets/images/down-arrow.png"></button></a>
+                                    </form>
+                                    <form style="float:right" method="post" action="../download-doc/facture-assurance/">
+                                        {% csrf_token %}
+                                        <a title="Télécharger mon contrat"><button style="margin-left:10px" class="btn btn-de-light shadow-dark" type="submit" value="{{ demande.id }}" name="choice"><img style="width: 25px;" src="../../static/admin/assets/images/down-arrow.png"></button></a>
+                                    </form>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table><!--end /table-->
+                </div><!--end /tableresponsive-->
+    </div> <!-- end col -->
+{% endblock %}
+
+{% block js %}
+<script src="../../static/admin/assets/plugins/hopscotch/hopscotch.js"></script>
+<script src="../../static/admin/assets/pages/tour.init.js"></script>
+{% endblock %}

@@ -1,0 +1,167 @@
+{% extends 'admin/content-admin.html' %}
+{% load static %}
+{% block content2 %}
+<!--    Links pour les templates de register    -->
+    <link rel="stylesheet" type="text/css" href="{% static 'register/assets/css/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'register/assets/css/card.css' %}">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'register/assets/css/bootstrap.min.css' %}">
+
+    <!-- External Css -->
+    <link rel="stylesheet" href="{% static 'register/assets/css/line-awesome.min.css' %}">
+    
+    <!-- Custom Css -->
+    <link rel="stylesheet" type="text/css" href="{% static 'register/assets/css/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'register/assets/css/theme-1.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'register/assets/css/kyc-2.css' %}">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'register/assets/images/favicon.png' %}">
+    <link rel="apple-touch-icon" href="{% static 'register/assets/images/apple-touch-icon.png' %}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{% static 'register/assets/images/icon-72x72.png' %}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{% static 'register/assets/images/icon-114x114.png' %}">
+
+
+<div class="ugf-content">
+  <h2>Le Locataire</h2>
+  <form action="" class="account-form" method="post" id="form-loc" novalidate>
+    {% csrf_token %}
+      <div style="display: flex; width: 100%;">
+    <div style="flex-direction: column; width: 100%;">
+      <div class="col-sm-6">
+          <h3 class="title-text">Entreprise</h3>
+        <div class="form-group check-gender" style="display:flow-root">
+          <label for="physical_moral">Capacité juridique </label>
+          <div style="display:inline-flex" id="physical_moral">
+            <div class="custom-radio">
+              <input type="radio" name="physical_moral" class="custom-control-input" id="physical" value="physical" {% if demande.physical_moral == "physical" %}checked{% endif %}>
+              <label class="custom-control-label" for="physical">Personne Physique</label>
+            </div>
+            <div class="custom-radio">
+              <input type="radio" name="physical_moral" class="custom-control-input" id="moral" value="moral" {% if demande.physical_moral == "moral" %}checked{% endif %}>
+              <label class="custom-control-label" for="moral">Personne Morale</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="juridical_form">Forme juridique</label>
+          <select id="juridical_form" class="form-control" name="juridical_form">
+            <option value= "EI" {% if demande.juridical_form == "EI" %}selected{% endif %}>Entreprise individuelle</option>
+            <option value= "EIRL" {% if demande.juridical_form == "EIRL" %}selected{% endif %}>Entreprise individuelle à responsabilité limitée</option>
+            <option value= "EURL" {% if demande.juridical_form == "EURL" %}selected{% endif %}>Entreprise unipersonnelle à responsabilité limitée</option>
+            <option value= "SC" {% if demande.juridical_form == "SC" %}selected{% endif %}>Société de capitaux</option>
+            <option value= "SNC" {% if demande.juridical_form == "SNC" %}selected{% endif %}>Société en nom collectif</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="social_reason">Raison sociale</label>
+          <input type="text" placeholder="QuietRent" class="form-control" id="social_reason" name="social_reason" value="{{ demande.social_reason }}">
+        </div>
+      </div>
+    <div class="col-sm-6">
+        <div class="form-group">
+          <label for="inputActivity">Secteur d'Activité</label>
+          <input type="text" placeholder="e.g. Assurance" class="form-control" id="inputActivity" name="inputActivity" value="{{ demande.inputActivity }}">
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="inputSIREN">SIRET</label>
+          <input type="text" placeholder="827636507" class="form-control" id="inputSIREN" name="inputSIREN" value="{{ demande.inputSIREN }}">
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <br/>
+        <button type="button" id="buttonInsee" style="width: 85%; text-align:center;" class="btn text-center">completer automatiquement
+        </button>
+      </div>
+  </div><!-- end-row -->
+  <div style="flex-direction: column; width: 100%;">
+      <div class="col-sm-6" >
+          <h3 class="title-text">Représentant</h3>
+        <div class="form-group check-gender" style="display:flow-root">
+          <label for="gender">Genre </label>
+          <div style="display:inline-flex" id="gender">
+            <div class="custom-radio">
+              <input type="radio" name="gender" class="custom-control-input" id="Gmale" value="male" required {% if demande.gender == "male" %}checked{% endif %}>
+              <label class="custom-control-label" for="Gmale">Monsieur</label>
+            </div>
+            <div class="custom-radio">
+              <input type="radio" name="gender" class="custom-control-input" id="Gfemale" value="female" required {% if demande.gender == "female" %}checked{% endif %}>
+              <label class="custom-control-label" for="Gfemale">Madame</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="inputName">Nom</label>
+          <input type="text" placeholder="e.g. Smith" class="form-control" id="inputName" name="inputName" value="{{ demande.inputName }}">
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="inputFirstName">Prénom</label>
+          <input type="text" placeholder="e.g. John" class="form-control" id="inputFirstName" name="inputFirstName" value="{{ demande.inputFirstName }}">
+        </div>
+      </div>
+<!--      <div class="col-md-6">-->
+<!--        <div class="form-group">-->
+<!--          <label for="inputMail">Adresse Email</label>-->
+<!--          <input type="email" placeholder="contact@quietrent.com" class="form-control" id="inputMail" name="inputMail" required value="{{ demande.inputMail }}">-->
+<!--        </div>-->
+<!--      </div>-->
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="inputPhone">Numéro de téléphone</label>
+          <input type="text" placeholder="e.g. 0753671129" class="form-control" id="inputPhone" name="inputPhone" value="{{ demande.inputPhone }}">
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="inputWebSite">Site internet</label>
+          <input type="text" placeholder="e.g. www.quietrent.com" class="form-control" id="inputWebSite" name="inputWebSite" value="{{ demande.inputWebSite }}">
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="inputWebSite">mail</label>
+          <input type="text" placeholder="contact@quietrent.com" class="form-control" id="inputMail" name="inputMail" value="{{ demande.inputMail }}">
+        </div>
+      </div>
+    </div>
+      </div>
+    <button type="submit" class="btn"><span>Suivant</span> <i class="las la-arrow-right"></i></button>
+  </form>
+</div>
+{% endblock %}
+
+{% block js %}
+<script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous">
+    </script>
+<!--        Links pour les templates de register            -->
+    <script src="{% static 'register/assets/js/popper.min.js' %}"></script>
+    <script src="{% static 'register/assets/js/bootstrap.min.js' %}"></script>
+
+    <script src="{% static 'register/assets/js/owl.carousel.min.js' %}"></script>
+
+    <!--<script src="{% static 'register/assets/js/custom.js' %}"></script>-->
+    <script src="{% static 'register/assets/js/upload.js' %}"></script>
+    <script type="module" src="{% static 'register/assets/js/tenant.js' %}" defer></script>
+{% endblock %}

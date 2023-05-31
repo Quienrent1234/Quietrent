@@ -1,0 +1,61 @@
+{% extends 'register/content.html' %}
+{% load static %}
+{% block css %}
+<link href="{% static 'admin/assets/plugins/sweet-alert2/sweetalert2.min.css' %}" rel="stylesheet" type="text/css">
+<link href="{% static 'admin/assets/plugins/animate/animate.min.css' %}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block logo %}
+<img class="navbar-brand" src="{% static 'register/assets/images/logoQuietRent.png' %}" alt="logo">
+{% endblock %}
+
+{% block content1 %}
+<div class="ugf-content pt340">
+  <a href="../return/" class="prev-page">Retour</a>
+  <h2>Verifier votre adresse mail</h2>
+  <p>S'il vous plait verifiez l'adresse <strong>{{email.inputMail}}</strong> <br> et entrez le code de verification ici</p>
+  <form action="" class="form-flex email-verification-form" id="email-verification-form" method="post" name="code">
+    {% csrf_token %}
+    <div class="form-group">
+      <input type="text" placeholder="0" class="form-control" maxlength="1" name="digit1" onKeyUp="suivant(this,'digit2', 1)">
+    </div>
+    <div class="form-group">
+      <input type="text" placeholder="0" class="form-control" maxlength="1" name="digit2" onKeyUp="suivant(this,'digit3', 1)">
+    </div>
+    <div class="form-group">
+      <input type="text" placeholder="0" class="form-control" maxlength="1" name="digit3" onKeyUp="suivant(this,'digit4', 1)">
+    </div>
+    <div class="form-group">
+      <input type="text" placeholder="0" class="form-control" maxlength="1" name="digit4" onKeyUp="suivant(this,'digit5', 1)">
+    </div>
+    <div class="form-group">
+      <input type="text" placeholder="0" class="form-control" maxlength="1" name="digit5">
+    </div>
+    <button class="btn"><span>Suivant</span> <i class="las la-arrow-right"></i></button>
+  </form>
+  <!-- <p class="resend-code">Vous ne l'avez pas recu ? <a href="#">Renvoyé le code</a></p> -->
+</div>
+{% endblock %}
+
+{% block content3 %}
+<div class="ugf-sidebar flex-bottom ugf-sidebar-bg-4 sidebar-steps">
+  <div class="steps">
+    <div class="step step-oncomplete">
+      <p>Résultat d'éligibilité</p>
+    </div>
+    <div class="step">
+      <p>Questionnaire d'eligibilité</p>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block js %}
+<script>
+function suivant(enCours, suivant, limite){
+  if (enCours.value.length == limite)
+  document.code[suivant].focus();
+}</script>
+<script src="{% static 'admin/assets/plugins/sweet-alert2/sweetalert2.min.js' %}"></script>
+<script type="module" src="{% static 'register/assets/js/email-verification.js' %}" defer></script>
+{% endblock %}

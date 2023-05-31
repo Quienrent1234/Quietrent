@@ -1,0 +1,353 @@
+{% extends 'admin/content.html' %}
+
+{% block content2 %}
+<div class="row">
+    <div class="col-lg-3">
+        <div class="card">
+            <div class="card-header">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <h4 class="card-title">Demandes</h4>
+                    </div><!--end col-->
+                </div>  <!--end row-->
+            </div><!--end card-header-->
+            <div class="card-body">
+                <div class="files-nav">
+                    <div class="nav flex-column nav-pills" id="files-tab" aria-orientation="vertical">
+                        {% for demande in demandes %}
+                        <a class="nav-link {% if demande.id == active %}active{% endif %}" id="files-projects-tab{{ demande.id }}" data-bs-toggle="pill" href="#files-projects{{ demande.id }}" aria-selected="false">
+                            <i data-feather="folder" class="align-self-center icon-dual-file icon-sm me-2"></i>
+                            <div class="d-inline-block align-self-center">
+                                <h5 class="m-0">Demande N°{{ demande.id }} ({{ demande.inputAddress }} {{ demande.inputCode }} {{ demande.inputCity }})</h5>
+                                <small>80GB/200GB Used</small>
+                            </div>
+                        </a>
+                        {% endfor %}
+<!--                        <a class="nav-link" id="files-pdf-tab" data-bs-toggle="pill" href="#files-pdf" aria-selected="false">-->
+<!--                            <i data-feather="folder" class="align-self-center icon-dual-file icon-sm me-2"></i>-->
+<!--                            <div class="d-inline-block align-self-center">-->
+<!--                                <h5 class="m-0">KBIS / 2 derniers bilans / Bail ou projet de bail</h5>-->
+<!--                                <small>80GB/200GB Used</small>-->
+<!--                            </div>-->
+<!--                        </a>-->
+<!--                        <a class="nav-link  align-items-center" id="files-documents-tab" data-bs-toggle="pill" href="#files-documents" aria-selected="false">-->
+<!--                            <i data-feather="folder" class="align-self-center icon-dual-file icon-sm me-2"></i>-->
+<!--                            <div class="d-inline-block align-self-center">-->
+<!--                                <h5 class="m-0">Statut de la société / Business Plan / Présentation de l'entreprise</h5>-->
+<!--                                <small>80GB/200GB Used</small>-->
+<!--                            </div>-->
+<!--                            <span class="badge bg-success ms-auto font-10">8</span>-->
+<!--                        </a>-->
+                        <a class="nav-link mb-0"  href="#" data-bs-toggle="modal" data-animation="bounce" data-bs-target=".hide-modal">
+                            <i data-feather="lock" class="align-self-center icon-dual-file icon-sm me-2"></i>
+                            <div class="d-inline-block align-self-center">
+                                <h5 class="m-0">Files Lock</h5>
+                                <small>80GB/200GB Used</small>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div><!--end card-body-->
+        </div><!--end card-->
+
+        <div class="card">
+            <div class="card-body">
+                <small class="float-end">62%</small>
+                <h6 class="mt-0">620GB / 1TB Used</h6>
+                <div class="progress" style="height: 5px;">
+                    <div class="progress-bar bg-success" role="progressbar" style="width: 62%;" aria-valuenow="62" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            </div><!--end card-body-->
+        </div><!--end card-->
+    </div><!--end col-->
+    <div class="col-lg-9">
+        <div class="">
+            <div class="tab-content" id="files-tabContent">
+                {% for demande in demandes %}
+                <div class="tab-pane fade show {% if demande.id == active %}active{% endif %}" id="files-projects{{ demande.id }}">
+                    <h4 class="card-title mt-0 mb-3">Pièces d'identité</h4>
+                    {% if demande.etat != 2 %}
+                    <div class="float-end">
+                        <form method="post" action="../upload-choice/">
+                            {% csrf_token %}
+                            <button type="submit" name="choice" value="{{ demande.id }}" class="add-file-input" style="border: none; background: none; margin-left: 10px;">
+                                <div class="add-file btn btn-purple position-relative overflow-hidden" style="width: 100%;">
+                                <i class="las la-cloud-upload-alt me-2 font-22"></i><span class="font-16">Upload File</span>
+                                </div>
+                            </button>
+                        </form>
+                    </div>
+                    {% endif %}
+                    {% if demande.etat != 2 %}
+                    <div class="float-end">
+                        <form class="validate_docs" method="post" action="{% url 'validate-docs' demande.id %}">
+                            {% csrf_token %}
+                            <button type="submit" style="border: solid lightseagreen 2px; margin-left: 20px;" class="btn btn-de-info float-end"><img style="width: 20px;" src="../../static/admin/assets/images/checked.png"><span style="font: bold; font-size: medium; margin-left: 10px;">Valider mes documents</span></button>
+                        </form>
+                    </div>
+                    {% endif %}
+                    <div class="file-box-content">
+                        {% for doc in docs_id %}
+                        {% if doc.id_demande == demande.id %}
+                        <div class="file-box">
+                            <a href="../../media/{{ doc.adresse_doc }}">
+                            <div class="text-center">
+                                <i class="lar la-file text-success"></i>
+                                <h6 class="text-truncate">{{ doc.adresse_doc }}</h6>
+                                <small class="text-muted">{{ doc.upload_date}} / {{ doc.size }} Ko</small>
+                            </div>
+                            <div style="display: flex; justify-content: center; align-content: center; align-items: center;">
+                                {% if doc.deletable %}
+                                <form class="delete_form1" method="post" action="{% url 'delete' doc.id %}">
+                                {% csrf_token %}
+                                <button type="submit" style="border: solid red 2px;" class="btn btn-de-danger text-center"><i class="mdi mdi-delete-outline" style="font-size: medium;"></i></button>
+                                </form>
+                                {% endif %}
+                                <a href="../../media/{{ doc.adresse_doc }}"  style="border: solid blue 2px;" download class="btn btn-de-blue m-1">
+                                    <i style="font-size: medium;" class="mdi mdi-cloud-download-outline"></i>
+                                </a>
+                            </div>
+                            </a>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+<!--                        <div class="file-box">-->
+<!--                            <a href="#" class="download-icon-link">-->
+<!--                                <i class="las la-download file-download-icon"></i>-->
+<!--                            </a>-->
+<!--                            <div class="text-center">-->
+<!--                                <i class="lar la-file-code text-danger"></i>-->
+<!--                                <h6 class="text-truncate">Ecommerce.pdf</h6>-->
+<!--                                <small class="text-muted">15 March 2021 / 8MB</small>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="file-box">-->
+<!--                            <a href="#" class="download-icon-link">-->
+<!--                                <i class="las la-download file-download-icon"></i>-->
+<!--                            </a>-->
+<!--                            <div class="text-center">-->
+<!--                                <i class="lar la-file-archive text-warning"></i>-->
+<!--                                <h6 class="text-truncate">Payment_app.zip</h6>-->
+<!--                                <small class="text-muted">11 April 2021 / 10MB</small>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="file-box">-->
+<!--                            <a href="#" class="download-icon-link">-->
+<!--                                <i class="las la-download file-download-icon"></i>-->
+<!--                            </a>-->
+<!--                            <div class="text-center">-->
+<!--                                <i class="lar la-file text-secondary"></i>-->
+<!--                                <h6 class="text-truncate">App_landing_001</h6>-->
+<!--                                <small class="text-muted">06 March 2021 / 5MB</small>-->
+<!--                            </div>-->
+<!--                        </div>-->
+                    </div>
+                    <br>
+                     <h4 class="mt-0 card-title mb-3">KBIS / 2 derniers bilans / Bail ou projet de bail</h4>
+                    <div class="file-box-content">
+                        {% for doc in docs_immo %}
+                        {% if doc.id_demande == demande.id %}
+                        <div class="file-box">
+                            <a href="../../media/{{ doc.adresse_doc }}">
+                            <div class="text-center">
+                                <i class="lar la-file-pdf text-success"></i>
+                                <h6 class="text-truncate">{{ doc.adresse_doc }}</h6>
+                                <small class="text-muted">{{ doc.upload_date}} / {{ doc.size }} Ko</small>
+                            </div>
+                                <div style="display: flex; justify-content: center; align-content: center; align-items: center;">
+                                {% if doc.deletable %}
+                                <form class="delete_form2" method="post" action="{% url 'delete' doc.id %}">
+                                {% csrf_token %}
+                                <button type="submit" style="border: solid red 2px;" class="btn btn-de-danger text-center"><i class="mdi mdi-delete-outline" style="font-size: medium;"></i></button>
+                                </form>
+                                    {% endif %}
+                                <a href="../../media/{{ doc.adresse_doc }}" style="border: solid blue 2px;" download class="btn btn-de-blue m-1">
+                                    <i style="font-size: medium;" class="mdi mdi-cloud-download-outline"></i>
+                                </a>
+                            </div>
+                            </a>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                    <br>
+                    <h4 class="mt-0 card-title mb-3">Statut de la société / Business Plan / Présentation de l'entreprise</h4>
+                    <div class="file-box-content">
+
+                        {% for doc in docs_entreprise %}
+                        {% if doc.id_demande == demande.id %}
+                        <div class="file-box">
+                            <a href="../../media/{{ doc.adresse_doc }}">
+                            <div class="text-center">
+                                <i class="lar la-file-alt text-info"></i>
+                                <h6 class="text-truncate">{{ doc.adresse_doc }}</h6>
+                                <small class="text-muted">{{ doc.upload_date}} / {{ doc.size }} Ko</small>
+                            </div>
+                                <div style="display: flex; justify-content: center; align-content: center; align-items: center;">
+                                {% if doc.deletable %}
+                                <form class="delete_form3" method="post" action="{% url 'delete' doc.id %}">
+                                {% csrf_token %}
+                                <button type="submit" style="border: solid red 2px;" class="btn btn-de-danger text-center"><i class="mdi mdi-delete-outline" style="font-size: medium;"></i></button>
+                                </form>
+                                {% endif %}
+                                <a href="../../media/{{ doc.adresse_doc }}" style="border: solid blue 2px;" download class="btn btn-de-blue m-1">
+                                    <i style="font-size: medium;" class="mdi mdi-cloud-download-outline"></i>
+                                </a>
+                            </div>
+                            </a>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                    <br>
+                    <h4 class="mt-0 card-title mb-3">Autres documents</h4>
+                    <div class="file-box-content">
+                        {% for doc in docs_autre %}
+                        {% if doc.id_demande == demande.id %}
+                        <div class="file-box">
+                            <a href="../../media/{{ doc.adresse_doc }}">
+                            <div class="text-center">
+                                <i class="lar la-file-pdf text-success"></i>
+                                <h6 class="text-truncate">{{ doc.adresse_doc }}</h6>
+                                <small class="text-muted">{{ doc.upload_date}} / {{ doc.size }} Ko</small>
+                            </div>
+                                <div style="display: flex; justify-content: center; align-content: center; align-items: center;">
+                                {% if doc.deletable %}
+                                <form class="delete_form4" method="post" action="{% url 'delete' doc.id %}">
+                                {% csrf_token %}
+                                <button type="submit" style="border: solid red 2px;" class="btn btn-de-danger text-center"><i class="mdi mdi-delete-outline" style="font-size: medium;"></i></button>
+                                </form>
+                                    {% endif %}
+                                <a href="../../media/{{ doc.adresse_doc }}" style="border: solid blue 2px;" download class="btn btn-de-blue m-1">
+                                    <i style="font-size: medium;" class="mdi mdi-cloud-download-outline"></i>
+                                </a>
+                            </div>
+                            </a>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+
+<!--                    <div class="row">-->
+<!--                        <div class="col-12">-->
+<!--                            <h4 class="card-title my-3">Freelancing Projects</h4>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="file-box-content">-->
+<!--                        <div class="file-box">-->
+<!--                            <a href="#" class="download-icon-link">-->
+<!--                                <i class="las la-download file-download-icon"></i>-->
+<!--                            </a>-->
+<!--                            <div class="text-center">-->
+<!--                                <i class="lar la-file-alt text-primary"></i>-->
+<!--                                <h6 class="text-truncate">Admin_Panel</h6>-->
+<!--                                <small class="text-muted">06 March 2021 / 5MB</small>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="file-box">-->
+<!--                            <a href="#" class="download-icon-link">-->
+<!--                                <i class="las la-download file-download-icon"></i>-->
+<!--                            </a>-->
+<!--                            <div class="text-center">-->
+<!--                                <i class="lar la-file-code text-info"></i>-->
+<!--                                <h6 class="text-truncate">Ecommerce.pdf</h6>-->
+<!--                                <small class="text-muted">15 March 2021 / 8MB</small>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+                </div><!--end tab-pane-->
+                {% endfor %}
+
+                <div class="tab-pane fade" id="files-pdf">
+<!--                    <h4 class="mt-0 card-title mb-3">KBIS / 2 derniers bilans / Bail ou projet de bail</h4>-->
+<!--                    <div class="file-box-content">-->
+<!--                        {% for doc in docs_immo %}-->
+<!--                        <div class="file-box">-->
+<!--                            <a href="../../media/{{ doc.adresse_doc }}">-->
+<!--                            <div class="text-center">-->
+<!--                                <i class="lar la-file-pdf text-success"></i>-->
+<!--                                <h6 class="">{{doc.type}} : {{ doc.adresse_doc }}</h6>-->
+<!--                                <small class="text-muted">{{ doc.upload_date}} / {{ doc.size }} Ko</small>-->
+<!--                            </div>-->
+<!--                                <div style="display: flex; justify-content: center; align-content: center; align-items: center;">-->
+<!--                                {% if doc.deletable %}-->
+<!--                                <form method="post" action="{% url 'delete' doc.id %}">-->
+<!--                                {% csrf_token %}-->
+<!--                                <button type="submit" style="border: solid red 2px;" class="btn btn-de-danger text-center"><i class="mdi mdi-delete-outline" style="font-size: medium;"></i></button>-->
+<!--                                </form>-->
+<!--                                    {% endif %}-->
+<!--                                <a href="../../media/{{ doc.adresse_doc }}" style="border: solid blue 2px;" download class="btn btn-de-blue m-1">-->
+<!--                                    <i style="font-size: medium;" class="mdi mdi-cloud-download-outline"></i>-->
+<!--                                </a>-->
+<!--                            </div>-->
+<!--                            </a>-->
+<!--                        </div>-->
+<!--                        {% endfor %}-->
+<!--                    </div>-->
+                </div><!--end tab-pane-->
+
+                <div class="tab-pane fade" id="files-documents">
+<!--                    <h4 class="mt-0 card-title mb-3">Statut de la société / Business Plan / Présentation de l'entreprise</h4>-->
+<!--                    <div class="file-box-content">-->
+
+<!--                        {% for doc in docs_entreprise %}-->
+<!--                        <div class="file-box">-->
+<!--                            <a href="../../media/{{ doc.adresse_doc }}">-->
+<!--                            <div class="text-center">-->
+<!--                                <i class="lar la-file-alt text-info"></i>-->
+<!--                                <h6 class="">{{doc.type}} : {{ doc.adresse_doc }}</h6>-->
+<!--                                <small class="text-muted">{{ doc.upload_date}} / {{ doc.size }} Ko</small>-->
+<!--                            </div>-->
+<!--                                <div style="display: flex; justify-content: center; align-content: center; align-items: center;">-->
+<!--                                {% if doc.deletable %}-->
+<!--                                <form method="post" action="{% url 'delete' doc.id %}">-->
+<!--                                {% csrf_token %}-->
+<!--                                <button type="submit" style="border: solid red 2px;" class="btn btn-de-danger text-center"><i class="mdi mdi-delete-outline" style="font-size: medium;"></i></button>-->
+<!--                                </form>-->
+<!--                                    {% endif %}-->
+<!--                                <a href="../../media/{{ doc.adresse_doc }}" style="border: solid blue 2px;" download class="btn btn-de-blue m-1">-->
+<!--                                    <i style="font-size: medium;" class="mdi mdi-cloud-download-outline"></i>-->
+<!--                                </a>-->
+<!--                            </div>-->
+<!--                            </a>-->
+<!--                        </div>-->
+<!--                        {% endfor %}-->
+<!--                    </div>-->
+                </div><!--end tab-pen-->
+
+                <div class="tab-pane fade" id="files-hide">
+                    <h4 class="mt-0 card-title mb-3">Hide</h4>
+                </div><!--end tab-pane-->
+            </div>  <!--end tab-content-->
+        </div><!--end card-body-->
+    </div><!--end col-->
+</div><!--end row-->
+{% endblock %}
+
+{% block content4 %}
+<div class="modal fade hide-modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title mt-0" id="exampleModalLabel">Enter Password</h6>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" action="index.html">
+                    <div class="mb-4 mt-2 ">
+                        <span class="thumb-xl justify-content-center d-flex align-items-center bg-soft-danger rounded-circle mx-auto"><i class="las la-lock"></i></span>
+                    </div>
+                    <div class="input-group">
+                        <input type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="HideCard">
+                        <button class="btn btn-de-primary" type="button" id="HideCard"><i class="las la-key"></i></button>
+                    </div>
+                    <div class="text-end mt-1">
+                        <a href="#" class="text-primary font-12"><i class="las la-lock"></i> Forgot password?</a>
+                    </div>
+                </form>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<script src="../../static/admin/assets/js/warning.js"></script>
+{% endblock %}

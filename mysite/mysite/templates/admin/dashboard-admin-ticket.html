@@ -1,0 +1,302 @@
+{% extends 'admin/content-admin.html' %}
+
+{% load poll_extras %}
+
+{% block content2 %}
+<div class="row justify-content-center">
+    <div class="col-12">
+        <div class="card overflow-hidden">
+            <div class="row g-0">
+                <div class="col-md-6 col-lg-3 border-b border-e border-bo">
+                    <div class="card-body">
+                        <div class="row d-flex justify-content-center">
+                            <div class="col">
+                                <div class="media">
+                                    <div class="bg-light-alt d-flex justify-content-center align-items-center thumb-md  rounded-circle">
+                                        <i data-feather="tag" class="align-self-center text-muted icon-sm"></i>  
+                                    </div>
+                                    <div class="media-body align-self-center ms-2"> 
+                                        <p class="text-dark mb-1 fw-semibold">Nouveaux Tickets</p>                                                            
+                                        <p class="mb-0 text-truncate text-muted">Depuis hier</p>                                                                                   
+                                    </div><!--end media body-->
+                                </div><!--end media-->                                                    
+                            </div><!--end col-->
+                            <div class="col-auto align-self-center">
+                                <h4 class="my-1">{{new_tickets}}</h4>
+                            </div><!--end col-->
+                        </div><!--end row-->
+                    </div><!--end card-body-->                                            
+                </div> <!--end col--> 
+                <div class="col-md-6 col-lg-3 border-b border-e border-bo">
+                    <div class="card-body">
+                        <div class="row d-flex justify-content-center">                                                
+                            <div class="col">
+                                <div class="media">
+                                    <div class="bg-light-alt d-flex justify-content-center align-items-center thumb-md  rounded-circle">
+                                        <i data-feather="zap" class="align-self-center text-muted icon-sm"></i>  
+                                    </div>
+                                    <div class="media-body align-self-center ms-2"> 
+                                        <p class="text-dark mb-1 fw-semibold">Ouvert</p>                                                            
+                                        <p class="mb-0 text-truncate text-muted"></p>
+                                    </div><!--end media body-->
+                                </div><!--end media-->                                                    
+                            </div><!--end col-->
+                            <div class="col-auto align-self-center">
+                                <h4 class="my-1">{{open_tickets}}</h4>
+                            </div><!--end col-->
+                        </div><!--end row-->
+                    </div><!--end card-body-->                                            
+                </div> <!--end col-->                         
+                <div class="col-md-6 col-lg-3 border-b border-e">
+                    <div class="card-body">
+                        <div class="row d-flex justify-content-center">
+                            <div class="col">  
+                                <div class="media">
+                                    <div class="bg-light-alt d-flex justify-content-center align-items-center thumb-md  rounded-circle">
+                                        <i data-feather="package" class="align-self-center text-muted icon-sm"></i>
+                                    </div>
+                                    <div class="media-body align-self-center ms-2"> 
+                                        <p class="text-dark mb-1 fw-semibold">Résolu</p>                                                             
+                                        <p class="mb-0 text-truncate text-muted">Depuis hier</p>
+                                    </div><!--end media body-->
+                                </div><!--end media-->                                                    
+                            </div><!--end col-->
+                            <div class="col-auto align-self-center">
+                                <h4 class="my-1">{{done_tickets}}</h4>                                                     
+                            </div><!--end col-->
+                        </div><!--end row-->
+                    </div><!--end card-body-->                                            
+                </div> <!--end col--> 
+                <div class="col-md-6 col-lg-3 ps-lg-0">
+                    <div class="card-body">
+                        <div class="row d-flex justify-content-center">                                                
+                            <div class="col">
+                                <div class="media">
+                                    <div class="bg-light-alt d-flex justify-content-center align-items-center thumb-md  rounded-circle">
+                                        <i data-feather="lock" class="align-self-center text-muted icon-sm"></i> 
+                                    </div>
+                                    <div class="media-body align-self-center ms-2"> 
+                                        <p class="text-dark mb-1 fw-semibold">Fermé</p>                                                      
+                                        <p class="mb-0 text-truncate text-muted">Depuis hier</p>
+                                    </div><!--end media body-->
+                                </div><!--end media-->                                                     
+                            </div><!--end col-->
+                            <div class="col-auto align-self-center">
+                                <h4 class="my-1">{{closed_tickets}}</h4> 
+                            </div><!--end col-->
+                        </div><!--end row-->
+                    </div><!--end card-body-->                                            
+                </div> <!--end col-->
+            </div><!--end row--> 
+        </div><!--end card-->
+    </div><!--end col-->           
+</div><!--end row-->
+<div class="row">
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="card-header">
+                <div class="row align-items-center">
+                    <div class="col">                      
+                        <h4 class="card-title">Status des tickets</h4>                      
+                    </div><!--end col-->                                        
+                </div>  <!--end row-->                                  
+            </div><!--end card-header-->
+            <div class="card-body">                                                                      
+                <div id="reports_tickets" class="apex-charts"></div>
+            </div><!--end card-body-->                                
+        </div><!--end card-->    
+    </div><!--end col-->
+
+    <div class="col-lg-4">
+    <div class="card">   
+        <div class="card-header">
+            <div class="row align-items-center">
+                <div class="col">                      
+                    <h4 class="card-title">Satisfaction client (a faire)</h4>                      
+                </div><!--end col-->                                       
+            </div>  <!--end row-->                                  
+        </div><!--end card-header-->  
+        <div class="card-body">
+            <div class="position-absolute bottom-50 start-50 translate-middle mb-n2">
+                <h3 class="mb-0">94.5%</h3>
+                <p class="mb-0 text-uppercase fw-semibold text-muted">Satisfaction</p>
+            </div> 
+            <div id="ana_device" class="apex-charts mb-2"></div>  
+            <ul class="list-inline mb-0 text-center">
+                <li class="list-inline-item mb-2 mb-lg-0 fw-semibold">
+                    <i class="far fa-grin-stars text-primary font-16 align-middle me-1"></i>Excellent
+                </li>
+                <li class="list-inline-item mb-2 mb-lg-0 fw-semibold">
+                    <i class="far fa-smile me-1 mb-lg-0 font-16 align-middle" style="color: #fdb5c8;"></i>Bien
+                </li>
+                <li class="list-inline-item mb-2 fw-semibold">
+                    <i class="far fa-meh text-info me-1 font-16 align-middle"></i>Convenable
+                </li>
+                <li class="list-inline-item fw-semibold">
+                    <i class="far fa-frown  me-1 font-16 align-middle" style="color: #c693ff;"></i>Médiocre
+                </li>
+            </ul>  
+            <hr class="hr-dashed">                                                                   
+            <div class="media">
+                <span class="thumb-sm justify-content-center d-flex align-items-center bg-soft-warning rounded-circle" style="visibility:hidden"></span>                                    
+                <div class="media-body align-self-center">                                         
+                </div><!--end media-body-->
+            </div>
+        </div><!--end card-body-->    
+    </div><!--end card-->
+</div>
+
+</div><!--end row-->
+
+<div class="row">
+    <div class="col-lg-4">
+        <div class="card">
+            <div class="card-body">
+                <div class="row d-flex justify-content-center">
+                    <div class="col">
+                        <p class="text-dark mb-0 text-uppercase fw-semibold">Tickets Worked</p>
+                        <h4 class="my-1">380</h4>
+                        <p class="mb-0 text-truncate text-muted"><span class="text-success"><i class="mdi mdi-trending-up"></i>8.5%</span> up from Yesterday</p>
+                    </div>
+                    <div class="col-auto align-self-center">
+                        <div class="d-flex justify-content-center align-items-center thumb-md bg-light-alt rounded-circle mx-auto">
+                            <i class="ti ti-tag font-24 align-self-center text-muted"></i>
+                        </div>
+                    </div>
+                </div>
+            </div><!--end card-body--> 
+        </div><!--end card--> 
+        <div class="card">
+            <div class="card-body">
+                <div class="row d-flex justify-content-center">
+                    <div class="col">
+                        <p class="text-dark mb-0 text-uppercase fw-semibold">Tickets déjà traité</p>
+                        <h4 class="my-1">{{sumClose}}</h4>
+                        {%  if pourcentage_close_day > 0%}
+                        <p class="mb-0 text-truncate text-muted"><span class="text-success"><i class="mdi mdi-trending-up">{{pourcentage_close_day}}%</i></span> par rapport a hier</p>
+                        {% else %}
+                        <p class="mb-0 text-truncate text-muted"><span class="text-warning"><i class="mdi mdi-trending-down">{{pourcentage_close_day}}%</i></span> par rapport a hier</p>
+                        {%endif%}
+                    </div>
+                    <div class="col-auto align-self-center">
+                        <div class="d-flex justify-content-center align-items-center thumb-md bg-light-alt rounded-circle mx-auto">
+                            <i class="ti ti-checkbox font-24 align-self-center text-muted"></i>
+                        </div>
+                    </div>
+                </div>
+            </div><!--end card-body--> 
+        </div><!--end card--> 
+        <div class="card">
+            <div class="card-body">
+                <div class="row d-flex justify-content-center">
+                    <div class="col">
+                        <p class="text-dark mb-0 text-uppercase fw-semibold">Hours Worked</p>
+                        <h4 class="my-1">420:30<span class="ms-1 font-12">min</span></h4>
+                        <p class="mb-0 text-truncate text-muted"><span class="text-success">00:01:05</span> min time from Yesterday</p>
+                    </div>
+                    <div class="col-auto align-self-center">
+                        <div class="d-flex justify-content-center align-items-center thumb-md bg-light-alt rounded-circle mx-auto">
+                            <i class="ti ti-clock font-24 align-self-center text-muted"></i>
+                        </div>
+                    </div>
+                </div>
+            </div><!--end card-body--> 
+        </div><!--end card-->                            
+    </div><!--end col-->
+    <div class="col-lg-4">
+        <div class="card">
+            <div class="card-header">
+                <div class="row align-items-center">
+                    <div class="col">                      
+                        <h4 class="card-title">Status des tickets</h4>                      
+                    </div><!--end col-->                                        
+                </div>  <!--end row-->                                  
+            </div><!--end card-header-->
+            <div class="card-body">
+                <div id="Tickets_Data" class="apex-charts"></div>                                      
+            </div><!--end card-body-->
+        </div><!--end card-->
+    </div><!--end col-->
+    <div class="col-lg-4">
+        <div class="card">
+            <div class="card-header">
+                <div class="row align-items-center">
+                    <div class="col">                      
+                        <h4 class="card-title">Type de tickets</h4>                      
+                    </div><!--end col-->                                        
+                </div>  <!--end row-->                                  
+            </div><!--end card-header-->
+            <div class="card-body">
+                <div id="requestType" class="apex-charts"></div>                                    
+            </div><!--end card-body-->
+        </div><!--end card-->
+    </div><!--end col-->                        
+</div><!--end row-->
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="row align-items-center">
+                    <div class="col">                      
+                        <h4 class="card-title">Tout les tickets</h4>                      
+                    </div><!--end col-->
+                </div>  <!--end row-->                                  
+            </div><!--end card-header-->   
+            <div class="card-body">                             
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead class="thead-light">
+                        <tr>
+                            <th>ID</th>
+                            <th>Utilisateur</th>
+                            <th>Sujet</th> 
+                            <th>Service</th>
+                            <th>Categorie</th>
+                            <th>Etat</th>
+                        </tr><!--end tr-->
+                        </thead>
+
+                        <tbody>
+                            {%for tickets in all_tickets %}
+                            {% if tickets.etat == '0' %}
+                            {% define 'badge badge-soft-dark' as classe %}
+                            {% define 'Clos' as etat %}
+                            {% endif %}
+
+                            {% if tickets.etat == '1' %}
+                            {% define 'badge badge-soft-warning' as classe %}
+                            {% define 'En Cours' as etat %}
+                            {% endif %}
+
+                            {% if tickets.etat == '2' %}
+                            {% define 'badge badge-soft-success' as classe %}
+                            {% define 'Résolu' as etat %}
+                            {% endif %}
+                        <tr>                                             
+                            <td>#{{tickets.id}}</td>
+                            <td>{% for user in all_user %}{% if user == tickets.user %}{{user.first_name}} {{user.last_name}}{%endif%}{%endfor%}</td>
+                           <td>{{tickets.objet}}</td>
+                            <td>{{tickets.service}}</td>                                                
+                            <td>{{tickets.category}}</td> 
+                            <td><span class="{{classe}}">{{etat}}</span></td>
+                        </tr><!--end tr-->   
+                        {%endfor%}                     
+                        </tbody>
+                    </table>                    
+                </div>                                         
+            </div><!--end card-body--> 
+        </div><!--end card--> 
+    </div> <!--end col-->                               
+</div><!--end row-->
+{% endblock %}
+
+{% block js %}*
+<script 
+src="https://code.jquery.com/jquery-3.4.1.min.js"
+integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+crossorigin="anonymous">
+</script>
+<script src="../../static/admin/assets/plugins/apexcharts/apexcharts.min.js"></script>
+<script src="../../static/admin/assets/pages/admin-apex-ticket.init.js"></script> 
+{% endblock %}

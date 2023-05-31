@@ -1,0 +1,296 @@
+{% extends 'admin/content.html' %}
+{% load static %}
+{% block css %}
+<link href="{% static 'admin/assets/plugins/tobii/tobii.min.css' %}" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block content2 %}
+{% if request.user.is_authenticated %}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="met-profile">
+                    <div class="row">
+                        <div class="col-lg-4 align-self-center mb-3 mb-lg-0">
+                            <div class="met-profile-main">
+                                <div class="met-profile-main-pic">
+                                    <span class="thumb-xl justify-content-center d-flex align-items-center bg-soft-info rounded-circle me-2" style="text-transform: uppercase;">{{ f1 }}{{ l1 }}</span>
+                                </div>
+                                <div class="met-profile_user-detail">
+                                    <h5 class="met-user-name">{{ user.first_name }} {{ user.last_name }}</h5>
+                                    <ul>{% for entreprise in entreprises %}
+                                        <li class="mb-0 met-user-name-post">{{ entreprise.social_reason }}</li>{% endfor %}
+                                    </ul>
+                                </div>
+                            </div>                                                
+                        </div><!--end col-->
+                        
+                        <div class="col-lg-4 ms-auto align-self-center">
+                            <ul class="list-unstyled personal-detail mb-0">
+                                <li class=""><i style="color: #4C9082;" class="las la-phone mr-2 font-22 align-middle"></i> <b class="text-dark"> Phone </b> :
+                                    {{ user.mobile }}</li>
+                                <li class="mt-2"><i style="color: #4C9082;" class="las la-envelope font-22 align-middle mr-2"></i> <b class="text-dark"> Email </b> :
+                                    {{ user.email }}</li>
+                                <li class="mt-2"><i style="color: #4C9082;" class="las la-globe font-22 align-middle mr-2"></i> <b class="text-dark"> Website </b> :
+                                    {% for entreprise in entreprises %}
+                                        <a href="{{ entreprise.siteweb }}" class="font-12" style="color: #4C9082;">{{ entreprise.siteweb }}</a><br>
+                                    {% endfor %}
+                                </li>                                                   
+                            </ul>
+                           
+                        </div><!--end col-->
+                        <div class="col-lg-4 align-self-center">                                        
+                        </div><!--end col-->
+                    </div><!--end row-->
+                </div><!--end f_profile-->                                                                                
+            </div><!--end card-body-->  
+            <div class="card-body p-0">    
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+<!--                    <li class="nav-item">-->
+<!--                        <a class="nav-link active" data-bs-toggle="tab" href="#Post" role="tab" aria-selected="true">Post</a>-->
+<!--                    </li>-->
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" href="#Entreprise" role="tab" aria-selected="false">{% if nb_entreprise > 1 %} Mes entreprises {% else %} Mon entreprise {% endif %}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" data-bs-toggle="tab" href="#Settings" role="tab" aria-selected="true">Infos contact</a>
+                    </li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div class="tab-pane p-3" id="Entreprise" role="tabpanel">
+                        <div class="row">
+                            <div class="col-lg-6 col-xl-6">
+                                    <!-- Nav tabs -->
+                                <ul class="nav nav-tabs" role="tablist">
+                                    {% for entreprise in entreprises %}
+                                    <li class="nav-item">
+                                        <a class="nav-link {% if entreprise.id == active %}active{% endif %}" data-bs-toggle="tab" href="#Entreprise{{ entreprise.id }}" role="tab" aria-selected="false">{{ entreprise.social_reason }}</a>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                                <div class="tab-content">
+                                {% for entreprise in entreprises %}
+                                <div class="tab-pane p-3 {% if entreprise.id == active %}active{% endif %}" id="Entreprise{{ entreprise.id }}" role="tabpanel">
+                                    <div class="row">
+<!--                                        <div class="col-lg-6 col-xl-6">-->
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <div class="row align-items-center">
+                                                        <div class="col">
+                                                            <h4 class="card-title">{{ entreprise.social_reason }}</h4>
+                                                        </div><!--end col-->
+                                                    </div>  <!--end row-->
+                                                </div><!--end card-header-->
+                                                <div class="card-body">
+                                                    <form method="post" action="">
+                                                        {% csrf_token %}
+                                                    <div class="form-group mb-3 row">
+                                                        <label class="col-xl-3 col-lg-3 text-end mb-lg-0 align-self-center form-label">Nom de l'entreprise</label>
+                                                        <div class="col-lg-9 col-xl-8">
+                                                            <input class="form-control" name="social_reason" type="text" value="{{ entreprise.social_reason }}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group mb-3 row">
+                                                        <label class="col-xl-3 col-lg-3 text-end mb-lg-0 align-self-center form-label">Adresse</label>
+                                                        <div class="col-lg-9 col-xl-8">
+                                                            <input class="form-control" name="adresse" type="text" value="{{ entreprise.adresse }}" {% if entreprise.adresse == "" %} placeholder="A compléter..." {% endif %}>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group mb-3 row">
+                                                        <label class="col-xl-3 col-lg-3 text-end mb-lg-0 align-self-center form-label">Code postal</label>
+                                                        <div class="col-lg-9 col-xl-8">
+                                                            <input class="form-control" name="codepostal" type="text" {% if entreprise.code_postal == "" %} placeholder="A compléter..." {% else %} value="{{ entreprise.code_postal }}" {% endif %}>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group mb-3 row">
+                                                        <label class="col-xl-3 col-lg-3 text-end mb-lg-0 align-self-center form-label">Forme juridique</label>
+                                                        <div class="col-lg-9 col-xl-8">
+                                                            <input class="form-control" name="juridical_form" type="text" value="{{ entreprise.juridical_form }}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group mb-3 row">
+                                                        <label class="col-xl-3 col-lg-3 text-end mb-lg-0 align-self-center form-label">Secteur d'activité</label>
+                                                        <div class="col-lg-9 col-xl-8">
+                                                            <input class="form-control" name="inputActivity" type="text" value="{{ entreprise.inputActivity }}">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group mb-3 row">
+                                                        <label class="col-xl-3 col-lg-3 text-end mb-lg-0 align-self-center form-label">Siren</label>
+                                                        <div class="col-lg-9 col-xl-8">
+                                                            <input class="form-control" name="siren" type="text" value="{{ entreprise.siren }}">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group mb-3 row">
+                                                        <label class="col-xl-3 col-lg-3 text-end mb-lg-0 align-self-center form-label">Description</label>
+                                                        <div class="col-lg-9 col-xl-8">
+                                                            <textarea class="form-control" name="descriptif" {% if entreprise.descriptif == "" %} placeholder="A compléter..." {% endif %}>{{ entreprise.descriptif }}</textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group mb-3 row">
+                                                        <label class="col-xl-3 col-lg-3 text-end mb-lg-0 align-self-center form-label">Site Internet</label>
+                                                        <div class="col-lg-9 col-xl-8">
+                                                            <div class="input-group">
+                                                                <span class="input-group-text"><i class="la la-globe"></i></span>
+                                                                <input type="text" name="website" class="form-control" value="{{ entreprise.siteweb }}" placeholder="Email" aria-describedby="basic-addon1">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group mb-3 row">
+                                                        <label class="col-xl-3 col-lg-3 text-end mb-lg-0 align-self-center form-label">Ville</label>
+                                                        <div class="col-lg-9 col-xl-8">
+                                                            <input class="form-control" type="text" name="ville" value="{{ entreprise.ville }}" {% if entreprise.adresse == "" %} placeholder="A compléter..." {% endif %}>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group mb-3 row">
+                                                        <div class="col-lg-9 col-xl-8 offset-lg-3">
+                                                            <button name="infoentreprise{{ entreprise.id }}" type="submit" class="btn btn-de-info">Modifier mes données</button>
+                                                            <button type="reset" class="btn btn-de-danger">Annuler</button>
+                                                        </div>
+                                                    </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+<!--                                        </div>-->
+                                    </div>
+                                </div>
+                                {% endfor %}
+                                </div>
+                            </div> <!--end col-->
+                        </div><!--end row-->
+                    </div>
+
+<!--                    Infos personnelles                  -->
+
+                    <div class="tab-pane p-3 active" id="Settings" role="tabpanel">
+                        <div class="row">
+                            <div class="col-lg-6 col-xl-6">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <div class="row align-items-center">
+                                            <div class="col">
+                                                <h4 class="card-title">Infos Contact</h4>
+                                            </div><!--end col-->
+                                        </div>  <!--end row-->
+                                    </div><!--end card-header-->
+                                    <div class="card-body">
+                                        <form method="post" action="">
+                                            {% csrf_token %}
+                                        <div class="form-group mb-3 row">
+                                            <label class="col-xl-3 col-lg-3 text-end mb-lg-0 align-self-center form-label">M/Mme</label>
+                                            <div class="col-lg-9 col-xl-8">
+                                                <input class="form-control" name="gender" type="text" value="{{ user.gender }}">
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-3 row">
+                                            <label class="col-xl-3 col-lg-3 text-end mb-lg-0 align-self-center form-label">Nom</label>
+                                            <div class="col-lg-9 col-xl-8">
+                                                <input class="form-control" name="last_name" type="text" value="{{ user.last_name }}">
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-3 row">
+                                            <label class="col-xl-3 col-lg-3 text-end mb-lg-0 align-self-center form-label">Prénom</label>
+                                            <div class="col-lg-9 col-xl-8">
+                                                <input class="form-control" name="first_name" type="text" value="{{ user.first_name }}">
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-3 row">
+                                            <label class="col-xl-3 col-lg-3 text-end mb-lg-0 align-self-center form-label">Adresse E-mail</label>
+                                            <div class="col-lg-9 col-xl-8">
+                                                <div class="input-group">
+                                                    <span class="input-group-text"><i class="las la-at"></i></span>
+                                                    <input type="text" name="email" class="form-control" value="{{ user.email }}" placeholder="Email" aria-describedby="basic-addon1">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-3 row">
+                                            <label class="col-xl-3 col-lg-3 text-end mb-lg-0 align-self-center form-label">Numéro de téléphone</label>
+                                            <div class="col-lg-9 col-xl-8">
+                                                <div class="input-group">
+                                                    <span class="input-group-text"><i class="las la-phone"></i></span>
+                                                    <input type="text" class="form-control" name="mobile" value="{{ user.mobile }}" placeholder="Phone" aria-describedby="basic-addon1">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-3 row">
+                                            <div class="col-lg-9 col-xl-8 offset-lg-3">
+                                                <button name="infoform" type="submit" class="btn btn-de-info">Modifier mes données</button>
+                                                <button type="reset" class="btn btn-de-danger">Annuler</button>
+                                            </div>
+                                        </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div> <!--end col-->
+                            <div class="col-lg-6 col-xl-6">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4 class="card-title">Changer de mot de passe</h4>
+                                    </div><!--end card-header-->
+                                    <div class="card-body">
+                                        {% if erreur %}
+                                        <p>{{ erreur }}</p>
+                                        {% else %}
+                                        <p>Cela aura pour effet de vous déconnecter.</p>
+                                        {% endif %}
+                                        <form method="post" action="">
+                                            {% csrf_token %}
+                                        <div class="form-group mb-3 row">
+                                            <label class="col-xl-3 col-lg-3 text-end mb-lg-0 align-self-center form-label">Mot de passe actuelle</label>
+                                            <div class="col-lg-9 col-xl-8">
+                                                <input class="form-control" name="currentPass" type="password" placeholder="Password" required>
+                                                <a href="{% url 'reset_password' %}" class="font-12" style="color: #4C9082;">Mot de passe oublié ?</a>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-3 row">
+                                            <label class="col-xl-3 col-lg-3 text-end mb-lg-0 align-self-center form-label">Nouveau mot de passe</label>
+                                            <div class="col-lg-9 col-xl-8">
+                                                <input class="form-control" name="newPass" type="password" placeholder="New Password" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-3 row">
+                                            <label class="col-xl-3 col-lg-3 text-end mb-lg-0 align-self-center form-label">Confirmer le nouveau mot de passe</label>
+                                            <div class="col-lg-9 col-xl-8">
+                                                <input class="form-control" name="confirmPass" type="password" placeholder="Re-Password" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-3 row">
+                                            <div class="col-lg-9 col-xl-8 offset-lg-3">
+                                                <button name="infopass" type="submit" class="btn btn-de-info">Changer de mot de passe</button>
+                                                <button type="reset" class="btn btn-de-danger">Annuler</button>
+                                            </div>
+                                        </div>
+                                        </form>
+                                    </div><!--end card-body-->
+                                </div><!--end card-->
+                            </div> <!-- end col -->
+                        </div><!--end row-->
+                    </div>
+                </div>
+            </div> <!--end card-body-->                            
+        </div><!--end card-->
+    </div><!--end col-->
+</div><!--end row-->
+{% else %}
+<p>Veuillez- vous connecter en cliquant <a href="../../../register/login/">ici</a>.</p>
+{% endif %}
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'admin/assets/plugins/tobii/tobii.min.js' %}"></script>
+<script 
+src="https://code.jquery.com/jquery-3.4.1.min.js"
+integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+crossorigin="anonymous">
+</script>
+<script src="../../../static/admin/assets/js/header.js"></script>
+<script>
+    const tobii = new Tobii()
+</script>
+{% endblock %}

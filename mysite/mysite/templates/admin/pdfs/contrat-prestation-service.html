@@ -1,0 +1,538 @@
+{% load static %}
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <style>
+            @page {
+                size: a4 portrait;
+                margin: 2cm;
+
+                @frame header_frame {           /* Static Frame */
+                    -pdf-frame-content: header_content;
+                    left: 50pt; width: 502pt; top: 50pt; height: 40pt;
+                }
+
+                @frame content_frame {          /* Content Frame */
+                    left: 50pt; width: 502pt; top: 100pt; height: 632pt;
+                }
+
+                @frame footer_frame {           /* Another static Frame */
+                    -pdf-frame-content: footer_content;
+                    left: 50pt; width: 502pt; top: 802pt; height: 20pt;
+                }
+            }
+
+            .header {
+                margin-bottom: 30px;
+            }
+
+            .header-only-on-first-page {
+                padding-top: 10px;
+                padding-bottom: 10px;
+            }
+
+            .header-only-on-first-page p {
+                margin-left: 13px;
+                font-size: 8pt;
+                text-align: center;
+                font-family: Calibri;
+                font-weight: bold;
+                font-size: 24pt;
+                color: #273576;
+            }
+
+            p {
+                font-size: 8pt;
+                font-family: Calibri;
+                text-align: justify;
+            }
+
+            p.title {
+                padding-top: 20px;
+                color: #253575;
+                font-size: 10pt;
+            }
+
+            table tr {
+                margin-left: 20px;
+            }
+
+            table tr.title {
+                padding-top: 5px;
+            }
+
+            table tr td.signature {
+                padding-top: 5px;
+                width: 200px;
+                height: 100px;
+                text-align: center;
+                vertical-align: top;
+                border: 1px solid #000000;
+            }
+
+            .footer {
+                font-size: 6pt;
+                text-align: right;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Content for Static Frame 'header_frame' -->
+        <div id="header_content">
+            <table class="header">
+                <tr>
+                    <td style="width: 450px"><img style="width: 100px" src="{% static 'admin/assets/images/ri_1.png' %}"></td>
+                    <td style="width: 250px;font-family:Mono Space;font-size:20pt">
+                        <span style="font-weight:bold">QuietRent</span> <span style="font-style:italic;color:#da7855">pro</span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Content for Static Frame 'footer_frame' -->
+        <div class="footer" id="footer_content">
+            <span>page <pdf:pagenumber> sur 5</span>
+        </div>
+
+        <div class="header-only-on-first-page"><p>Contrat de Prestation de Services <br> « QuietRent Pro »</p></div>
+
+        <p style="margin-bottom:30px">Réf. «CL_CODE»</p>
+        <p>Le présent contrat, dénommé « CPS », est conclu entre :</p>
+        <p>
+            <span style="font-weight:bold">INSOR</span>, société de courtage d'assurances, immatriculée à l'ORIAS sous le n° 07 001 564 –
+            www.orias.fr (registre des intermédiaires en assurances) et placée sous le contrôle de l'ACPR
+            (Autorité de Contrôle Prudentiel et de Résolution), SAS au capital de 25.000 euros, dont le siège
+            social est à PARIS (75001) 14 RUE DE RICHELIEU, immatriculée au registre du commerce et des
+            sociétés de PARIS sous le numéro 432 320 742 représentée par M. Olivier ATLAN en sa qualité de
+            Directeur Général.
+        </p>
+        <p style="text-align:right">Dénommée ci-après le « <span style="font-weight:bold">Prestataire</span> », d'une part,</p>
+        <p>
+            ET
+            <br>
+            <span style="font-weight:bold">{{ demande.social_reason }}</span>, {{ demande.social_reason }} au capital de xxxxxxx €, 
+            ayant son siège social au {{ demande.inputAddress }}
+            {{ demande.inputCode }} {{ demande.inputCity }}, Société en cours d'immatriculation/immatriculée au
+            registre du commerce et des sociétés de xxxx sous le n° {{ demande.inputSIREN }}, représentée par «CL_NOMDE2»
+            en sa qualité de « Président / Gérant ».
+        </p>
+        <p style="text-align:right">
+            Dénommée ci-après le « <span style="font-weight:bold">Client</span> », d'une part,
+        </p>
+        <p class="title">1. Objet du contrat de prestation de services QuietRent Pro</p>
+        <p>
+            Le présent contrat a pour objet de fournir une solution assurantielle au Client afin qu'il puisse
+            substituer en sa qualité de locataire d'un bail commercial, le versement d'un dépôt de garantie (DG)
+            et/ou d'une Garantie à Première Demande (GAPD), par un contrat d'assurance couvrant le
+            propriétaire contre les risques :
+        </p>
+        <table>
+            <tr>
+                <td style="width:10px;vertical-align:top">-</td>
+                <td>de manquement du Client à ses obligations locatives,</td>
+            </tr>
+            <tr>
+                <td style="width:10px;vertical-align:top">-</td>
+                <td>de frais de procédure contentieuse consécutifs à ses manquements.</td>
+            </tr>
+        </table>
+        <p>
+            A cet effet, le Prestataire en sa qualité de courtier délégataire de compagnies d'assurances a négocié 
+            auprès d'assureurs, des critères d'éligibilité des locataires.
+            <br>
+            Le client ayant pris connaissance des critères requis (solvabilité et composition du dossier
+            Locataire), disponibles sur les sites Internet <a href="https://insor.com">https://insor.com</a> et <a href="https://www.quietrent.com">https://www.quietrent.com</a>, charge
+            le Prestataire d'accomplir les missions suivantes :
+        </p>
+        <table>
+            <tr class="title">
+                <td style="width:20px;vertical-align:top;font-weight:bold">1.</td>
+                <td><span style="font-weight:bold">La « Certification du locataire »</span>, qui comprend les missions suivantes :</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <table>
+                        <tr>
+                            <td style="width:10px;vertical-align:top">-</td>
+                            <td style="width:500px">La collecte des informations permettant l'étude de solvabilité du locataire,</td>
+                        </tr>
+                        <tr>
+                            <td style="width:10px;vertical-align:top">-</td>
+                            <td>
+                                L'étude d'éligibilité au regard des engagements qui découlent du bail désigné (projet de
+                                bail ou bail en cours),
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:10px;vertical-align:top">-</td>
+                            <td>La certification du dossier Locataire après contrôle des documents transmis par le Client.</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr class="title">
+                <td style="width:20px;vertical-align:top;font-weight:bold">2.</td>
+                <td style="font-weight:bold">
+                    L'obtention d'une « Proposition d'assurance » lorsque les critères d'éligibilité sont
+                    effectivement respectés :
+                </td>    
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <table>
+                        <tr>
+                            <td style="width:10px;vertical-align:top">-</td>
+                            <td style="width:500px">
+                                Présentation des conditions de garanties d'assurances et de tarif obtenues des
+                                assureurs partenaires,
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:10px;vertical-align:top">-</td>
+                            <td>Transmission au propriétaire des informations relatives à la garantie proposée.</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+
+        <pdf:nextpage>
+
+        <table>
+            <tr class="title">
+                <td style="width:20px;vertical-align:top;font-weight:bold">3.</td>
+                <td style="font-weight:bold">La gestion du contrat d'assurance :</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <table>
+                        <tr>
+                            <td style="width:10px;vertical-align:top">-</td>
+                            <td style="width:500px">Suivi du règlement des cotisations par le Client pendant toute la durée du dispositif,</td>
+                        </tr>
+                        <tr>
+                            <td style="width:10px;vertical-align:top">-</td>
+                            <td>
+                                Gestion des sinistres auprès du propriétaire assuré, en cas de défaillance du Client dans le
+                                cadre de ses engagements découlant du bail,
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:10px;vertical-align:top">-</td>
+                            <td>
+                                Exercice des recours et suivi de la procédure contentieuse auprès du Client débiteur, et de
+                                son éventuelle caution.
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <p>
+            Par cette convention, le Prestataire accepte de fournir au Client les prestations décrites ci-dessus, en
+            échange du paiement du prix et aux conditions convenues par les parties et définies aux articles
+            suivants.
+        </p>
+        <p class="title">2. Obligations du Prestataire dont information et conseil</p>
+        <p>
+            Le Prestataire s'engage dans le cadre d'une obligation de moyen à mener sa mission à bien, selon
+            les termes convenus dans le contrat par les parties. Toutefois, l'obtention d'une Proposition
+            d'assurance relevant de la seule responsabilité de l'assureur qui accepte de porter le risque, le
+            Prestataire ne peut être tenu responsable d'un refus d'assurance.
+            <br>
+            Il s'engage également à livrer sa prestation dans le délai convenu, soit 72 heures à réception d'un
+            dossier complet pour la phase de Certification, et 5 jours ouvrés pour l'obtention d'une Proposition
+            d'assurance.
+            <br>
+            Par ailleurs, le Prestataire a un devoir d'information vis-à-vis du Client au regard des
+            caractéristiques essentielles du service qu'il s'apprête à fournir. Il doit communiquer au Client les
+            informations nécessaires en ce sens, telles que les critères d'éligibilité retenus par les assureurs.
+            <br>
+            Le Prestataire a de surcroit un devoir de conseil envers son Client, et doit le conseiller au mieux sur
+            l'utilité que la prestation qui est réalisée représente pour lui. Le Prestataire remet donc au Client la
+            copie du contrat d'assurance qui sera établi au profit du propriétaire.
+        </p>
+        <p class="title">3. Obligations du Client</p>
+        <p>
+            Le Client doit donner au Prestataire accès aux informations et aux moyens suffisants pour qu'il
+            puisse mener à bien sa mission. Il s'engage donc en ce sens à collaborer avec le Prestataire pour lui
+            fournir ces informations et atteste que celles-ci sont exactes, sincères et à jour.
+            <br>
+            Dans le cadre du présent contrat, le Client consent au Prestataire le droit de contacter les personnes
+            mentionnées dans les documents fournis par le Locataire ou lors d'échanges ultérieurs, afin de
+            procéder à la vérification des données inscrites dans son dossier de Locataire.
+            <br>
+            Le Client s'engage à maintenir en vigueur le présent contrat de service tant que le contrat
+            d'assurance proposé est lui-même en vigueur.
+            <br>
+            Le Client a également l'obligation de verser le prix convenu, dans les délais prévus par cette
+            convention, à l'article 4 - Prix.
+            <br>
+            La mise en jeu de la garantie d'assurance mise en place, ne dispense pas le Client du règlement du
+            prix convenu à l'Article 4 - Prix.
+            <br>
+            Le Client s'engage à informer le Prestataire dans un délai de 10 jours maximum, dans les cas
+            suivants :
+        </p>
+        <table>
+            <tr>
+                <td style="width:10px;vertical-align:top">-</td>
+                <td style="width:500px">
+                    Rétablissement du Dépôt de Garantie et/ou de la Garantie à Première Demande ayant fait
+                    l'objet de la mise en place d'un contrat QuietRent Pro,
+                </td>
+            </tr>
+            <tr>
+                <td style="width:10px;vertical-align:top">-</td>
+                <td>
+                    Résiliation du bail à l'initiative du Client (le délai débute à compter du jour où le congé a
+                    été donné),
+                </td>
+            </tr>
+            <tr>
+                <td style="width:10px;vertical-align:top">-</td>
+                <td>
+                    Résiliation du bail à l'initiative du Propriétaire (le délai débute à compter du jour où le
+                    congé a été reçu).
+                </td>
+            </tr>
+        </table>
+
+        <pdf:nextpage>
+
+        <p class="title">4. Prix</p>
+        <p>
+            En contrepartie des prestations réalisées, les parties conviennent que le Client versera au Prestataire
+            les sommes suivantes :
+        </p>
+        <table>
+            <tr class="title">
+                <td style="width:20px;vertical-align:top;font-weight:bold">1.</td>
+                <td><span style="font-weight:bold">Coût de Certification et Frais de dossier : «FraisDossierQR» €</span> (TVA incluse)</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <table>
+                        <tr class="title">
+                            <td style="width:30px;vertical-align:top">&squf;</td>
+                            <td style="width:500px">
+                                Dont Coût de Certification du dossier Locataire 120,00 € TTC (TVA incluse)
+                                Montant forfaitaire exigible lors de la dépose du dossier de Location (règlement par
+                                carte bancaire). Le coût de cette prestation correspond à l'analyse des pièces du dossier
+                                et est applicable même en l'absence de mise en garantie du bail.
+                            </td>
+                        </tr>
+                        <tr class="title">
+                            <td style="width:30px;vertical-align:top">&squf;</td>
+                            <td>
+                                Dont Frais de dossier «FraisDossierQR_moins_Certif» € (TVA incluse)
+                                Montant forfaitaire exigible pour la délivrance de l'Attestation de Garantie destinée au
+                                Propriétaire. Le montant correspond à une année de cotisation, déduction faite du coût
+                                de la Certification déjà réglé.
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr class="title">
+                <td style="width:20px;vertical-align:top;font-weight:bold">2.</td>
+                <td style="font-weight:bold">Au titre de la « Proposition d'assurance » «CotisTTC» € *</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>* Toutes taxes d'assurances comprises.</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    Montant de la cotisation d'assurance, pour une période de «Duree_Garantie» ans à compter
+                    de la date d'effet de la substitution des sommes prévues au bail.
+                    Montants substitués par la garantie QuietRent :
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>Montants substitués par la garantie QuietRent :</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <table>
+                        <tr class="title">
+                            <td style="width:30px;vertical-align:top">&squf;</td>
+                            <td style="width:500px">Dépôt de garantie : Néant</td>
+                        </tr>
+                        <tr class="title">
+                            <td style="width:30px;vertical-align:top">&squf;</td>
+                            <td>Garantie à Première Demande : Néant</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr class="title">
+                <td style="width:20px;vertical-align:top;font-weight:bold">3.</td>
+                <td style="font-weight:bold">Clause pénale</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    En cas de manquement persistant, cinq jours après la réception d'une mise en demeure
+                    préalable adressée par lettre recommandée avec accusé de réception restée sans effet, une
+                    indemnité égale à 15 (quinze) % des sommes dues, outre les intérêts légaux et les frais
+                    judiciaires éventuels, sera exigible du débiteur, sans préjudice du droit à des dommages et
+                    intérêts au bénéfice du créancier et du droit de l'assureur relatif à la cotisation due.
+                </td>
+            </tr>
+        </table>
+        <p>
+            Le Client est seul responsable du paiement effectif des sommes dues au titre du présent contrat de
+            prestation de services, ainsi que des cotisations d'assurance.
+        </p>
+        <p class="title">5. Accord de confidentialité</p>
+        <p>
+            Les parties s'engagent à ne communiquer aucune des informations qui leur ont été transmises au
+            titre de la conclusion ce contrat et de son exécution, ainsi qu'à ne pas utiliser ces informations pour
+            leur compte ou celui de tiers.
+            <br>
+            Les informations relevant du domaine public ou connues légitimement par les parties avant la
+            conclusion de cette convention ne sont toutefois pas visées par cet article.
+        </p>
+        <p class="title">6. Cas de force majeure</p>
+        <p>
+            Le Prestataire ne saurait être tenu responsable pour tout retard dans l'exécution de ses obligations
+            ou pour toute inexécution de ses obligations résultant du présent contrat lorsque les circonstances y
+            donnant lieu relèvent de la force majeure.
+        </p>
+
+        <pdf:nextpage>
+
+        <p>
+            De façon expresse, sont considérés comme cas de force majeure ou cas fortuit, outre ceux
+            habituellement retenus par la jurisprudence des cours et tribunaux français, les cas suivants : Grève
+            totale ou partielle, lock-out, émeute, trouble civil, insurrection, guerre civile ou étrangère, risque
+            nucléaire, embargo, confiscation, capture ou destruction par toute autorité publique, intempérie,
+            épidémie, blocage des moyens de transport ou d'approvisionnement pour quelque raison que ce
+            soit, tremblement de terre, incendie, tempête, inondation, dégâts des eaux, restrictions
+            gouvernementales ou légales, modifications légales ou réglementaires des formes de
+            commercialisation, blocage des communications électroniques, non prévisible par le Prestataire,
+            remettant en cause les normes et standards de sa profession et tout autre cas indépendant de la
+            volonté des parties empêchant l'exécution normale des obligations découlant du présent contrat.
+            <br>
+            Tout cas de force majeure affectant l'exécution des obligations suspendra, dès sa date de
+            survenance, l'exécution du présent contrat. A partir de cette date, et malgré le cas de force majeur,
+            le Prestataire s'efforcera dans la mesure du possible d'informer le Client de l'existence de ce cas de
+            force majeure.
+            <br>
+            Il est expressément convenu entre les Parties que la mise en œuvre tout à fait exceptionnelle de
+            moyens palliatifs pendant la survenance d'un cas de force majeure ne pourra donner lieu à aucune
+            responsabilité ou indemnisation de la part du Prestataire.
+        </p>
+        <p class="title">7. Résiliation du contrat</p>
+        <p>
+            Dans le cas où l'une des parties ne remplirait pas ses obligations, ce contrat peut être résilié après
+            envoi d'une mise en demeure à la partie débitrice desdites obligations, restée sans réponse.
+            <br>
+            Cette mise en demeure devra comporter à peine de nullité une mention de cette clause résolutoire,
+            ainsi qu'un délai raisonnable dans lequel la partie débitrice devra remédier à l'inexécution ou à la
+            mauvaise exécution de son obligation.
+            <br>
+            L'objet du présent contrat étant la substitution du DG et/ou GAPD dans le cadre d'un bail
+            commercial, le Client s'engage à reconstituer auprès du propriétaire le dépôt de ces sommes s'il
+            entend résilier le contrat de service et le contrat d'assurance associé, alors même que le bail est
+            toujours en cours. Dans ce cas, <span style="font-weight:bold">le Client devra respecter un délai de 6 mois avant l'échéance
+            du bail</span> pour informer le Prestataire de la résiliation du présent contrat, et devra produire un
+            document émanant du propriétaire attestant de la conformité de la nouvelle situation du locataire à
+            l'égard des sûretés prévues au bail.
+        </p>
+        <p class="title">8. Renouvellement par tacite reconduction</p>
+        <p>
+            Au terme de la durée de garantie fixée par l'assureur, le présent CPS se reconduit tacitement dès
+            lors que la garantie de l'assureur est renouvelée et sauf résiliation prononcée par l'une des parties
+            (cf. l'article 7 - Résiliation du contrat ). La facture de renouvellement du CPS sera adressée par le
+            Prestataire avant le terme du contrat. Le Client s'engage à procéder au paiement à réception.
+        </p>
+        <p class="title">9. Responsabilité du Prestataire</p>
+        <p>
+            L'inexécution contractuelle d'une quelconque stipulation contenue dans le présent contrat engagera
+            de plein droit la responsabilité de la partie défaillante, conformément au droit commun.
+            <br>
+            Le Prestataire est responsable des dommages causés à autrui à l'occasion de l'exécution des
+            obligations résultant de la présente convention et garantit le Client contre tout recours et actions
+            exercés contre ce dernier de ce fait, et ce aussi longtemps que sa responsabilité peut être
+            recherchée.
+            <br>
+            Il est également responsable des dommages matériels directs causés à son Client lorsqu'ils résultent
+            de sa négligence dans l'exécution de ses fonctions. Ainsi, cette clause pourra être écartée en cas de
+            faute lourde commise par le Prestataire.
+            <br>
+            La responsabilité du Prestataire ne peut toutefois pas être engagée si l'inexécution ou la mauvaise
+            exécution de ses obligations est due au fait du Client, au fait insurmontable et imprévisible d'un tiers
+            au contrat ou à un cas de force majeure.
+        </p>
+
+        <pdf:nextpage>
+
+        <p class="title">10. Données à caractère personnel</p>
+        <p>
+            Le Client, en sa qualité de Locataire est amené à fournir des données à caractère personnel le
+            concernant, afin de bénéficier du service QuietRent Pro.
+            <br>
+            Dans le cadre de la fourniture de ce service, le Client donne son consentement explicite à l'utilisation
+            des données à caractère personnel le concernant collectées par tout moyen (formulaire, voie
+            électronique ou par téléphone).
+            <br>
+            Ces données sont destinées au personnel du Prestataire et/ou de ses sous-traitants assurant la
+            fourniture du service, et à l'Assureur, et sont utilisées à des fins d'administration et de gestion
+            technique et/ou commerciale du service ainsi qu'à des fins de statistiques et de prospection
+            commerciale, conformément au cadre légal applicable.
+            <br>
+            Conformément à la loi n° 78-17 du 6 janvier 1978 relative à l'informatique, aux fichiers et aux
+            libertés, le Client peut exercer son droit d'accès, de rectification, d'opposition et demander la
+            suppression des données à caractère personnel le concernant.
+            <br>
+            La demande doit être effectuée par écrit, signée, et accompagnée de la copie d'une pièce d'identité
+            du demandeur ainsi que l'adresse de retour.
+        </p>
+        <p class="title">11. Modification du contrat</p>
+        <p>
+            Toute modification de cette convention devra être mise par écrite dans un avenant signé par les
+            parties.
+            <br>
+            Par ailleurs si l'une des clauses du présent contrat est ou devient invalide, les parties sont tenues de
+            la considérer comme non-écrite et de la remplacer par une nouvelle clause dont le sens se
+            rapproche le plus fidèlement possible du sens de la clause invalidée.
+        </p>
+        <p class="title">12. Clause attributive de compétence</p>
+        <p>
+            En cas de différend, les parties s'engagent à tenter de régler leurs désaccords à l'amiable avant de
+            procéder à la saisine du juge judiciaire.
+            <br>
+            Néanmoins, si elles ne pouvaient y parvenir, elles s'accordent pour désigner les tribunaux
+            compétents du ressort de la ville de Paris pour juger de tout litige relatif à l'interprétation ou
+            l'exécution du contrat.
+        </p>
+        <p class="title">13. Caution solidaire</p>
+        <p>
+            Pour l'exécution des [Le cas échéant] Caution Solidaire :
+            <br>
+            Pour l'exécution du paiement,
+        </p>
+        <p>
+            Fait le «date_jour» , à Paris, en 2 exemplaires originaux, un exemplaire étant destiné à chacune des
+            Parties.
+        </p>
+
+        <table style="margin-top:50px;">
+            <tr>
+                <td class="signature">INSOR</td>
+                <td></td>
+                <td class="signature">LE CLIENT</td>
+            </tr>
+        </table>
+    </body>
+</html>

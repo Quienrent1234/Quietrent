@@ -1,0 +1,174 @@
+{% extends 'register/content.html' %}
+{% load static %}
+{% block logo %}
+<img class="navbar-brand" src="{% static 'register/assets/images/logoQuietRent.png' %}" alt="logo">
+{% endblock %}
+
+{% block content1 %}
+
+<div class="ugf-content pt150">
+  <a href="../return/" class="prev-page">Retour</a>
+  <h2>Le Bail</h2>
+  <p>Entrez les informations de votre bail</p>
+  <form action="" class="account-form" method="post" id="form-bail" novalidate>
+    {% csrf_token %}
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+        <label for="inputAddress">Adresse de la location</label>
+        <input type="text" placeholder="e.g. Smith" class="form-control" id="inputAddress" name="inputAddress" value="{{inputAddress}}">
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="inputCode">Code Postal</label>
+          <input type="text" placeholder="e.g. Smith" class="form-control" id="inputCode" name="inputCode" value="{{inputCode}}">
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="inputCity">Ville</label>
+          <input type="text" placeholder="e.g. Smith" class="form-control" id="inputCity" name="inputCity" value="{{inputCity}}">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group" id="lease-effective-date">
+          <label for="inputDate">Date d'effet du bail</label>
+          <div class="birth-date">
+            <div class="select-input birth-date-input">
+              <select id="inputDate" class="form-control" name="mois">
+                <option value="" selected disabled hidden>mois</option>
+                <option {% if mois == 1 %} selected {% endif %} value=1>01</option>
+                <option {% if mois == 2 %} selected {% endif %} value=2>02</option>
+                <option {% if mois == 3 %} selected {% endif %} value=3>03</option>
+                <option {% if mois == 4 %} selected {% endif %} value=4>04</option>
+                <option {% if mois == 5 %} selected {% endif %} value=5>05</option>
+                <option {% if mois == 6 %} selected {% endif %} value=6>06</option>
+                <option {% if mois == 7 %} selected {% endif %} value=7>07</option>
+                <option {% if mois == 8 %} selected {% endif %} value=8>08</option>
+                <option {% if mois == 9 %} selected {% endif %} value=9>09</option>
+                <option {% if mois == 10 %} selected {% endif %} value=10>10</option>
+                <option {% if mois == 11 %} selected {% endif %} value=11>11</option>
+                <option {% if mois == 12 %} selected {% endif %} value=12>12</option>
+              </select>
+            </div>
+            <div class="select-input birth-date-input">
+              <select id="inputDate" class="form-control" name="annee">
+                <option value="" selected disabled hidden>année</option>
+                <option {% if annee == 2016 %}selected{% endif %} value=2016>2016</option>
+                <option {% if annee == 2017 %}selected{% endif %} value=2017>2017</option>
+                <option {% if annee == 2018 %}selected{% endif %} value=2018>2018</option>
+                <option {% if annee == 2019 %}selected{% endif %} value=2019>2019</option>
+                <option {% if annee == 2020 %}selected{% endif %} value=2020>2020</option>
+                <option {% if annee == 2021 %}selected{% endif %} value=2021>2021</option>
+                <option {% if annee == 2022 %}selected{% endif %} value=2022>2022</option>
+                <option {% if annee == 2023 %}selected{% endif %} value=2023>2023</option>
+                <option {% if annee == 2024 %}selected{% endif %} value=2024>2024</option>
+                <option {% if annee == 2025 %}selected{% endif %} value=2025>2025</option>
+                <option {% if annee == 2026 %}selected{% endif %} value=2026>2026</option>
+                <option {% if annee == 2027 %}selected{% endif %} value=2027>2027</option>
+                <option {% if annee == 2028 %}selected{% endif %} value=2028>2028</option>
+                <option {% if annee == 2029 %}selected{% endif %} value=2029>2029</option>
+              </select>
+            </div>
+          </div>
+          <label id="negotiation">
+            <input type="checkbox" name="negotiation">
+            <span>Bail en cours de négociation</span>
+          </label>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="loyer">Montant du loyer annuel HT HC</label>
+          <input type="text" placeholder="e.g. Smith" class="form-control" id="loyer" name="loyer" value="{{loyer}}">
+        </div>
+      </div>
+      <div class="col-sm-6">
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="garantie">Montant du dépôt de garantie initialement prévu</label>
+          <input type="text" placeholder="e.g. Smith" class="form-control" id="garantie" name="garantie" value="{{garantie}}" >
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group" id="label-garantieMois">
+          <label for="garantieMois">Soit en mois de loyers<br> &nbsp</label>
+          <div class="birth-date">
+            <div class="select-input birth-date-input">
+              <span></span>
+              <select id="garantieMois" class="form-control" name="garantieMois">
+                <option {% if garantieMois == 0 %} selected {% endif %} value=0>0</option>
+                <option {% if garantieMois == 1 %} selected {% endif %} value=1>0</option>
+                <option {% if garantieMois == 2 %} selected {% endif %} value=2>2</option>
+                <option {% if garantieMois == 3 %} selected {% endif %} value=3>3</option>
+                <option {% if garantieMois == 4 %} selected {% endif %} value=4>4</option>
+                <option {% if garantieMois == 5 %} selected {% endif %} value=5>5</option>
+                <option {% if garantieMois == 6 %} selected {% endif %} value=6>6</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="caution">Montant de la caution bancaire initialement prévue</label>
+          <input type="text" placeholder="e.g. Smith" class="form-control" id="caution" name="caution" value="{{caution}}">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group" id="label-cautionMois">
+          <label for="cautionMois">Soit en mois de loyers <br> &nbsp</label>
+          <div class="birth-date">
+            <div class="select-input birth-date-input">
+              <span></span>
+              <select id="cautionMois" class="form-control" name="cautionMois">
+                <option {% if cautionMois == 0 %} selected {% endif %} value=0>0</option>
+                <option {% if cautionMois == 1 %} selected {% endif %} value=1>0</option>
+                <option {% if cautionMois == 2 %} selected {% endif %} value=2>2</option>
+                <option {% if cautionMois == 3 %} selected {% endif %} value=3>3</option>
+                <option {% if cautionMois == 4 %} selected {% endif %} value=4>4</option>
+                <option {% if cautionMois == 5 %} selected {% endif %} value=5>5</option>
+                <option {% if cautionMois == 6 %} selected {% endif %} value=6>6</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+        </div>
+      </div>
+    </div>
+    <button type="submit" class="btn"><span>Suivant</span> <i class="las la-arrow-right"></i></button>
+  </form>
+</div>
+{% endblock %}
+
+{% block content3 %}
+<div class="ugf-sidebar flex-bottom ugf-sidebar-bg-4 sidebar-steps">
+  <div class="steps">
+    <div class="step complete-step">
+      <span>1</span>
+      <p>Locataire</p>
+    </div>
+    <div class="step step-onprocess">
+      <span>2</span>
+      <p>Bailleur</p>
+    </div>
+    <div class="step ">
+      <span>3</span>
+      <p>Type de garanties</p>
+    </div>
+    <div class="step">
+      <span>4</span>
+      <p>Questionnaire d'eligibilité</p>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block js %}
+<script type="module" src="{% static 'register/assets/js/landlord.js' %}" defer></script>
+{% endblock %}

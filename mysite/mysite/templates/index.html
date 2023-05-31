@@ -1,0 +1,837 @@
+{% extends 'base/header.html' %}
+{% block content %}
+<!-- Start Banner Area -->
+<div class="banner-area style-three">
+	<div class="container-fluid">
+		<div class="row align-items-center">
+			<div class="col-xl-7">
+				<div class="banner-img-4" style="width: 1200px;">
+					<img style="height: 630px; width: 1100px;"  src="../static/base/assets/images/shutterstock.jpg" alt="Image">
+				</div>
+			</div>
+
+			<div class="col-xl-5">
+				<div class="banner-content style-three" style="width: auto; height: 100%;">
+					<span class="top-title">DES ASSURANCES INNOVANTES</span>
+					<h1 style="font-size: 2.5em;">Nous remplaçons vos garanties à première demande (GAPD) et dépôts de garantie (DG) </h1>
+
+					<div class="banner-btn">
+						{% if not request.user.is_authenticated %}
+						<a href="../register/souscription/" class="default-btn">
+							<i class="ri-arrow-right-s-line"></i>
+							Souscrire
+						</a>
+						{% endif %}
+
+						<a href="../base/contact-us/" class="default-btn active">
+							<i class="ri-send-plane-fill"></i>
+							Nous Contacter
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- End Banner Area -->
+
+<!-- Start Partner Area -->
+<div class="partner-area ptb-100">
+	<div class="container">
+		<span class="partner-top-title">ILS PARLENT DE NOUS</span>
+
+		<div class="partner-slide owl-carousel owl-theme">
+			<div class="partner-item">
+				<img src="../static/base/assets/images/media/article-qr-2-240x66.jpg" alt="Image">
+			</div>
+			<div class="partner-item">
+				<img src="../static/base/assets/images/media/article-gr-2-240x76.jpg" alt="Image">
+			</div>
+			<div class="partner-item">
+				<img src="../static/base/assets/images/media/challenges.svg" alt="Image">
+			</div>
+			<div class="partner-item">
+				<img src="../static/base/assets/images/media/frenchweb-240x47.png" alt="Image">
+			</div>
+			<div class="partner-item">
+				<img src="../static/base/assets/images/media/immo20.svg" alt="Image">
+			</div>
+			<div class="partner-item">
+				<img src="../static/base/assets/images/media/jaimelesstartups-2-3307x1090.png" alt="Image">
+			</div>
+			<div class="partner-item">
+				<img src="../static/base/assets/images/media/timesofisrael.svg" alt="Image">
+			</div>
+		</div>
+	</div>
+</div>
+<!-- End Partner Area -->
+
+<!-- Start Our Features Area -->
+<div class="our-features-area pb-70">
+	<div class="container">
+		<div class="section-title">
+			<span class="top-title">NOTRE VISION</span>
+			<h2>Une gamme d'assurances pour optimiser votre trésorerie</h2>
+		</div>
+
+		<div class="row justify-content-center">
+			<div class="col-lg-3 col-sm-6">
+				<div class="single-features-item style-three">
+					<i class="flaticon-claim"></i>
+					<h3>Un contrat sans cash </h3>
+					<p>Un contrat d'assurance garantit une somme équivalente sans immobiliser de trésorerie.</p>
+				</div>
+			</div>
+
+			<div class="col-lg-3 col-sm-6">
+				<div class="single-features-item style-three">
+					<i class="flaticon-money-back"></i>
+					<h3>Cash back</h3>
+					<p>En remplaçant vos garanties existantes, récupérez de la trésorerie ou une franchise.</p>
+				</div>
+			</div>
+
+			<div class="col-lg-3 col-sm-6">
+				<div class="single-features-item style-three">
+					<i class="flaticon-insurance-policy"></i>
+					<h3>Une relation forte </h3>
+					<p>Préservez vos relations en étant ouvert aux besoins de vos clients.</p>
+				</div>
+			</div>
+
+			<div class="col-lg-3 col-sm-6">
+				<div class="single-features-item style-three">
+					<i class="flaticon-mobile-payment"></i>
+					<h3>Une garantie forte</h3>
+					<p>Bénéficier de la meilleure protection et d’une indemnisation rapide.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- End Our Features Area -->
+
+<!-- Start About Area -->
+<div class="about-area bg-color-f8f8f8 pt-100 pb-70">
+	<div class="container">
+		<div class="row align-items-center">
+			<div class="col-lg-6">
+				<div class="about-content mr-15">
+					<span class="top-title">NOTRE PROCESSUS</span>
+					<h2>Un processus de souscription en 3 étapes.
+					</h2>
+
+					<ul>
+						<li>
+							<i><img class="align-icon" src="../static/base/assets/images/icon/icon1.png" alt="Image"></i>
+							<h3>Scoring d'éligibilité du locataire entrant ou en place</h3>
+							<p>Le locataire remplit notre formulaire et obtient une réponse de principe rapidement</p>
+						</li>
+						<li>
+							<i><img class="align-icon" src="../static/base/assets/images/icon/icon2.png" alt="Image"></i>
+							<h3>Obtenez une tarification</h3>
+							<p>Le locataire s'acquitte d'une prime réduite, dont le montant varie entre moins de 1% et 5% des sommes à immobiliser</p>
+						</li>
+						<li>
+							<i> <img class="align-icon" src="../static/base/assets/images/icon/icon3.png" alt="Image"></i>
+							<h3>Mise en place du dispositif</h3>
+							<p>Après acquittement des frais et primes, vous êtes couverts</p>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="col-lg-6">
+				<div class="about-img ml-15">
+					<div class="row align-items-center">
+						<div class="col-lg-6 col-sm-6">
+							<div class="about-1">
+								<img src="/static/base/assets/images/questionnaire.jpeg" alt="Image">
+							</div>
+							<div class="about-2 mb-0">
+								<img src="/static/base/assets/images/tarrification.jpeg" alt="Image">
+							</div>
+						</div>
+						<div class="col-lg-6 col-sm-6">
+							<div class="about-3 about-extra">
+								<img src="/static/base/assets/images/dispositif.jpeg" alt="Image">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- End About Area -->
+
+<!-- Start Counter Area
+<div class="counter-area bg-color-497774 pt-100 pb-70">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-3 col-sm-6">
+				<div class="single-counter-item style-icon">
+					<i class="flaticon-home-insurance-2"></i>
+					<h2>
+						<span class="odometer" data-count="50">00</span> 
+						<span class="target">K</span>
+					</h2>
+					<h4>Home Protected</h4>
+				</div>
+			</div>
+
+			<div class="col-lg-3 col-sm-6">
+				<div class="single-counter-item style-icon">
+					<i class="flaticon-shield"></i>
+					<h2>
+						<span class="odometer" data-count="120">00</span> 
+						<span class="target">K</span>
+					</h2>
+					<h4>People Saved</h4>
+				</div>
+			</div>
+
+			<div class="col-lg-3 col-sm-6">
+				<div class="single-counter-item style-icon">
+					<i class="flaticon-policy"></i>
+					<h2>
+						<span class="odometer" data-count="1.2">00</span> 
+						<span class="target">M</span>
+					</h2>
+					<h4>Contract Signed</h4>
+				</div>
+			</div>
+			
+			<div class="col-lg-3 col-sm-6">
+				<div class="single-counter-item style-icon">
+					<i class="flaticon-family-insurance"></i>
+					<h2>
+						<span class="odometer" data-count="100">00</span> 
+						<span class="target">K</span>
+					</h2>
+					<h4>Contract Signed</h4>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+	End Counter Area -->
+
+<!-- Start Services Area -->
+<div class="services-area bg-color-f8f8f8 ptb-100">
+	<div class="container" style: margin: 0 auto>
+		<div class="section-title">
+			<span class="top-title">LES AVANTAGES</span>
+			<h2>Une solution qui offre de nombreux avantages pour les entreprises </h2>
+		</div>
+
+		<div class="row">
+			<div class="col-lg-6 col-md-6">
+				<div class="single-services-item-card d-flex justify-content-start align-items-center">
+					<div class="icon">
+						
+						<i> <img class="align-icon" src="../static/base/assets/images/icon/icon4.png" alt="Image"></i>
+					</div>
+
+					<div>
+						<h3>
+							<a href="services-details.html">
+								Trésorerie
+							</a>
+						</h3>
+						<p>Libérez la trésorerie en s'acquittant d'une prime annuelle réduite.</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-lg-6 col-md-6">
+				<div class="single-services-item-card d-flex justify-content-start align-items-center">
+					<div class="icon">
+						<i> <img class="align-icon" src="../static/base/assets/images/icon/icon5.png" alt="Image"></i>
+					</div>
+
+					<div>
+						<h3>
+							<a href="services-details.html">
+								Prime
+							</a>
+						</h3>
+						<p>Le niveau de la prime est déterminé par les résultats de notre scoring.</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-lg-6 col-md-6">
+				<div class="single-services-item-card d-flex justify-content-start align-items-center">
+					<div class="icon">
+						<i> <img class="align-icon" src="../static/base/assets/images/icon/icon6.png" alt="Image"></i>
+					</div>
+
+					<div>
+						<h3>
+							<a href="services-details.html">
+								Assurance
+							</a>
+						</h3>
+						<p>La prime d'assurance est une charge déductible (économie d'impôt)
+							.</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-lg-6 col-md-6">
+				<div class="single-services-item-card d-flex justify-content-start align-items-center">
+					<div class="icon">
+						<i><img class="align-icon" src="../static/base/assets/images/icon/icon7.png" alt="Image"></i>
+					</div>
+
+					<div>
+						<h3>
+							<a href="services-details.html">
+								Bailleurs
+							</a>
+						</h3>
+						<p>Augmentation du nombre de bailleurs conciliants (suppression de la barrière trésorerie DG/GAPD).</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-lg-6 col-md-6">
+				<div class="single-services-item-card d-flex justify-content-start align-items-center">
+					<div class="icon">
+						<i><img class="align-icon" src="../static/base/assets/images/icon/icon8.png" alt="Image"></i>
+					</div>
+
+					<div>
+						<h3>
+							<a href="services-details.html">
+								Crédit
+							</a>
+						</h3>
+						<p>Optimiser la capacité de crédit et allouer les fonds propres à la croissance de l'activité.</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-lg-6 col-md-6">
+				<div class="single-services-item-card d-flex justify-content-start align-items-center">
+					<div class="icon">
+						<i> <img class="align-icon" src="../static/base/assets/images/icon/icon9.png" alt="Image"></i>
+					</div>
+
+					<div>
+						<h3>
+							<a href="services-details.html">
+								Locataire
+							</a>
+						</h3>
+						<p>Augmentation du nombre de biens à la portée du locataire (suppression de la barrière trésorerie DG/GAPD).</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-lg-6 col-md-6 offset-auto">
+				<div class="single-services-item-card d-flex justify-content-start align-items-center">
+					<div class="icon">
+						<i> <img class="align-icon" src="../static/base/assets/images/icon/icon10.png" alt="Image"></i>
+					</div>
+
+					<div>
+						<h3>
+							<a href="services-details.html">
+								Eligibilité
+							</a>
+						</h3>
+						<p>L'éligibilité au produit renforce la qualité du dossier.</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-lg-12 text-center">
+				<a href="../../base/proprietaire/" class="default-btn">
+					<i class="ri-arrow-right-s-line"></i>
+					Avantages Propriétaire
+				</a>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- End Services Area -->
+
+<!-- Start Services Area 
+<div class="services-area ptb-100">
+	<div class="container-fluid p-0">
+		<div class="section-title">
+			<span class="top-title">INSURANCE SERVICES</span>
+			<h2>Take The Worry Out Of Life With Insurance Protection</h2>
+		</div>
+
+		<div class="services-slide-two owl-carousel owl-theme">
+			<div class="single-services-item bg-1 style-three d-flex align-items-end">
+				<div class="services-contents">
+					<ul>
+						<li>INSURANCE</li>
+						<li>HEALTH</li>
+					</ul>
+					<h3>
+						<a href="services-details.html">Health Insurance</a>
+					</h3>
+				</div>
+			</div>
+
+			<div class="single-services-item bg-2 style-three d-flex align-items-end">
+				<div class="services-contents">
+					<ul>
+						<li>INSURANCE</li>
+						<li>TERM LIFE</li>
+					</ul>
+					<h3>
+						<a href="services-details.html">Home Insurance</a>
+					</h3>
+				</div>
+			</div>
+
+			<div class="single-services-item bg-3 style-three d-flex align-items-end">
+				<div class="services-contents">
+					<ul>
+						<li>INSURANCE</li>
+						<li>VEHICLE</li>
+					</ul>
+					<h3>
+						<a href="services-details.html">Business Insurance</a>
+					</h3>
+				</div>
+			</div>
+
+			<div class="single-services-item bg-4 style-three d-flex align-items-end">
+				<div class="services-contents">
+					<ul>
+						<li>INSURANCE</li>
+						<li>VEHICLE</li>
+					</ul>
+					<h3>
+						<a href="services-details.html">Vehicle Insurance</a>
+					</h3>
+				</div>
+			</div>
+
+			<div class="single-services-item bg-5 style-three d-flex align-items-end">
+				<div class="services-contents">
+					<ul>
+						<li>INSURANCE</li>
+						<li>CAR</li>
+					</ul>
+					<h3>
+						<a href="services-details.html">Car Insurance</a>
+					</h3>
+				</div>
+			</div>
+		</div>
+
+		<div class="view-all">
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quis placerat arcu nibh sed placerat elementum. Urna eu et purus et mi sit rhoncus <a href="services.html">View All</a></p>
+		</div>
+	</div>
+</div>
+	End Services Area --> 
+
+<!-- Start Why Choose Us Area -->
+<div class="why-choose-us-area bg-color-f8f8f8 pt-100 pb-70">
+	<div class="container">
+		<div class="row align-items-center">
+			<div class="col-lg-6">
+				<div class="choose-us-content mr-15">
+					<span class="top-title">POURQUOI NOUS CHOISIR</span>
+					<h2>Plus qu'une assurance, un conseil spécialisé et sur-mesure</h2>
+					<p>Notre équipe dispose d'une approche unique du risque, de manière tridimensionnelle à la fois mathématiques, immobilières et financières.</p>
+
+					<div class="row">
+						<div class="col-lg-6 col-sm-6">
+							<ul>
+								<li>
+									<i class="ri-check-double-line"></i>
+									Indicateurs de performance
+								</li>
+								<li>
+									<i class="ri-check-double-line"></i>
+									Algorithmes de scoring
+								</li>
+								<li>
+									<i class="ri-check-double-line"></i>
+									Analyse immobilière
+								</li>
+							</ul>
+						</div>
+
+						<div class="col-lg-6 col-sm-6">
+							<ul>
+								<li>
+									<i class="ri-check-double-line"></i>
+									Business Plan Review
+								</li>
+								<li>
+									<i class="ri-check-double-line"></i>
+									Modélisation financière
+								</li>
+								<li>
+									<i class="ri-check-double-line"></i>
+									Revue des contrats
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-lg-6">
+				<div class="choose-us-img ml-15">
+					<img src="/static/base/assets/images/choose-us.jpg" alt="Image">
+					<img src="/static/base/assets/images/choose-shape.png" class="choose-shape shape" alt="Image" data-speed="0.04" data-revert="true">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- End Why Choose Us Area -->
+
+<!-- Start Pricing Area 
+<div class="pricing-area pt-100 pb-70">
+	<div class="container">
+		<div class="section-title">
+			<span class="top-title">PRICING PLANS</span>
+			<h2>Choose From Our Popular Insurance Pricing Plan</h2>
+		</div>
+
+		<div class="row justify-content-center">
+			<div class="col-lg-4 col-sm-6">
+				<div class="single-pricing">
+					<div class="price-title">
+						<h3>Health Insurance</h3>
+						<h2>$10.25</h2>
+						<span>Per Month</span>
+					</div>
+
+					<ul>
+						<li>
+							<i class="ri-check-line"></i>
+							Individual & Family Doctor
+						</li>
+						<li>
+							<i class="ri-check-line"></i>
+							Prescription Drug Coverage
+						</li>
+						<li>
+							<i class="ri-check-line"></i>
+							Dental Coverage
+						</li>
+						<li>
+							<i class="ri-check-line"></i>
+							Medical Consultations
+						</li>
+						<li>
+							<i class="ri-check-line"></i>
+							I24/7 Support
+						</li>
+					</ul>
+
+					<button class="default-btn">
+						Choose Plan
+					</button>
+				</div>
+			</div>
+
+			<div class="col-lg-4 col-sm-6">
+				<div class="single-pricing">
+					<div class="price-title">
+						<h3>Vehicle Insurance</h3>
+						<h2>$28.25</h2>
+						<span>Per Month</span>
+					</div>
+
+					<ul>
+						<li>
+							<i class="ri-check-line"></i>
+							Learner Insurance Provides
+						</li>
+						<li>
+							<i class="ri-check-line"></i>
+							Comprehensive Insurance
+						</li>
+						<li>
+							<i class="ri-check-line"></i>
+							Fire And Theft Insurance
+						</li>
+						<li>
+							<i class="ri-check-line"></i>
+							Cost Of Accidents & Damage
+						</li>
+						<li>
+							<i class="ri-check-line"></i>
+							I24/7 Support
+						</li>
+					</ul>
+
+					<button class="default-btn">
+						Choose Plan
+					</button>
+				</div>
+			</div>
+
+			<div class="col-lg-4 col-sm-6">
+				<div class="single-pricing">
+					<div class="price-title">
+						<h3>Life Insurance</h3>
+						<h2>$120.25</h2>
+						<span>Per Month</span>
+					</div>
+
+					<ul>
+						<li>
+							<i class="ri-check-line"></i>
+							Protective Protection
+						</li>
+						<li>
+							<i class="ri-check-line"></i>
+							Transitioning Between Jobs
+						</li>
+						<li>
+							<i class="ri-check-line"></i>
+							Health Coverage
+						</li>
+						<li>
+							<i class="ri-check-line"></i>
+							Free Consultations
+						</li>
+						<li>
+							<i class="ri-check-line"></i>
+							I24/7 Support
+						</li>
+					</ul>
+
+					<button class="default-btn">
+						Choose Plan
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+End Pricing Area -->
+
+<!-- Start Our Review Area -->
+<div class="our-review-area bg-color-f8f8f8 pt-100 pb-70">
+	<div class="container">
+		<div class="row align-items-center">
+			<div class="col-xl-8">
+				<div class="review-slide owl-carousel owl-theme">
+					<div class="single-review-item style-three">
+						<div class="review-img">
+							<img src="/static/base/assets/images/review/via-sana.jpeg" alt="Image">
+						</div>
+
+						<p>L'équipe QuietRent est réactive et sait s'adapter à nos besoins en continu. En limitant nos immobilisations de trésorerie, c'est un partenaire idéal pour accélérer notre déploiement.<br/>&nbsp;</p>
+						<h3>Louis Fosse</h3>
+						<span>Président Via Sana</span>
+						<i class="ri-double-quotes-r"></i>
+					</div>
+
+					<div class="single-review-item style-three">
+						<div class="review-img">
+							<img src="/static/base/assets/images/review/we-are-Fojo.jpeg" alt="Image">
+						</div>
+
+						<p>Parfaitement satisfait de Quiet Rent ! <br/> De vraies solutions utiles, adaptées, simples à mettre en œuvre, et qui permettent de fortes économies de trésorerie. Nous avons bénéficié d'un réel conseil et d'un accompagnement tout au long de la procédure.</p>
+
+						<h3>Lucas Narboni</h3>
+						<span>co-founder FOJO</span>
+						<i class="ri-double-quotes-r"></i>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-xl-4">
+				<div class="review-content style-two style-three">
+					<span class="top-title">NOS RETOURS</span>
+					<h2>Nos clients sont nos meilleurs ambassadeurs</h2>
+					<p> Découvrez certains témoignages de clients ayant eu recours à nos solutions pour débloquer des opportunités.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<img src="/static/base/assets/images/review/shape-1.png" alt="Image" class="shape shape-1" data-speed="0.04" data-revert="true">
+	<img src="/static/base/assets/images/review/shape-2.png" alt="Image" class="shape shape-2" data-speed="0.04" data-revert="true">
+	<img src="/static/base/assets/images/review/shape-3.png" alt="Image" class="shape shape-3" data-speed="0.04" data-revert="true">
+</div>
+<!-- End Our Review Area -->
+
+<!-- Start Our Quality Area -->
+<div class="quality-area bg-color-497774 ptb-100">
+	<div class="container">
+		<div class="quality-content">
+			<span class="top-title">PRÊT À NOUS REJOINDRE ?</span>
+			<h2> Nous remplaçons vos garanties à première demande et dépôts de garantie au meilleur prix.</h2>
+
+			<div class="quality-btn">
+				{% if not request.user.is_authenticated %}
+				<a href="../register/souscription/" class="default-btn">
+					Souscrire
+				</a>
+				{% endif %}
+				<a href="../contact-us/" class="default-btn active">
+					Nous Contacter
+				</a>
+			</div>
+
+			<img src="/static/base/assets/images/subscribe-shape-2.png" alt="Image" class="shape shape-1" data-speed="0.04" data-revert="true">
+			<img src="/static/base/assets/images/subscribe-shape-3.png" alt="Image" class="shape shape-2" data-speed="0.04" data-revert="true">
+		</div>
+	</div>
+</div>
+<!-- End Our Quality Area -->
+
+<!-- Start Blog Area -->
+<!-- <div class="blog-area bg-color-f3f9f8 ptb-100">
+	<div class="container">
+		<div class="section-title">
+			<span class="top-title">BLOG</span>
+			<h2>Better Digital Insurance Begins Right Here</h2>
+		</div>
+
+		<div class="blog-slide owl-carousel owl-theme">
+			<div class="single-blog-item">
+				<a href="blog-details.html">
+					<img src="/static/base/assets/images/blog/blog-1.jpg" alt="Image">
+				</a>
+
+				<div class="blog-content">
+					<span>14 AUG 2021</span>
+					<ul>
+						<li>
+							<a href="our-team.html">BY ADMIN
+							</a>
+						</li>
+						<li>
+							<a href="blog.html">INSURANCE</a>
+						</li>
+					</ul>
+					<h3>
+						<a href="blog-details.html">Ambulance Cover Of Fire On Insurance Serving</a>
+					</h3>
+
+					<a href="blog-details.html" class="default-btn">
+						<i class="ri-arrow-right-s-line"></i>
+						Read More
+					</a>
+				</div>
+			</div>
+		
+			<div class="single-blog-item">
+				<a href="blog-details.html">
+					<img src="/static/base/assets/images/blog/blog-2.jpg" alt="Image">
+				</a>
+
+				<div class="blog-content">
+					<span>14 AUG 2021</span>
+					<ul>
+						<li>
+							<a href="our-team.html">BY ADMIN
+							</a>
+						</li>
+						<li>
+							<a href="blog.html">INSURANCE</a>
+						</li>
+					</ul>
+					<h3>
+						<a href="blog-details.html">Insurance Covers Risk Of Fire Absence Of Fire Insurance</a>
+					</h3>
+
+					<a href="blog-details.html" class="default-btn">
+						<i class="ri-arrow-right-s-line"></i>
+						Read More
+					</a>
+				</div>
+			</div>
+		
+			<div class="single-blog-item">
+				<a href="blog-details.html">
+					<img src="/static/base/assets/images/blog/blog-2.jpg" alt="Image">
+				</a>
+
+				<div class="blog-content">
+					<span>14 AUG 2021</span>
+					<ul>
+						<li>
+							<a href="our-team.html">BY ADMIN
+							</a>
+						</li>
+						<li>
+							<a href="blog.html">INSURANCE</a>
+						</li>
+					</ul>
+					<h3>
+						<a href="blog-details.html">What Is Personal Liability Umbrella Coverage</a>
+					</h3>
+
+					<a href="blog-details.html" class="default-btn">
+						<i class="ri-arrow-right-s-line"></i>
+						Read More
+					</a>
+				</div>
+			</div>
+
+			<div class="single-blog-item">
+				<a href="blog-details.html">
+					<img src="/static/base/assets/images/blog/blog-4.jpg" alt="Image">
+				</a>
+
+				<div class="blog-content">
+					<span>14 AUG 2021</span>
+					<ul>
+						<li>
+							<a href="our-team.html">BY ADMIN
+							</a>
+						</li>
+						<li>
+							<a href="blog.html">INSURANCE</a>
+						</li>
+					</ul>
+					<h3>
+						<a href="blog-details.html">Insurance Covers Risk Of Fire Absence Of Fire Insurance</a>
+					</h3>
+
+					<a href="blog-details.html" class="default-btn">
+						<i class="ri-arrow-right-s-line"></i>
+						Read More
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div> -->
+<!-- End Blog Area -->
+
+<!-- Start Subscribe Area -->
+<div class="subscribe-area ptb-60">
+	<div class="container">
+		<div class="section-title">
+			<span class="top-title">Pour tout savoir</span>
+			<h2>Ici pas de newsletter</h2>
+			<p>Nous vous tenons informés de nos évolutions via des mails succincts pour toujours bénéficier de nos opportunités business.</p>
+		</div>
+
+		<div class="subscribe-content">
+			<div class="col-12 text-center">
+				<a href="../../base/coming-soon/" class="default-btn">
+					<i class="ri-arrow-right-s-line"></i>
+					S'inscrire
+				</a>
+			</div>
+			<img src="/static/base/assets/images/subscribe-shape-1.png" alt="Image" class="shape shape-1" data-speed="0.04" data-revert="true">
+			<img src="/static/base/assets/images/subscribe-shape-2.png" alt="Image" class="shape shape-2" data-speed="0.04" data-revert="true">
+		</div>
+	</div>
+</div>
+<!-- End Subscribe Area -->
+{% endblock content %}

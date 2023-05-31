@@ -1,0 +1,73 @@
+{% extends 'admin/content-admin.html' %}
+{% block content2 %}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="row align-items-center">
+                    <div class="col">                      
+                        <h4 class="card-title">All Tickets</h4>                      
+                    </div><!--end col-->
+                    <div class="col-auto"> 
+                        <button class="btn btn-sm btn-de-primary">Create Ticket</button> 
+                    </div><!--end col-->
+                </div>  <!--end row-->                                  
+            </div><!--end card-header-->   
+            <div class="card-body">                             
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead class="thead-light">
+                        <tr>
+                            <th style="max-width: 95px;">
+                                <input class="form-check-input" type="checkbox" id="checkbox1" value="" aria-label="...">
+                            </th>
+                            <th>ID</th>
+                            <th>Customers</th>
+                            <th>Subject</th> 
+                            <th>Priority</th>
+                            <th>Status</th>
+                            <th>Respose Time</th>
+                        </tr><!--end tr-->
+                        </thead>
+
+                        <tbody>
+                            {% for form in Contact %}
+                            {{form}}
+                        <tr>
+                            <td>
+                                <input class="form-check-input" type="checkbox" id="checkbox7" value="" aria-label="...">                                                      
+                            </td>                                                
+                            <td>#{{form.id}}</td>
+                            <td><img src="../../static/admin/assets/images/users/user-5.jpg" alt="" class="thumb-sm rounded-circle me-2">
+                                {{form.name}}</td>
+                            <td>{{form.msg_subject}}</td>
+                            <td>{{form.email}}</td>
+                            <td>
+                            <button id="status-{{form.id}}" type="button" class="btn btn-outline-secondary btn-round dropdown-toggle {{classe}}" data-bs-toggle="dropdown" aria-expanded="false">{{form.etat}} <i class="mdi mdi-chevron-down"></i></button>
+                                    <div class="dropdown-menu">
+                                        <button class="dropdown-item" onclick="ChangerEtatContact('Fermer','{{form.id}}')" >Fermer</button>
+                                        <button class="dropdown-item" onclick="ChangerEtatContact('En cours','{{form.id}}')">En cours</button>
+                                        <!-- <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#">Separated link</a> -->
+                                    </div>                                         
+                            <td>4 houur</td>
+                        </tr><!--end tr-->   
+                            {% endfor%}                          
+                        </tbody>
+                    </table>                    
+                </div>                                         
+            </div><!--end card-body--> 
+        </div><!--end card--> 
+    </div> <!--end col-->                               
+</div><!--end row-->
+{% endblock %}
+
+{% block js %}
+<script 
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous">
+    </script>
+<script src="../../static/admin/assets/js/super-admin.js"></script>
+{% endblock %}

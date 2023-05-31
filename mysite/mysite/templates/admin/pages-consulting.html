@@ -1,0 +1,322 @@
+{% extends 'admin/content.html' %}
+
+{% block content2 %}
+
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Informations sur ma demande</h4>
+                <p class="text-muted mb-0">Cet espace est réservé à la consultation des informations de ma demande.</p>
+            </div><!--end card-header-->
+            <div class="card-body">
+                <form action="" method="post" id="custom-step">
+                    <nav>
+                        <div class="nav nav-tabs" id="nav-tab">
+                            <a class="nav-link active" id="step1-tab" data-bs-toggle="tab" href="#step1">Le locataire</a>
+                            <a class="nav-link" id="step2-tab" data-bs-toggle="tab" href="#step2">Le bail</a>
+                            <a class="nav-link" id="step3-tab" data-bs-toggle="tab" href="#step3">Eligibilité</a>
+                            <a class="nav-link" id="step4-tab" data-bs-toggle="tab" href="#step4">La garantie souhaitée</a>
+                        </div>
+                    </nav>
+                    <div class="tab-content" id="nav-tabContent">
+                        <div class="tab-pane active" id="step1">
+                            <h4 class="card-title mt-3 mb-1">Le locataire</h4>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group row mb-2">
+                                        <label for="txtFirstNameBilling" class="col-lg-9 col-form-label text-end">Raison sociale</label>
+                                        <div class="col-lg-9">
+                                            <input id="txtFirstNameBilling" name="txtFirstNameBilling" type="text" class="form-control" disabled value="{{ demande.social_reason }}">
+                                        </div>
+                                    </div><!--end form-group-->
+                                </div><!--end col-->
+                                <div class="col-md-6">
+                                    <div class="form-group row mb-2">
+                                        <label for="txtLastNameBilling" class="col-lg-9 col-form-label text-end">Forme juridique</label>
+                                        <div class="col-lg-9">
+                                            <input id="txtLastNameBilling" name="txtLastNameBilling" type="text" class="form-control" disabled value="{{ demande.juridical_form }}">
+                                        </div>
+                                    </div><!--end form-group-->
+                                </div><!--end col-->
+                            </div><!--end row-->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group row mb-2">
+                                        <label for="txtCompanyBilling" class="col-lg-9 col-form-label text-end">Personne physique ou morale</label>
+                                        <div class="col-lg-9">
+                                            <input id="txtCompanyBilling" name="txtCompanyBilling" type="text" class="form-control" disabled value="{{ demande.physical_moral }}">
+                                        </div>
+                                    </div><!--end form-group-->
+                                </div><!--end col-->
+                                <div class="col-md-6">
+                                    <div class="form-group row mb-2">
+                                        <label for="txtEmailAddressBilling" class="col-lg-9 col-form-label text-end">N° SIRET</label>
+                                        <div class="col-lg-9">
+                                            <input id="txtEmailAddressBilling" name="txtEmailAddressBilling" type="text" class="form-control" disabled value="{{ demande.inputSIREN }}">
+                                        </div>
+                                    </div><!--end form-group-->
+                                </div><!--end col-->
+                            </div><!--end row-->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group row mb-2">
+                                        <label for="txtAddress1Billing" class="col-lg-9 col-form-label text-end">Civilité</label>
+                                        <div class="col-lg-9">
+                                            <input id="txtAddress1Billing" name="txtAddress1Billing" class="form-control" disabled value="{{ demande.gender }}">
+                                        </div>
+                                    </div><!--end form-group-->
+                                </div><!--end col-->
+                                <div class="col-md-6">
+                                    <div class="form-group row mb-2">
+                                        <label for="txtAddress2Billing" class="col-lg-9 col-form-label text-end">Nom</label>
+                                        <div class="col-lg-9">
+                                            <input id="txtAddress2Billing" name="txtAddress2Billing" class="form-control" disabled value="{{ demande.inputName }}">
+                                        </div>
+                                    </div><!--end form-group-->
+                                </div><!--end col-->
+                            </div><!--end row-->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group row mb-2">
+                                        <label for="txtCityBilling" class="col-lg-9 col-form-label text-end">Prénom</label>
+                                        <div class="col-lg-9">
+                                            <input id="txtCityBilling" name="txtCityBilling" type="text" class="form-control" disabled value="{{ demande.inputFirstName }}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group row mb-2">
+                                        <label for="txtStateProvinceBilling" class="col-lg-9 col-form-label text-end">Secteur d'activité</label>
+                                        <div class="col-lg-9">
+                                            <input id="txtStateProvinceBilling" name="txtStateProvinceBilling" type="text" class="form-control" disabled value="{{ demande.inputActivity }}">
+                                        </div>
+                                    </div><!--end form-group-->
+                                </div><!--end col-->
+                            </div><!--end row-->
+                            <div class="">
+                                <button type="button" id="step1Next" class="btn text-white float-end" style="background-color: #4C9082;">Next</button>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="step2">
+                            <h4 class="card-title mt-3 mb-1">Le bail</h4>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group row mb-2">
+                                        <label for="txtFirstNameShipping" class="col-lg-9 col-form-label text-end">Adresse de la location</label>
+                                        <div class="col-lg-9">
+                                            <input id="txtFirstNameShipping" name="txtFirstNameShipping" type="text" class="form-control" disabled value="{{ demande.inputAddress }}">
+                                        </div>
+                                    </div><!--end form-group-->
+                                </div><!--end col-->
+                                <div class="col-md-6">
+                                    <div class="form-group row mb-2">
+                                        <label for="txtLastNameShipping" class="col-lg-9 col-form-label text-end">Code Postal</label>
+                                        <div class="col-lg-9">
+                                            <input id="txtLastNameShipping" name="txtLastNameShipping" type="text" class="form-control" disabled value="{{ demande.inputCode }}">
+                                        </div>
+                                    </div><!--end form-group-->
+                                </div><!--end col-->
+                            </div><!--end row-->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group row mb-2">
+                                        <label for="txtCompanyShipping" class="col-lg-9 col-form-label text-end">Ville</label>
+                                        <div class="col-lg-9">
+                                            <input id="txtCompanyShipping" name="txtCompanyShipping" type="text" class="form-control" disabled value="{{ demande.inputCity }}">
+                                        </div>
+                                    </div><!--end form-group-->
+                                </div><!--end col-->
+                                <div class="col-md-6">
+                                    <div class="form-group row mb-2">
+                                        <label for="txtEmailAddressShipping" class="col-lg-9 col-form-label text-end">Date d'effet du bail ou prévisionnel</label>
+                                        <div class="col-lg-9">
+                                            <input id="txtEmailAddressShipping" name="txtEmailAddressShipping" type="text" class="form-control" disabled value="{{ demande.mois }}/{{ demande.annee}}">
+                                        </div>
+                                    </div><!--end form-group-->
+                                </div><!--end col-->
+                            </div><!--end row-->
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group row mb-2">
+                                        <label for="txtCityShipping" class="col-lg-9 col-form-label text-end">Montant du loyer annuel HT TC</label>
+                                        <div class="col-lg-9">
+                                            <input id="txtCityShipping" name="txtCityShipping" type="text" class="form-control" disabled value="{{ demande.loyer }}">
+                                        </div>
+                                    </div><!--end form-group-->
+                                </div><!--end col-->
+                                <div class="col-md-6">
+                                    <div class="form-group row mb-2">
+                                        <label for="txtStateProvinceShipping" class="col-lg-9 col-form-label text-end">Montant du dépôt de garantie initialement prévue</label>
+                                        <div class="col-lg-9">
+                                            <input id="txtStateProvinceShipping" name="txtStateProvinceShipping" type="text" class="form-control" disabled value="{{ demande.garantie }}">
+                                        </div>
+                                    </div><!--end form-group-->
+                                </div><!--end col-->
+                                <div class="col-md-6">
+                                    <div class="form-group row mb-2">
+                                        <label for="txtStateProvinceShipping" class="col-lg-9 col-form-label text-end">Montant de la caution bancaire initialement prévue</label>
+                                        <div class="col-lg-9">
+                                            <input id="txtStateProvinceShipping" name="txtStateProvinceShipping" type="text" class="form-control" disabled value="{{ demande.caution }}">
+                                        </div>
+                                    </div><!--end form-group-->
+                                </div><!--end col-->
+                            </div><!--end row-->
+                            <div>
+                                <button type="button" id="step2Prev" class="btn text-white float-start" style="background-color: lightseagreen;">Previous</button>
+                                <button type="button" id="step2Next" class="btn text-white float-end" style="background-color: #4C9082;">Next</button>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="step3">
+                            <h4 class="card-title mt-3 mb-1">Eligibilité</h4>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group row mb-2">
+                                        <label for="txtNameCard" class="col-lg-9 col-form-label text-end">Avez-vous déjà fait l'objet d'incident de paiement ou litige avec votre bailleur (ou un de vos bailleurs), de quelque nature que ce soit, au cours des 12 derniers mois ?</label>
+                                        <div class="col-lg-9">
+                                            <input id="txtNameCard" name="txtNameCard" type="text" class="form-control" disabled value="{{ demande.incident }}">
+                                        </div>
+                                    </div><!--end form-group-->
+                                </div><!--end col-->
+                                <div class="col-md-6">
+                                    <div class="form-group row mb-2">
+                                        <label for="ddlCreditCardType" class="col-lg-9 col-form-label text-end">Correspondez-vous aux critères des sociétés en difficulté (repris par la BPI dans le cadre temporaire sur les aides de l'Etat publié le 19 Mars 2020) - autrement dit des entreprises dont les fonds propres sont inférieurs à la moitié du capital social ?</label>
+                                        <div class="col-lg-9">
+                                            <input id="txtCreditCardNumber" name="txtCreditCardNumber" type="text" class="form-control" disabled value="{{ demande.difficulte }}">
+                                        </div>
+                                    </div><!--end form-group-->
+                                </div><!--end col-->
+                                <div class="col-md-6">
+                                    <div class="form-group row mb-2">
+                                        <label for="txtCreditCardNumber" class="col-lg-9 col-form-label text-end">Avez-vous reçu ou avez-vous donné un préavis de congé portant sur le bail visé par la présente étude d'éligibilité</label>
+                                        <div class="col-lg-9">
+                                            <input id="txtCreditCardNumber" name="txtCreditCardNumber" type="text" class="form-control" disabled value="{{ demande.preavis }}">
+                                        </div>
+                                    </div><!--end form-group-->
+                                </div><!--end col-->
+                                <div class="col-md-6">
+                                    <div class="form-group row mb-2">
+                                        <label for="txtCardVerificationNumber" class="col-lg-9 col-form-label text-end">Si l’étude concerne un bail en cours, avez-vous une échéance triennale au cours des 12 prochains mois ?</label>
+                                        <div class="col-lg-9">
+                                            <input id="txtCardVerificationNumber" name="txtCardVerificationNumber" type="text" class="form-control" disabled value="{{ demande.echeance }}">
+                                        </div>
+                                    </div><!--end form-group-->
+                                </div><!--end col-->
+                                <div class="col-md-6">
+                                    <div class="form-group row mb-2">
+                                        <label for="txtExpirationDate" class="col-lg-9 col-form-label text-end">Si oui, souhaitez-vous ne pas renouveler ce contrat de bail ?</label>
+                                        <div class="col-lg-9">
+                                            <input id="txtExpirationDate" name="txtExpirationDate" type="text" class="form-control" disabled value="{{ demande.renouveler }}">
+                                        </div>
+                                    </div><!--end form-group-->
+                                </div><!--end col-->
+                                <div class="col-md-6">
+                                    <div class="form-group row mb-2">
+                                        <label for="txtNameCard" class="col-lg-9 col-form-label text-end">Votre entreprise a-t-elle plus de deux ans ?</label>
+                                        <div class="col-lg-9">
+                                            <input id="txtNameCard" name="txtNameCard" type="text" class="form-control" disabled value="{{ demande.plusDeuxAns }}">
+                                        </div>
+                                    </div><!--end form-group-->
+                                </div><!--end col-->
+                                <div class="col-md-6">
+                                    <div class="form-group row mb-2">
+                                        <label for="ddlCreditCardType" class="col-lg-9 col-form-label text-end">Congé sur vos locaux actuellement loué ?</label>
+                                        <div class="col-lg-9">
+                                            <input id="txtCreditCardNumber" name="txtCreditCardNumber" type="text" class="form-control" disabled value="{{ demande.conges }}">
+                                        </div>
+                                    </div><!--end form-group-->
+                                </div><!--end col-->
+                                <div class="col-md-6">
+                                    <div class="form-group row mb-2">
+                                        <label for="txtNameCard" class="col-lg-9 col-form-label text-end">Bénéfice/Perte 2021</label>
+                                        <div class="col-lg-9">
+                                            <input id="txtNameCard" name="txtNameCard" type="text" class="form-control" disabled value="{{ demande.beneficePerte2021 }}">
+                                        </div>
+                                    </div><!--end form-group-->
+                                </div><!--end col-->
+                                <div class="col-md-6">
+                                    <div class="form-group row mb-2">
+                                        <label for="ddlCreditCardType" class="col-lg-9 col-form-label text-end">Chiffre d'affaire 2021</label>
+                                        <div class="col-lg-9">
+                                            <input id="txtCreditCardNumber" name="txtCreditCardNumber" type="text" class="form-control" disabled value="{{ demande.ca2021 }}">
+                                        </div>
+                                    </div><!--end form-group-->
+                                </div><!--end col-->
+                                <div class="col-md-6">
+                                    <div class="form-group row mb-2">
+                                        <label for="txtNameCard" class="col-lg-9 col-form-label text-end">Bénéfice/Perte 2020</label>
+                                        <div class="col-lg-9">
+                                            <input id="txtNameCard" name="txtNameCard" type="text" class="form-control" disabled value="{{ demande.beneficePerte2020 }}">
+                                        </div>
+                                    </div><!--end form-group-->
+                                </div><!--end col-->
+                                <div class="col-md-6">
+                                    <div class="form-group row mb-2">
+                                        <label for="ddlCreditCardType" class="col-lg-9 col-form-label text-end">Chiffre d'affaire 2020</label>
+                                        <div class="col-lg-9">
+                                            <input id="txtCreditCardNumber" name="txtCreditCardNumber" type="text" class="form-control" disabled value="{{ demande.ca2020 }}">
+                                        </div>
+                                    </div><!--end form-group-->
+                                </div><!--end col-->
+                                <div class="col-md-6">
+                                    <div class="form-group row mb-2">
+                                        <label for="txtNameCard" class="col-lg-9 col-form-label text-end">Si oui, quel est le loyer CC ?</label>
+                                        <div class="col-lg-9">
+                                            <input id="txtNameCard" name="txtNameCard" type="text" class="form-control" disabled value="{{ demande.CC }}">
+                                        </div>
+                                    </div><!--end form-group-->
+                                </div><!--end col-->
+                                <div class="col-md-6">
+                                    <div class="form-group row mb-2">
+                                        <label for="ddlCreditCardType" class="col-lg-9 col-form-label text-end">Avez-vous la possibilité d'émettre une caution personnelle ou d'une entreprise de plus de 2 ans solvable ?</label>
+                                        <div class="col-lg-9">
+                                            <input id="txtCreditCardNumber" name="txtCreditCardNumber" type="text" class="form-control" disabled value="{{ demande.cautionPerso }}">
+                                        </div>
+                                    </div><!--end form-group-->
+                                </div><!--end col-->
+                                <div class="col-md-6">
+                                    <div class="form-group row mb-2">
+                                        <label for="txtNameCard" class="col-lg-9 col-form-label text-end">QuietSolution ?</label>
+                                        <div class="col-lg-9">
+                                            <input id="txtNameCard" name="txtNameCard" type="text" class="form-control" disabled value="{{ demande.QuietSolution }}">
+                                        </div>
+                                    </div><!--end form-group-->
+                                </div><!--end col-->
+                            </div><!--end row-->
+                            <div>
+                                <button type="button" id="step3Prev" class="btn text-white float-start" style="background-color: lightseagreen;">Previous</button>
+                                <button type="button" id="step3Next" class="btn text-white float-end" style="background-color: #4C9082;">Next</button>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="step4">
+                            <h4 class="card-title mt-3">La garantie souhaitée</h4>
+                            <div class="row">
+                            <div class="col-md-6">
+                                    <div class="form-group row mb-2">
+                                        <label for="txtNameCard" class="col-lg-9 col-form-label text-start">Quel type de substitution souhaitez-vous mettre en place ? 0 pour substitution du depot de garantie, 1 pour substitution de la GAPD/Caution bancaire (plafonnée à six mois de loyers HT TC), 2 pour les deux.</label>
+                                        <div class="col-lg-9">
+                                            <input id="txtNameCard" name="txtNameCard" type="text" class="form-control" disabled value="{{ demande.substitution }}">
+                                        </div>
+                                    </div><!--end form-group-->
+                                </div><!--end col-->
+<!--                            <div class="form-check my-2">-->
+<!--                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">-->
+<!--                                <label class="form-check-label" for="flexCheckDefault">-->
+<!--                                    I agree with the Terms and Conditions.-->
+<!--                                </label>-->
+                            </div>
+                            <div>
+                                <button type="button" id="step4Prev" class="btn text-white float-start" style="background-color: lightseagreen;">Previous</button>
+                                <a href="../demandes/"><button type="button" class="btn btn-danger float-end">Finish</button></a>
+                            </div>
+                        </div>
+                    </div>
+                </form><!--end form-->
+            </div><!--end card-body-->
+        </div><!--end card-->
+    </div><!--end col-->
+</div><!--end row-->
+<script src="../../static/admin/assets/pages/form-wizard.js"></script>
+{% endblock %}

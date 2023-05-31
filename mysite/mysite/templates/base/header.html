@@ -1,0 +1,506 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Links Of CSS File -->
+<link rel="stylesheet" href="{% static 'base/assets/css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'base/assets/css/owl.theme.default.min.css' %}">
+<link rel="stylesheet" href="{% static 'base/assets/css/owl.carousel.min.css' %}">
+<link rel="stylesheet" href="{% static 'base/assets/css/flaticon.css' %}">
+<link rel="stylesheet" href="{% static 'base/assets/css/remixicon.css' %}">
+<link rel="stylesheet" href="{% static 'base/assets/css/meanmenu.min.css' %}">
+<link rel="stylesheet" href="{% static 'base/assets/css/aos.min.css' %}">
+<link rel="stylesheet" href="{% static 'base/assets/css/odometer.min.css' %}">
+<link rel="stylesheet" href="{% static 'base/assets/css/magnific-popup.min.css' %}">
+<link rel="stylesheet" href="{% static 'base/assets/css/style.css' %}">
+<link rel="stylesheet" href="{% static 'base/assets/css/responsive.css' %}">
+
+{% block css %}
+{% endblock %}
+
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="{% static 'base/assets/images/favicon.png' %}">
+<!-- Title -->
+<title>QuietRent</title>
+</head>
+<body>
+<!-- Script JS pour déconnecter un utilisateur en cas de fermeture de l'onglet -->
+
+<!--<script>-->
+<!--$(document).ready(function(){-->
+<!--    $(window).on("beforeunload", function(e) {-->
+<!--        $.ajax({-->
+<!--                url: logout,-->
+<!--                method: 'GET',-->
+<!--            })-->
+<!--    });-->
+<!--});-->
+<!--</script>-->
+
+<!-- Start Preloader Area -->
+<div class="preloader">
+    <div class="content">
+        <div class="box"></div>
+    </div>
+</div>
+<!-- End Preloader Area -->
+
+<!-- Start Navbar Area --> 
+<div class="navbar-area">
+	<div class="mobile-responsive-nav">
+		<div class="container">
+			<div class="mobile-responsive-menu">
+				<div class="logo">
+					<a href="../../index">
+						<img src="{% static 'base/assets/images/logo.png' %}" alt="logo">
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="desktop-nav">
+		<div class="container-fluid">
+			<nav class="navbar navbar-expand-md navbar-light">
+				<a class="navbar-brand" href="../../index">
+					<img src="{% static 'base/assets/images/logo.png' %}" alt="logo">
+				</a>
+
+				<div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
+					<!-- <div class="others-options ml-30">
+						<form class="search-form">
+							<input class="form-control" type="search" placeholder="Search here...">
+							<button class="search-btn" type="submit">
+								<i class="ri-search-line"></i>
+							</button>
+						</form>
+					</div>  -->
+
+					<ul class="navbar-nav m-auto">
+						<li class="nav-item">
+							<a href="../../index/" class="nav-link active">Accueil</a>
+						</li>
+
+						<li class="nav-item">
+							<a href="#" class="nav-link dropdown-toggle">
+								À Propos 
+							</a>
+
+							<ul class="dropdown-menu">
+								<li class="nav-item">
+									<a href="../../base/about-us/" class="nav-link">Qui Sommes-Nous ?</a>
+								</li>
+								
+								<li class="nav-item">
+									<a href="../../base/notre-metier/" class="nav-link">Notre Métier</a>
+								</li>
+								
+								<li class="nav-item">
+									<a href="../../base/notre-equipe/" class="nav-link">Notre Équipe</a>
+								</li>
+
+								<li class="nav-item">
+									<a href="../../base/nos-expertises/" class="nav-link">Nos Expertises</a>
+								</li>
+								
+								<li class="nav-item">
+									<a href="#" class="nav-link dropdown-toggle">
+										Autres 
+									</a>
+
+									<ul class="dropdown-menu">
+										<li class="nav-item">
+
+
+											<a href="../../base/legal/" class="nav-link">Mentions légales</a>
+
+										</li>
+										<li class="nav-item">
+											<a href="../../base/privacy-policy/" class="nav-link">Politique de confidentialité</a>
+										</li>
+										<li class="nav-item">
+											<a href="../../base/terms-conditions/" class="nav-link">CGU</a>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+
+						<li class="nav-item">
+							<a href="#" class="nav-link dropdown-toggle">
+								Nos Assurances            
+							</a>
+
+							<ul class="dropdown-menu">
+								<li class="nav-item">
+									<a href="../../base/insurance/" class="nav-link">Garantie de remplacement de DG/GAPD</a>
+								</li>
+								<li class="nav-item">
+									<a href="../../base/coming-soon/" class="nav-link"> Garantie de Prise de possesion </a>
+								</li>
+								<li class="nav-item">
+									<a href="../../base/coming-soon/" class="nav-link">Garantie d'indemnité d'immobilisation</a>
+								</li>
+							</ul>
+						</li>
+						<li class="nav-item">
+							<a href="../../base/proprietaire/" class="nav-link">Propriétaire</a>
+						</li>
+						<li class="nav-item">
+							<a href="../../base/locataire/" class="nav-link">Locataire</a>
+						</li>
+						<li class="nav-item">
+							<a href="../../base/blog/" class="nav-link">Blog</a>
+						</li>
+
+						<li class="nav-item">
+							<a href="../../base/contact-us/" class="nav-link">Nous Contacter</a>
+						</li>
+					</ul>
+
+					<div class="others-options">
+						<ul class="d-flex justify-content-between align-items-center">
+							{% if not request.user.is_authenticated %}
+							<a href="../../register/souscription/" class="default-btn">
+								<i class="ri-edit-line"></i>
+								Souscrire
+								</a>
+							{% endif %}
+
+							</li>
+
+							<li>
+
+							<li>{% if request.user.is_authenticated %}
+								{% if request.user.type == '0'%}
+								<a href="../../admin/profil/" class="default-btn">
+									<!--<a href="../../base/coming-soon" class="default-btn">-->
+										<i class="ri-edit-line"></i>
+									Profil
+								</a>
+								{%else%}
+									{% if request.user.type == '1' %}
+									<a href="../../admin/super-profil/" class="default-btn">
+										<!--<a href="../../base/coming-soon" class="default-btn">-->
+											<i class="ri-edit-line"></i>
+										Profil
+									</a>
+									{%else%}
+									<a href="../../admin/admin-profil/" class="default-btn">
+										<!--<a href="../../base/coming-soon" class="default-btn">-->
+											<i class="ri-edit-line"></i>
+										Profil
+									</a>
+									{%endif%}
+								{%endif%}
+									
+								<a href="{% url 'register:logout' %}" class="default-btn">
+<!--								<a href="../../base/coming-soon" class="default-btn">-->
+									<i class="ri-edit-line"></i>
+									Deconnexion
+								</a>
+								{% else %}
+								<!--<a href="{% url 'register:status' %}" class="default-btn">-->
+								<a href="{% url 'register:status' %}" class="default-btn">
+									<i class="ri-edit-line"></i>
+									Se Connecter
+								</a>
+							{% endif %}
+							</li>
+							<li>
+								<button class="menu-bars" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight">
+									<i class="flaticon-right-menu-bars"></i>
+								</button>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</div>
+	</div>
+
+	<div class="others-option-for-responsive">
+		<div class="container">
+			<div class="dot-menu">
+				<div class="inner">
+					<div class="circle circle-one"></div>
+					<div class="circle circle-two"></div>
+					<div class="circle circle-three"></div>
+				</div>
+			</div>
+			
+			<div class="container">
+				<div class="option-inner">
+					<div class="others-options justify-content-center d-flex align-items-center">
+						<ul>
+							<li>
+								<form class="search-form">
+									<input class="form-control" type="search" placeholder="Search here...">
+									<button class="search-btn" type="submit">
+										<i class="ri-search-line"></i>
+									</button>
+								</form>
+							</li>
+							<li>
+								<a href="../../register/souscription/" class="default-btn">
+									<i class="ri-edit-line"></i>
+									Souscrire
+								</a>
+							</li>
+							<li>
+								<a href="{% url 'register:status' %}" class="default-btn">
+									<i class="ri-edit-line"></i>
+									Se Connecter
+								</a>
+							</li>
+							<li>
+								<button class="menu-bars" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight">
+									<i class="flaticon-right-menu-bars"></i>
+								</button>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="others-option-for-responsive">
+		<div class="container">
+			<div class="dot-menu">
+				<div class="inner">
+					<div class="circle circle-one"></div>
+					<div class="circle circle-two"></div>
+					<div class="circle circle-three"></div>
+				</div>
+			</div>
+			
+			<div class="container">
+				<div class="option-inner">
+					<div class="others-options justify-content-center d-flex align-items-center">
+						<ul>
+							<li>
+								<form class="search-form">
+									<input class="form-control" type="search" placeholder="Search here...">
+									<button class="search-btn" type="submit">
+										<i class="ri-search-line"></i>
+									</button>
+								</form>
+							</li>
+							<li>
+								<a href="../../register/souscription/" class="default-btn">
+									<i class="ri-edit-line"></i>
+									Souscrire
+								</a>
+							</li>
+							<li>
+								<a href="{% url 'register:status' %}" class="default-btn">
+									<i class="ri-edit-line"></i>
+									Se Connecter
+								</a>
+							</li>
+							<li>
+								<button class="menu-bars" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight">
+									<i class="flaticon-right-menu-bars"></i>
+								</button>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- End Navbar Area -->
+
+		<!-- Start Offcanvas Area -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight">
+	<div class="offcanvas-header">
+		<a href="../index">
+			<img src="{% static 'base/assets/images/logo.png' %}" alt="Image">
+		</a>
+		<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+	</div>
+	<div class="offcanvas-body">
+		<div class="about-us off-mb-30">
+			<h3>A Propos</h3>
+			<p>QuietRent élabore des produits d'assurances innovants avec comme fil conducteur l'optimisation de trésorerie. Il s'agit d'une startup pionnière en matière de nouvelles technologies appliquées à l'asssurance qui dispose d'une expertise reconnue par la presse professionnelle et nos partenaires : assureurs, courtiers et cabinets experts en analyse de risques.</p>
+		</div>
+
+		<div class="contact-info off-mb-30">
+			<h3>Contact Info</h3>
+
+			<ul class="contact-list">
+				<li>
+					<i class="ri-map-pin-line"></i>
+					6B rue du 4 Septembre 75002 Paris
+				</li>
+				<li>
+					<i class="ri-phone-fill"></i>
+					+33 9 74 98 54 22
+				</li>
+				<li>
+					<i class="ri-mail-line"></i>
+					<a href="mailto:contact@quietrent.com">contact@quietrent.com</a>
+				</li>
+				<li>
+					<i class="ri-time-line"></i>
+					(10h - 15h / 14h - 18h, Lundi - Vendredi )
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<!-- End Offcanvas Area -->
+
+{% block content %}
+{% endblock %}
+
+<!-- Start Footer Area -->
+<div class="footer-area bg-color-f3f9f8 pt-100 pb-70">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-5">
+				<div class="single-footer-widget">
+					<a href="../index">
+						<img src="{% static 'base/assets/images/logo.png' %}" alt="Image">
+					</a>
+
+					<ul class="contact-info">
+						<li>
+							<span>Contact:</span>
+							<a href="mailto:contact@quietrent.com">contact@quietrent.com</a>
+						</li>
+						<li>
+							<span>        </span>
+							De 10h à 13h et de 14h à 18h30
+						</li>
+					</ul>
+
+						<ul class="social-link">
+						<li>
+							<a href="https://fr.linkedin.com/company/quietrent" target="_blank">
+								<i class="ri-linkedin-fill"></i>
+							</a>
+						</li>
+					</ul>
+					&nbsp;
+					
+					<ul class="contact-info">
+						<li>
+							<span>Réclamation:</span>
+							Vous pouvez nous envoyez un mail à <a href="mailto:contact@quietrent.com">reclamation@quietrent.com</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="col-lg-7">
+				<div class="row">
+					<div class="col-lg-4 col-sm-4">
+						<div class="single-footer-widget">
+							<h3>À propos de QuietRent</h3>
+
+							<ul class="use-link">
+								<li>
+									<a href="../about-us/">Qui Sommes Nous ?</a>
+								</li>
+								<li>
+									<a href="../notre-metier/">Notre Métier</a>
+								</li>
+								<li>
+									<a href="../notre-equipe">Notre Équipe</a>
+								</li>
+								<li>
+									<a href="../nos-expertises/">Nos Expertises</a>
+								</li>
+								<!-- <li>
+									<a href="../blog/">Blog</a>
+								</li> -->
+							</ul>
+						</div>
+					</div>
+
+					<div class="col-lg-4 col-sm-4">
+						<div class="single-footer-widget">
+							<h3>Confidentialité</h3>
+
+							<ul class="use-link">
+								<li>
+									<a href="../legal/">Mentions Légales</a>
+								</li>
+								<li>
+									<a href="../terms-conditions/">Conditions Générales D'Utilisations </a>
+								</li>
+								<li>
+									<a href="../privacy-policy/">Politique De Confidentialité</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+
+					<div class="col-lg-4 col-sm-4">
+						<div class="single-footer-widget">
+							<h3>Nos Assurances</h3>
+
+							<ul class="use-link">
+								<li>
+									<a href="../../base/insurance/" >Garantie de remplacement de DG/GAPD</a>
+								</li>
+								<li>
+									<a href="../../base/coming-soon/" > Garantie de Prise de possesion </a>
+								</li>
+								<li>
+									<a href="../../base/coming-soon/" >Garantie d'indemnité d'immobilisation </a>
+								</li>
+							</ul>
+						</div>
+					</div> 
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- End Footer Area -->
+
+<!-- Start Copy Right Area -->
+<div class="copy-right-area bg-color-f3f9f8">
+	<div class="container">
+		<div class="copy-right-content">
+			<p>© QuietRent est immatriculée à l'ORIAS sous le numéro 18005281 en qualité d'intermédiaire en assurance et est soumis au contrôle de l'ACPR </p>
+		</div>
+	</div>
+</div>
+<!-- End Copy Right Area -->
+<!-- Start Go Top Area -->
+<div class="go-top">
+	<i class="ri-arrow-up-s-fill"></i>
+	<i class="ri-arrow-up-s-fill"></i>
+</div>
+<!-- End Go Top Area -->
+
+<!-- Links of JS File -->
+<script src="{% static 'base/assets/js/jquery.min.js' %}"></script>
+<script src="{% static 'base/assets/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'base/assets/js/meanmenu.min.js' %}"></script>
+<script src="{% static 'base/assets/js/owl.carousel.min.js' %}"></script>
+<script src="{% static 'base/assets/js/carousel-thumbs.min.js' %}"></script>
+<script src="{% static 'base/assets/js/aos.min.js' %}"></script>
+<script src="{% static 'base/assets/js/appear.min.js' %}"></script>
+<script src="{% static 'base/assets/js/odometer.min.js' %}"></script>
+<script src="{% static 'base/assets/js/magnific-popup.min.js' %}"></script>
+<script src="{% static 'base/assets/js/tween-max.min.js' %}"></script>
+<script src="{% static 'base/assets/js/form-validator.min.js' %}"></script>
+<script src="{% static 'base/assets/js/ajaxchimp.min.js' %}"></script>
+<script src="{% static 'base/assets/js/custom.js' %}"></script>
+
+{% block js %}
+{% endblock %}
+     
+</body>
+</html>

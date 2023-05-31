@@ -1,0 +1,206 @@
+{% load static %}
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>QuietRent</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description">
+    <meta content="" name="author">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <style>
+        {% block style %}
+        @page {
+            size: a4 portrait;
+            @frame header_frame {           /* Static Frame */
+                -pdf-frame-content: header_content;
+                left: 50pt; width: 502pt; top: 40pt; height: 107pt;
+            }
+            @frame content_frame {          /* Content Frame */
+                left: 50pt; width: 502pt; top: 150pt; height: 632pt;
+            }
+            @frame footer_frame {           /* Another static Frame */
+                -pdf-frame-content: footer_content;
+                left: 50pt; width: 502pt; top: 742pt; height: 80pt;
+            }
+        }
+        {% endblock %}
+
+        .header-left, .header-bottom {
+            line-height: 20px;
+        }
+
+        .header-left p {
+            font-style: normal;
+            font-weight: normal;
+            font-size: 7pt;
+            font-family: Verdana;
+            color: #273476;
+        }
+
+        .header-left-2 tr td {
+            font-style: normal;
+            font-weight: normal;
+            font-size: 8pt;
+            font-family: Verdana;
+            color: #000000;
+        }
+
+        .header-left-2 tr td.frst-column {
+            width: 80px;
+        }
+
+        .header-left-2 tr td.second-column {
+            width: 200px;
+        }
+
+        .header-right p {
+            font-style: normal;
+            font-weight: bold;
+            font-size: 10pt;
+            font-family: Calibri;
+            color: #273576;
+        }
+
+        .header-right-2 {
+            font-style: normal;
+            font-weight: bold;
+            font-size:10pt;
+            font-family: Verdana;
+            color: #000000;
+        }
+
+        .content p, .content table tr td p {
+            font-style: normal;
+            font-weight: normal;
+            font-size: 10pt;
+            font-family: Verdana;
+            color: #000000;
+            text-align: justify;
+        }
+
+        .content table tr td {
+            font-size: 8pt;
+        }
+
+        .content p.asterisk {
+            font-size: 8pt;
+        }
+
+        .content p.title-signature, .content p.signature {
+            padding-left: 500px;
+        }
+
+        .content p.signature {
+            vertical-align: top;
+        }
+
+        .content p.title {
+            margin-bottom: 20px;
+            font-family: Calibri;
+            color: #273576;
+            font-weight: bold;
+        }
+
+        .content table.table-content {
+            padding-top: 4px;
+            border: 3px solid #fcab31;
+        }
+
+        .content table.table-content tr th {
+            font-style: normal;
+            font-size: 8pt;
+            font-family: Verdana;
+            color: #ffffff;
+            background-color: #fcab31;
+            text-align: center;
+            border: 1px solid #ffffff;
+        }
+
+        .content table.table-content tr td {
+            font-style: normal;
+            font-weight: bold;
+            font-family: Verdana;
+            color: #000000;
+            text-align: center;
+            border-left: 1px solid #fcab31;
+            border-right: 1px solid #fcab31;
+            border-bottom: 1px solid #fcab31;
+        }
+
+        .content table.avis-echeance {
+            margin-top: 10px;
+        }
+
+        .content table.avis-echeance tr th, .content table.avis-echeance tr td {
+            padding-top: 4px;
+            border: 1px solid #ff6600;
+        }
+
+        .content table.avis-echeance tr th.margin {
+            border-top: none;
+            border-bottom: none;
+            width: 50px;
+        }
+
+        .content table.avis-echeance tr td {
+            text-align: center;
+            height: 50px;
+        }
+
+        .content table.avis-echeance tr td.text-bold {
+            font-weight: bold;
+        }
+
+        .content table.avis-echeance tr .background-graw {
+            background-color: #f3f3f3;
+        }
+
+        .content table.table-content-2 {
+            border: 1px solid #000000;
+        }
+
+        .content table.table-content-2 tr th, .content table.table-content-2 tr td {
+            padding: 5px, 5px, 0, 5px;
+            font-size: 8pt;
+        }
+
+        .content table.table-content-2 tr td {
+            text-align: center;
+        }
+
+        .footer img {
+            width:100px;
+        }
+
+        .footer p {
+            font-style: normal;
+            font-weight: normal;
+            font-size: 6pt;
+            font-family: Verdana;
+            color:#273476;
+            text-align: justify;
+        }
+    </style>
+</html>
+<body>
+    <div id="header_content">
+        {% block header %}
+        <img style="width:100px" src="{% static 'admin/assets/images/ri_1.png' %}">
+        <div class="header-left"><p>14 rue de Richelieu <br/> 75001 Paris <br/> T. 01 44 40 84 40 <br/> insor.com</p></div>
+        {% endblock %}
+    </div>
+    <div class="footer" id="footer_content">
+        <img src="{% static 'admin/assets/images/ri_2.png' %}">
+        <p>
+            Insor SAS, société de courtage en assurances au capital de 25 000 € - Siège social : 14 rue de Richelieu 75001 Paris– N°432 320 745 RCS Paris – Immatriculée à
+            l'ORIAS sous le numéro N°07001564 vérifiable sur www.orias.fr – Sous le contrôle de l'ACPR, 4 place de Budapest – CS 92459 – 75436 PARIS CEDEX 09 (acpr.banque-
+            france.fr) – Tel : 01 44 40 84 40 Insor exerce son activité en application des dispositions de l'article L 520-1 II b du Code des assurances, la liste des assureurs
+            partenaires est disponible sur demande Réclamation : Insor/Service Réclamation, 14 rue de Richelieu 75001 Paris
+        </p>
+    </div>
+
+    {% block content %}
+    {% endblock %}
+</body>
+</html>

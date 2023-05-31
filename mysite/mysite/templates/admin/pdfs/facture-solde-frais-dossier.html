@@ -1,0 +1,54 @@
+{% extends 'admin/pdfs/facture.html' %}
+{% load static %}
+
+{% block header_left_2 %}
+<tr>
+    <td class="frst-column">Dossier n°</td>
+    <td class="second-column">3PFF00001/0013</td>
+</tr>
+<tr>
+    <td class="frst-column">Réf. Client</td>
+    <td class="second-column">C15072</td>
+</tr>
+{% endblock %}
+
+{% block content1 %}
+<p style="font-weight: bold;">Facture N°89229</p>
+<p>
+    {{ demande.inputCity }} le {% now "j F Y" %}
+</p>
+<p>
+    Madame, Monsieur,
+    <br>
+    Dans le cadre de la mise en place {{ substitution }}
+    <br>
+    Nous vous remettons la présente facture correspondant aux frais de dossiers :
+</p>
+</p>
+<table class="table-content-2">
+    <tr>
+        <th style="width: 300px"></th>
+        <th style="width: 100px">Montant HT</th>
+        <th style="width: 100px">TVA (20%)</th>
+        <th style="width: 300px">Montant TTC</th>
+    </tr>
+    <tr>
+        <td style="width: 300px;text-align:left">
+            <span style="font-weight: bold;">Frais de dossier :</span> Mise en place Garantie QuietRent <br> Dont Certification du dossier Locataire : 120 € TTC
+            Garanties obtenues : <br> - Substitution {{ substitution }} d'un montant de {{ montant_HT }} € <br> - Frais de procédure contentieuse (plafond 5000,00 €)
+        </td>
+        <td>{{ montant_HT }} €</td>
+        <td>{{ TVA }} €</td>
+        <td style="font-weight:bold">{{ montant_TTC }} €</td>
+    </tr>
+    <tr>
+        <td colspan="3" style="font-weight: normal;">Votre règlement / Certification</td>
+        <td>{{ certification }} €</td>
+    </tr>
+    <tr>
+        <td colspan="3">RESTE DÛ</td>
+        <td style="font-weight: bold; background-color: #d9dff4;">{{ montant_TTC|add:certification }} €</td>
+    </tr>
+</table>
+{{ block.super }}
+{% endblock %}

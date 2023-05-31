@@ -1,0 +1,240 @@
+{% extends 'admin/header.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+.nav2.active{
+    color: #4C9082 !important;
+}
+</style>
+<div class="leftbar-tab-menu" >
+    <div class="main-icon-menu" style="background-color: #4C9082;">
+        <div class="main-icon-menu-body">
+            <div class="position-relative h-100" data-simplebar style="overflow-x: hidden;">
+                <ul class="nav nav-tabs" role="tablist" id="tab-menu">
+                    <li class="nav-item" data-bs-toggle="tooltip" data-bs-placement="right" title="Accueil" data-bs-trigger="hover">
+                        <a href="../#MetricaPages" style="background-color: #4C9082;" id="pages-tab" class="nav-link ">
+                            <i class="ti ti-smart-home menu-icon"></i>
+                        </a><!--end nav-link-->
+                    </li><!--end nav-item-->
+                    <li class="nav-item" data-bs-toggle="tooltip" data-bs-placement="right" title="Documents" data-bs-trigger="hover">
+                        <a href="../#MetricaDashboard" style="background-color: #4C9082;" id="dashboard-tab" class="nav2 nav-link">
+                             <i class="ti ti-files menu-icon"></i>
+                        </a><!--end nav-link-->
+                    </li><!--end nav-item-->
+                    <li class="nav-item" data-bs-toggle="tooltip" data-bs-placement="right" title="Actions" data-bs-trigger="hover">
+                        <a href="../#MetricaApps" style="background-color: #4C9082;" id="apps-tab" class="nav2 nav-link">
+                            <i class="ti ti-apps menu-icon"></i>
+                        </a><!--end nav-link-->
+                    </li><!--end nav-item-->
+                </ul><!--end nav-->
+            </div><!--end /div-->
+        </div><!--end main-icon-menu-body-->
+        <div class="pro-metrica-end">
+            <a style="background-color: #4C9082;" href="../profil/" class="profile">
+                <span class="thumb-sm justify-content-center d-flex align-items-center bg-soft-info rounded-circle me-2">{{ request.user.first_name|first }}{{ request.user.last_name|first }}</span>
+            </a>
+        </div><!--end pro-metrica-end-->
+    </div>
+    <!--end main-icon-menu-->
+
+    <div class="main-menu-inner">
+        <!-- LOGO -->
+        <div class="topbar-left" style="margin-top: 25px; margin-bottom: 35px;">
+            <a href="../../index/" class="">
+                <span>
+                    <img src="../../../static/admin/assets/images/logoQuietRent-redimentionner.png" alt="logo-large" style="width:12em;margin-top: 1em;" class="logo-dark">
+                </span>
+            </a><!--end logo-->
+        </div><!--end topbar-left-->
+        <!--end logo-->
+        <div class="menu-body navbar-vertical tab-content" data-simplebar>
+            <div id="MetricaPages" class="main-icon-menu-pane tab-pane " role="tabpanel" aria-labelledby="pages-tab">
+                <div class="title-box">
+                    <h6 class="menu-title">Accueil</h6>
+                </div>
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav2 nav-link" href="../dashboard/"><i class="mdi mdi-view-dashboard " style="margin-right: 10px; color: #4c9082;"></i>Dashboard</a>
+                    </li><!--end nav-item-->
+                    <li class="nav-item">
+                        <a class="nav2 nav-link" href="../profil/"><i class="mdi mdi-account-edit" style="margin-right: 10px; color: #4c9082;"></i>Profil</a>
+                    </li><!--end nav-item-->
+                    <li class="nav-item">
+                        <a class="nav2 nav-link" href="../demandes/"><i class="mdi mdi-folder-multiple " style="margin-right: 10px; color: #4c9082;"></i>Mes demandes</a>
+                    </li><!--end nav-item-->
+                </ul><!--end nav-->
+            </div><!-- end Pages -->
+            <div id="MetricaDashboard" class="main-icon-menu-pane tab-pane" role="tabpanel"
+                aria-labelledby="dasboard-tab">
+                <div class="title-box">
+                    <h6 class="menu-title">Documents</h6>
+                </div>
+
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav2 nav-link" href="../documents/"><i class="mdi mdi-file-download" style="margin-right: 10px; color: #4c9082;"></i>Docs Persos/Pros</a>
+                    </li><!--end nav-item-->
+                    <li class="nav-item">
+                        <a class="nav2 nav-link" href="../contrats-certificats/"><i class="mdi mdi-book-multiple" style="margin-right: 10px; color: #4c9082;"></i>Mes contrats et mes certificats</a>
+                    </li><!--end nav-item-->
+                    <li class="nav-item">
+                        <a class="nav2 nav-link" href="../factures/"><i class="mdi mdi-file-document-box-multiple" style="margin-right: 10px; color: #4c9082;"></i>Mes factures</a>
+                    </li><!--end nav-item-->
+                </ul><!--end nav-->
+            </div><!-- end Dashboards -->
+
+            <div id="MetricaApps" class="main-icon-menu-pane tab-pane" role="tabpanel"
+                aria-labelledby="apps-tab">
+                <div class="title-box">
+                    <h6 class="menu-title">Actions</h6>
+                </div>
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav2 nav-link nav2" href="../new-demande-loc/"><i class="mdi mdi-folder-plus" style="margin-right: 10px; color: #4c9082;"></i>Nouvelle demande</a>
+                    </li><!--end nav-item-->
+                    <li class="nav-item">
+                        <a class="nav2 nav-link" href="../tickets-consulting/"><i class="mdi mdi-ticket-account" style="margin-right: 10px; color: #4c9082;"></i>Mes tickets</a>
+                    </li><!--end nav-item-->
+                </ul>
+            </div><!-- end Crypto -->
+            <div>
+                <hr style="background-color: #4c9082; height: 3px; border-radius: 10px; margin-top: 150%;">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav2 nav-link nav2" href="../../base/contact-us/">Contact</a>
+                    </li><!--end nav-item-->
+                    <li class="nav-item">
+                        <a class="nav2 nav-link" href="../../register/logout/">Déconnexion</a>
+                    </li><!--end nav-item-->
+                </ul>
+            </div>
+        </div>
+        <!--end menu-body-->
+    </div><!-- end main-menu-inner-->
+</div>
+
+<!-- Top Bar Start -->
+<div class="topbar">  
+    <!-- Navbar -->
+    <nav class="navbar-custom" id="navbar-custom">    
+        <ul class="list-unstyled topbar-nav float-end mb-0">
+
+            <li class="dropdown notification-list">
+                <a class="nav-link dropdown-toggle arrow-none nav-icon" data-bs-toggle="dropdown" href="../#" onclick="header_notification()" role="button"
+                    aria-haspopup="false" aria-expanded="false">
+                    <i class="ti ti-bell"></i>
+                    {% if request.session.message != 0 %}
+                    <span class="alert-badge"></span>
+                    {%endif%}
+                </a>
+                <div class="dropdown-menu dropdown-menu-end dropdown-lg pt-0">
+                
+                    <h6 class="dropdown-item-text font-15 m-0 py-3 border-bottom d-flex justify-content-between align-items-center">
+                        Notifications <span class="badge badge-pill" style="background-color: #4C9082;color: #fff ;">{{request.session.message}}</span>
+                    </h6> 
+                    <div class="notification-menu" data-simplebar id="notification-menu">
+                        
+                        
+                        <!--js add notification for serv-->
+                        
+                        
+                    </div>
+                    <!-- All-->
+                    <a href="../pages-notif/" class="dropdown-item text-center" style="color: #4C9082;">
+                        Voir plus <i class="fi-arrow-right"></i>
+                    </a>
+                </div>
+            </li>
+
+            <li class="dropdown">
+                <a class="nav-link dropdown-toggle nav-user" data-bs-toggle="dropdown" href="../#" role="button"
+                    aria-haspopup="false" aria-expanded="false">
+                    <div class="d-flex align-items-center">
+                        <span class="thumb-md justify-content-center d-flex align-items-center bg-soft-info rounded-circle me-2" style="text-transform: uppercase;">{{ request.user.first_name|first }}{{ request.user.last_name|first }}</span>
+                        <div>
+                            <small class="d-none d-md-block font-11">{{ request.user.email }}</small>
+                            <span class="d-none d-md-block fw-semibold font-12">{{ request.user.first_name }} {{ request.user.last_name }}<i
+                                    class="mdi mdi-chevron-down"></i></span>
+                        </div>
+                    </div>
+                </a>
+                <div class="dropdown-menu dropdown-menu-end">
+                    <a class="dropdown-item" href="../profil/"><i class="ti ti-user font-16 me-1 align-text-bottom"></i> Profil</a>
+                    <div class="dropdown-divider mb-0"></div>
+                    <a class="dropdown-item" href="{% url 'register:logout' %}"><i class="ti ti-power font-16 me-1 align-text-bottom"></i> Déconnexion</a>
+                </div>
+            </li><!--end topbar-profile-->
+            <li class="notification-list">
+                <a class="nav-link arrow-none nav-icon offcanvas-btn" href="../profil/">
+                    <i class="ti ti-settings ti-spin"></i>
+                </a>
+            </li>   
+        </ul><!--end topbar-nav-->
+
+        <ul class="list-unstyled topbar-nav mb-0">                        
+            <li>
+                <button class="nav-link button-menu-mobile nav-icon" id="togglemenu">
+                    <i class="ti ti-menu-2"></i>
+                </button>
+            </li> 
+            <!-- <li class="hide-phone app-search">
+                <form role="search" action="#" method="get">
+                    <input type="search" name="search" class="form-control top-search mb-0" placeholder="Type text...">
+                    <button type="submit"><i class="ti ti-search"></i></button>
+                </form>
+            </li>                        -->
+        </ul>
+    </nav>
+    <!-- end navbar-->
+</div>
+<!-- Top Bar End -->
+
+<div class="page-wrapper">
+
+    <!-- Page Content-->
+    <div class="page-content-tab">
+
+        <div class="container-fluid">
+            <!-- Page-Title -->
+            <div class="row">
+                {% block content1 %}
+                <div class="col-sm-12">
+                    <div class="page-title-box">
+                    </div>
+                    <!--end page-title-box-->
+                </div>
+                <!--end col-->
+                {% endblock %}
+            </div>
+            <!-- end page title end breadcrumb -->
+
+            {% block content2 %}
+            {% endblock %}
+
+        </div>
+        <!-- container -->
+
+        <!-- Footer Start -->
+        <footer class="footer text-center text-sm-start">
+            <span class="text-muted d-none d-sm-inline-block float-end">
+                <i class="mdi mdi-heart text-danger"></i></span>
+        </footer>
+        <!-- end Footer -->
+    </div>
+    <!-- end page content -->
+</div>
+<!-- end page-wrappe -->
+
+{% block content4 %}
+{% endblock %}
+{% endblock %}
+
+{% block js %}
+<script 
+src="https://code.jquery.com/jquery-3.4.1.min.js"
+integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+crossorigin="anonymous">
+</script>
+<script src="../../../static/admin/assets/js/header.js"></script>
+{% endblock %}

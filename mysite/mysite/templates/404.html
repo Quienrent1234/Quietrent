@@ -1,0 +1,22 @@
+{% extends 'base/header.html' %}
+{% block content %}
+<!-- Start 404 Error -->
+<div class="error-area ptb-100">
+	<div class="d-table">
+		<div class="d-table-cell">
+			<div class="error-content">
+				<h1>4 <span class="red">0</span> 4</h1>
+				<h3>Oops! Cette page n'existe pas !</h3>
+				<p>Vous pouvez cependant retourner à l'accueil.</p>
+				<a href="{% url 'index-redirection' %}" class="default-btn two">
+					<span>
+						Return To Home Page
+						<i class="flaticon-next"></i>
+					</span>
+				</a>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- End 404 Error -->
+{% endblock content %}

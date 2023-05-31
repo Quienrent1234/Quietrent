@@ -1,0 +1,358 @@
+[
+ {
+   "A": "Code",
+   "B": "Libellé"
+ },
+ {
+   "A": "01",
+   "B": "Culture et production animale, chasse et services annexes"
+ },
+ {
+   "A": "02",
+   "B": "Sylviculture et exploitation forestière"
+ },
+ {
+   "A": "03",
+   "B": "Pêche et aquaculture"
+ },
+ {
+   "A": "05",
+   "B": "Extraction de houille et de lignite"
+ },
+ {
+   "A": "06",
+   "B": "Extraction d'hydrocarbures"
+ },
+ {
+   "A": "07",
+   "B": "Extraction de minerais métalliques"
+ },
+ {
+   "A": "08",
+   "B": "Autres industries extractives"
+ },
+ {
+   "A": "09",
+   "B": "Services de soutien aux industries extractives"
+ },
+ {
+   "A": "10",
+   "B": "Industries alimentaires"
+ },
+ {
+   "A": "11",
+   "B": "Fabrication de boissons"
+ },
+ {
+   "A": "12",
+   "B": "Fabrication de produits à base de tabac"
+ },
+ {
+   "A": "13",
+   "B": "Fabrication de textiles"
+ },
+ {
+   "A": "14",
+   "B": "Industrie de l'habillement"
+ },
+ {
+   "A": "15",
+   "B": "Industrie du cuir et de la chaussure"
+ },
+ {
+   "A": "16",
+   "B": "Travail du bois et fabrication d'articles en bois et en liège, à l'exception des meubles ; fabrication d'articles en vannerie et sparterie"
+ },
+ {
+   "A": "17",
+   "B": "Industrie du papier et du carton"
+ },
+ {
+   "A": "18",
+   "B": "Imprimerie et reproduction d'enregistrements"
+ },
+ {
+   "A": "19",
+   "B": "Cokéfaction et raffinage"
+ },
+ {
+   "A": "20",
+   "B": "Industrie chimique"
+ },
+ {
+   "A": "21",
+   "B": "Industrie pharmaceutique"
+ },
+ {
+   "A": "22",
+   "B": "Fabrication de produits en caoutchouc et en plastique"
+ },
+ {
+   "A": "23",
+   "B": "Fabrication d'autres produits minéraux non métalliques"
+ },
+ {
+   "A": "24",
+   "B": "Métallurgie"
+ },
+ {
+   "A": "25",
+   "B": "Fabrication de produits métalliques, à l'exception des machines et des équipements"
+ },
+ {
+   "A": "26",
+   "B": "Fabrication de produits informatiques, électroniques et optiques"
+ },
+ {
+   "A": "27",
+   "B": "Fabrication d'équipements électriques"
+ },
+ {
+   "A": "28",
+   "B": "Fabrication de machines et équipements n.c.a."
+ },
+ {
+   "A": "29",
+   "B": "Industrie automobile"
+ },
+ {
+   "A": "30",
+   "B": "Fabrication d'autres matériels de transport"
+ },
+ {
+   "A": "31",
+   "B": "Fabrication de meubles"
+ },
+ {
+   "A": "32",
+   "B": "Autres industries manufacturières"
+ },
+ {
+   "A": "33",
+   "B": "Réparation et installation de machines et d'équipements"
+ },
+ {
+   "A": "35",
+   "B": "Production et distribution d'électricité, de gaz, de vapeur et d'air conditionné"
+ },
+ {
+   "A": "36",
+   "B": "Captage, traitement et distribution d'eau"
+ },
+ {
+   "A": "37",
+   "B": "Collecte et traitement des eaux usées"
+ },
+ {
+   "A": "38",
+   "B": "Collecte, traitement et élimination des déchets ; récupération"
+ },
+ {
+   "A": "39",
+   "B": "Dépollution et autres services de gestion des déchets"
+ },
+ {
+   "A": "41",
+   "B": "Construction de bâtiments"
+ },
+ {
+   "A": "42",
+   "B": "Génie civil"
+ },
+ {
+   "A": "43",
+   "B": "Travaux de construction spécialisés"
+ },
+ {
+   "A": "45",
+   "B": "Commerce et réparation d'automobiles et de motocycles"
+ },
+ {
+   "A": "46",
+   "B": "Commerce de gros, à l'exception des automobiles et des motocycles"
+ },
+ {
+   "A": "47",
+   "B": "Commerce de détail, à l'exception des automobiles et des motocycles"
+ },
+ {
+   "A": "49",
+   "B": "Transports terrestres et transport par conduites"
+ },
+ {
+   "A": "50",
+   "B": "Transports par eau"
+ },
+ {
+   "A": "51",
+   "B": "Transports aériens"
+ },
+ {
+   "A": "52",
+   "B": "Entreposage et services auxiliaires des transports"
+ },
+ {
+   "A": "53",
+   "B": "Activités de poste et de courrier"
+ },
+ {
+   "A": "55",
+   "B": "Hébergement"
+ },
+ {
+   "A": "56",
+   "B": "Restauration"
+ },
+ {
+   "A": "58",
+   "B": "Édition"
+ },
+ {
+   "A": "59",
+   "B": "Production de films cinématographiques, de vidéo et de programmes de télévision ; enregistrement sonore et édition musicale"
+ },
+ {
+   "A": "60",
+   "B": "Programmation et diffusion"
+ },
+ {
+   "A": "61",
+   "B": "Télécommunications"
+ },
+ {
+   "A": "62",
+   "B": "Programmation, conseil et autres activités informatiques"
+ },
+ {
+   "A": "63",
+   "B": "Services d'information"
+ },
+ {
+   "A": "64",
+   "B": "Activités des services financiers, hors assurance et caisses de retraite"
+ },
+ {
+   "A": "65",
+   "B": "Assurance"
+ },
+ {
+   "A": "66",
+   "B": "Activités auxiliaires de services financiers et d'assurance"
+ },
+ {
+   "A": "68",
+   "B": "Activités immobilières"
+ },
+ {
+   "A": "69",
+   "B": "Activités juridiques et comptables"
+ },
+ {
+   "A": "70",
+   "B": "Activités des sièges sociaux ; conseil de gestion"
+ },
+ {
+   "A": "71",
+   "B": "Activités d'architecture et d'ingénierie ; activités de contrôle et analyses techniques"
+ },
+ {
+   "A": "72",
+   "B": "Recherche-développement scientifique"
+ },
+ {
+   "A": "73",
+   "B": "Publicité et études de marché"
+ },
+ {
+   "A": "74",
+   "B": "Autres activités spécialisées, scientifiques et techniques"
+ },
+ {
+   "A": "75",
+   "B": "Activités vétérinaires"
+ },
+ {
+   "A": "77",
+   "B": "Activités de location et location-bail"
+ },
+ {
+   "A": "78",
+   "B": "Activités liées à l'emploi"
+ },
+ {
+   "A": "79",
+   "B": "Activités des agences de voyage, voyagistes, services de réservation et activités connexes"
+ },
+ {
+   "A": "80",
+   "B": "Enquêtes et sécurité"
+ },
+ {
+   "A": "81",
+   "B": "Services relatifs aux bâtiments et aménagement paysager"
+ },
+ {
+   "A": "82",
+   "B": "Activités administratives et autres activités de soutien aux entreprises"
+ },
+ {
+   "A": "84",
+   "B": "Administration publique et défense ; sécurité sociale obligatoire"
+ },
+ {
+   "A": "85",
+   "B": "Enseignement"
+ },
+ {
+   "A": "86",
+   "B": "Activités pour la santé humaine"
+ },
+ {
+   "A": "87",
+   "B": "Hébergement médico-social et social"
+ },
+ {
+   "A": "88",
+   "B": "Action sociale sans hébergement"
+ },
+ {
+   "A": "90",
+   "B": "Activités créatives, artistiques et de spectacle"
+ },
+ {
+   "A": "91",
+   "B": "Bibliothèques, archives, musées et autres activités culturelles"
+ },
+ {
+   "A": "92",
+   "B": "Organisation de jeux de hasard et d'argent"
+ },
+ {
+   "A": "93",
+   "B": "Activités sportives, récréatives et de loisirs"
+ },
+ {
+   "A": "94",
+   "B": "Activités des organisations associatives"
+ },
+ {
+   "A": "95",
+   "B": "Réparation d'ordinateurs et de biens personnels et domestiques"
+ },
+ {
+   "A": "96",
+   "B": "Autres services personnels"
+ },
+ {
+   "A": "97",
+   "B": "Activités des ménages en tant qu'employeurs de personnel domestique"
+ },
+ {
+   "A": "98",
+   "B": "Activités indifférenciées des ménages en tant que producteurs de biens et services pour usage propre"
+ },
+ {
+   "A": "99",
+   "B": "Activités des organisations et organismes extraterritoriaux"
+ }
+]

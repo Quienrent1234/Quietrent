@@ -1,0 +1,53 @@
+{% extends 'admin/pdfs/facture.html' %}
+
+{% block header_left_2 %}
+<tr>
+    <td class="frst-column">Police n°</td>
+    <td class="second-column">3PFF00001/0013</td>
+</tr>
+<tr>
+    <td class="frst-column">Assureur</td>
+    <td class="second-column">SADA Assurances</td>
+</tr>
+<tr>
+    <td class="frst-column">Contrat</td>
+    <td class="second-column">QuietRent Pro</td>
+</tr>
+{% endblock %}
+
+{% block content1 %}
+<p style="padding-top:30px;font-weight:bold">Objet : Quittance de règlement Certification QuietRent</p>
+<p style="padding-bottom:30px">Madame, Monsieur,</p>
+<p>Nous faisons suite à la prestation de certification <span style="font-weight:bold">QuietRent</span> effectuée dans le cadre du contrat rappelé en références.</p>
+<p>Nous accusons réception de votre règlement par paiement en ligne.</p>
+<p>Vous trouverez ci-joint la quittance correspondante.</p>
+<p>Nous restons à votre disposition pour toute information complémentaire,</p>
+<p>Et vous prions d'agréer, Messieurs, l'expression de nos salutations distinguées.</p>
+{% endblock %}
+
+{% block content2 %}
+<p class="title" style="border-bottom:2px solid #fcab31">QUITTANCE</p>
+<table class="quittance">
+    <tr style="padding-bottom:6px">
+        <td style="width:130px"><p style="font-weight:bold">Souscripteur</p></td>
+        <td style="width:130px"><p style="font-weight:bold">SAS YOU AND EYE<p></td>
+    </tr>
+    <tr>
+        <td style="width:130px"><p>Client n°</p></td>
+        <td style="width:130px"><p>C15263</p></td>
+    </tr>
+    <tr style="padding-bottom:6px">
+        <td style="width:130px"><p>Affaire n°</p></td>
+        <td style="width:130px"><p>3PFF00001/0007</p></td>
+    </tr>
+    <tr style="padding-bottom:6px">
+        <td style="width:130px"><p style="font-weight:bold">EMontant réglé</p></td>
+        <td style="width:130px"><p><span style="font-weight:bold">120,00 €</span> TTC</td>
+        <td style="width:300px"><p>Cotisation forfaitaire, dont TVA 20,00 EUR</p></td>
+    </tr>
+    <tr style="padding-bottom:6px">
+        <td style="width:130px"><p>Réf/ Règlement</p></td>
+        <td colspan="2" style="width:130px"><p>par paiement CB le 30.07.2021 (M. DESPLANQUES)</p></td>
+    </tr>
+</table>
+{% endblock %}

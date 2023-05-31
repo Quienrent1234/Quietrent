@@ -1,0 +1,500 @@
+{% load static %}
+<html>
+    <head>
+        <meta charset="utf-8">
+        <style>
+            @page {
+                size: a4 portrait;
+                margin: 1cm;
+
+                @frame header_frame {           /* Static Frame */
+                    -pdf-frame-content: header_content;
+                    left: 50pt; width: 512pt; top: 50pt; height: 40pt;
+                }
+
+                @frame content_frame {          /* Content Frame */
+                    left: 50pt; width: 502pt; top: 100pt; height: 632pt;
+                }
+
+                @frame footer_frame {           /* Another static Frame */
+                    -pdf-frame-content: footer_content;
+                    left: 50pt; width: 502pt; top: 762pt; height: 50pt;
+                }
+            }
+
+            table.table-header tr td.header-left {
+                margin-left: 13px;
+                width: 400px;
+                line-height: 20px;
+                color: #273576;
+            }
+
+            table.table-header tr td.header-right {
+                margin-left: 27px;
+                vertical-align: top;
+                font-size: 8pt;
+                font-family: Calibri;
+                font-weight: bold;
+                color: #273576;
+            }
+
+            .header-only-on-first-page {
+                padding-top: 10px;
+                padding-bottom: 10px;
+            }
+
+            .header-only-on-first-page p {
+                margin-left: 13px;
+                font-size: 8pt;
+                font-family: Calibri;
+                font-weight: bold;
+                color: #273576;
+            }
+
+            table.table-content {
+                margin-bottom: 20px;
+            }
+
+            table.table-content tr td.box-content table {
+                margin-bottom: none;
+            }
+
+            table.table-content tr th.title-box,
+            table.table-content tr td p,
+            table.table-content tr td.box-content table tr th,
+            table.table-content tr td.box-content table tr td {
+                padding-top: 4px;
+                font-family: Verdana;
+                font-size: 7pt;
+                color: #273576;
+            }
+
+            table.table-content tr th.title-box {
+                width: 250px;
+                text-align: center;
+                background-color: #fcab31;
+                border-bottom: none;
+            }
+
+            table.table-content tr th.title-box,
+            table.table-content tr td.box-content {
+                border: 1px solid #fcab31;
+            }
+
+            table.table-content tr td p,
+            table.table-content tr td.box-content table tr th,
+            table.table-content tr td.box-content table tr td {
+                margin-left: 20px;
+                text-align: justify;
+            }
+
+            table.table-content tr td p {
+                margin-right: 20px;
+            }
+
+            table.table-content tr td p.asterisk {
+                padding-left: 20px;
+                font-style: italic;
+            }
+
+            table.table-content tr td.box-content table.table-garantie tr th,
+            table.table-content tr td.box-content table.table-garantie tr td {
+                margin: none;
+                text-align: center;
+                border: 1px solid #fcab31;
+            }
+
+            table.table-content tr td.box-content table.table-garantie tr th {
+                background-color: #fde2bf;
+            }
+
+            table.table-content tr td.box-content table.table-garantie tr td {
+                font-weight: bold;
+                padding: 1px;
+                padding-top: 3px;
+            }
+
+            table.table-content tr td.box-content table.table-garantie tr td.margin {
+                width: 20px;
+                border-top: none;
+                border-bottom: none;
+            }
+
+            table.table-content tr td.box-content table.table-garantie tr td.margin.left {
+                border-left: none;
+            }
+
+            table.table-content tr td.box-content table.table-garantie tr td.margin.right {
+                border-right: none;
+            }
+
+            .footer {
+                font-size: 6pt;
+            }
+
+            .footer span {
+                text-align: right;
+            }
+
+            .footer p {
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Content for Static Frame 'header_frame' -->
+        <div id="header_content">
+            <table>
+                <tr>
+                    <td style="width:570px"><img style="width: 100px" src="{% static 'admin/assets/images/ri_1.png' %}"></td>
+                    <td style="width:100px"><img style="width: 100px;" src="{% static 'admin/assets/images/logo-quietrent.png' %}"></td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Content for Static Frame 'footer_frame' -->
+        <div class="footer" id="footer_content">
+            <span>page <pdf:pagenumber> sur 3</span>
+            <p>
+                Courtier gestionnaire : INSOR 14 rue de Richelieu 75001 PARIS Tél. 01.44.40.84.40 Fax : 01.44.40.84.41
+                <br>
+                SAS de courtage d'assurances au capital de 25.000 € – Code NAF 6622Z – RCS Paris B 432 320 745 – N° ORIAS 07001564 www.orias.fr
+                <br>
+                Sous le contrôle de l'ACPR, Autorité de Contrôle Prudentiel et de Résolution, 4 Place de Budapest - CS92459 - 75436 Paris cedex 09
+            </p>
+        </div>
+
+        <table class="table-content">
+            <tr>
+                <th class="title-box">PROPRIETAIRE-BAILLEUR / MANDATAIRE</th>
+                <th class="width:262;display:none"></th>
+            </tr>
+            <tr>
+                <td colspan="2" class="box-content">
+                    <table>
+                        <tr style="width:160px"><th>Propriétaire :</th></tr>
+                        <tr>
+                            <td style="width:160px">Raison sociale :</td>
+                        </tr>
+                        <tr>
+                            <td style="width:160px">Forme juridique :</td>
+                            <td style="width:80px"></td>
+                            <td style="width:160px">Représentant légal :</td>
+                            <td style="width:80px"></td>
+                        </tr>
+                        <tr>
+                            <td style="width:160px">Adresse :</td>
+                            <td style="width:80px"></td>
+                            <td style="width:160px">Code Postal :</td>
+                            <td style="width:80px"></td>
+                            <td style="width:160px">Ville :</td>
+                        </tr>
+                        <tr>
+                            <td style="width:160px">N° de RCS :</td>
+                            <td style="width:80px"></td>
+                            <td style="width:160px">tribunal :</td>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr><th colspan="3">Représenté(e) dans le cadre d'un mandat de gestion locative, par :</th></tr>
+                        <tr>
+                            <td style="width:160px">Raison sociale :</td>
+                        </tr>
+                        <tr>
+                            <td style="width:160px">Forme juridique :</td>
+                            <td style="width:80px"></td>
+                            <td style="width:160px">Représentant légal :</td>
+                            <td style="width:80px"></td>
+                        </tr>
+                        <tr>
+                            <td style="width:160px">Adresse :</td>
+                            <td style="width:80px"></td>
+                            <td style="width:160px">Code Postal :</td>
+                            <td style="width:80px"></td>
+                            <td style="width:160px">Ville :</td>
+                        </tr>
+                        <tr>
+                            <td style="width:160px">N° de RCS :</td>
+                            <td style="width:80px"></td>
+                            <td style="width:160px">tribunal :</td>
+                        </tr>
+                        <tr>
+                            <td style="width:160px">N° de Carte de gestion locative :</td>
+                            <td style="width:80px"></td>
+                            <td style="width:160px">Interlocuteur :</td>
+                            <td style="width:80px"></td>
+                        </tr>
+                        <tr>
+                            <td style="width:160px">Téléphone fixe :</td>
+                            <td style="width:80px"></td>
+                            <td style="width:160px">Portable :</td>
+                            <td style="width:80px"></td>
+                            <td style="width:160px">E-mail (obligatoire) :</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+
+        <table class="table-content">
+            <tr>
+                <th class="title-box">PRENEUR</th>
+                <th class="width:262;display:none"></th>
+            </tr>
+            <tr>
+                <td colspan="2" class="box-content">
+                    <p>
+                        <br>
+                        <span style="font-weight:bold">STOCK J Boutique JENNYFER</span>
+                        <br>
+                        Société par actions simplifiée au capital de 24.988.980 EUR, Siège social : 7 rue Pierre Dreyfus 92150 Clichy, RCS Nanterre N°338 880 180
+                    </p>
+                    <table>
+                        <tr>
+                            <td style="width:160px">Représentée par</td>
+                            <td style="width:80px"></td>
+                            <td style="width:160px"></td>
+                            <td style="width:80px"></td>
+                            <td colspan="2" style="width:160px">en vertue des pouvoir qui lui ont été conférés.</td>
+                        </tr>
+                        <tr>
+                            <td style="width:160px">Téléphone fixe :</td>
+                            <td style="width:80px"></td>
+                            <td style="width:160px">Portable :</td>
+                            <td style="width:80px"></td>
+                            <td style="width:160px">E-mail (obligatoire) :</td>
+                            <td style="width:80px"></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <table class="table-content">
+            <tr>
+                <th class="title-box">BIEN IMMOBILIER OBJET DE LA LOCATION</th>
+                <th class="width:262;display:none"></th>
+            <tr>
+                <td colspan="2" class="box-content">
+                    <table>
+                        <tr>
+                            <td style="width:160px">Centre commercial</td>
+                            <td style="width:80px"></td>
+                            <td style="width:160px">N° des lots :</td>
+                            <td style="width:80px"></td>
+                            <td style="width:160px">Etage/Bâtiment :</td>
+                        </tr>
+                        <tr>
+                            <td style="width:160px">Etage/Bâtiment :</td>
+                            <td style="width:80px"></td>
+                            <td style="width:160px">Portable :</td>
+                            <td style="width:80px"></td>
+                            <td style="width:160px">E-mail (obligatoire) :</td>
+                        </tr>
+                        <tr>
+                            <td style="width:160px">Date de prise d'effet du bail :</td>
+                            <td style="width:80px"></td>
+                            <td colspan="3" style="width:160px">Date de fin de période de bail en cours :</td>
+                            <td style="width:80px"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" style="width:160px">Montant du loyer mensuel actuel (hors charges et hors taxes) :</td>
+                            <td style="width:80px"></td>
+                            <td style="width:160px">€</td>
+                            <td style="width:80px"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" style="width:160px">Montant des provisions pour charges mensuelles :</td>
+                            <td style="width:80px"></td>
+                            <td style="width:160px">€</td>
+                            <td style="width:80px"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" style="width:160px">Montant du Dépôt de garantie constitué :</td>
+                            <td style="width:80px"></td>
+                            <td style="width:160px">€</td>
+                            <td style="width:80px"></td>
+                        </tr>
+                    </table>
+                    <p style="font-weight:bold">
+                        Le bien objet de la location : n'est pas soumis à Arrêté de péril pris par l'Autorité Administrative, ou désaffection ou occupation
+                        clandestine à l'occasion desquelles les conditions élémentaires de salubrité et d'habitabilité ne sont plus maintenues, ou état de
+                        délabrement ne permet plus un usage d'habitation, ou vice de la construction ou un vice du sol touchant le bien assuré ou sa
+                        dégradation consécutive à un sinistre.
+                    </p>
+                    <p style="font-weight:bold">
+                        Le locataire n'a fait l'objet d'aucun incident de paiement au cours des six derniers mois, et ne présente pas de solde débiteur au jour
+                        de l'adhésion.
+                    </p>
+                </td>
+            </tr>
+        </table>
+
+        <pdf:nextpage>
+
+        <table class="table-content">
+            <tr>
+                <th class="title-box">CONDITIONS DE L'ADHESION ET GARANTIES</th>
+                <th class="width:262;display:none"></th>
+            </tr>
+            <tr>
+                <td colspan="2" class="box-content">
+                    <p>
+                        <br>
+                        L'Assureur de ce contrat est la compagnie d'assurance SADA-Groupe DEVK. 4, rue Scatisse - NIMES Cedex 9 - Société Anonyme de
+                        Défense et d'Assurance. Entreprise régie par le Code des assurances S.A. à Directoire et Conseil de Surveillance au capital de 32 388
+                        700 €. R.C.S. NIMES B 580 201 127.
+                    </p>
+                    <p>
+                        <span style="font-weight:bold">J'ai pris connaissance</span> du résumé des garanties, le texte intégral du contrat régissant mon adhésion pouvant être obtenu sur simple
+                        demande effectuée auprès de <span style="font-weight:bold">INSOR</span> et les garanties sont basées sur les Conditions Générales référencées Réf SADA QuietRent
+                        (vers.2019-12).
+                    </p>
+                    <table class="table-garantie">
+                        <tr>
+                            <td rowspan="4" class="margin left"></td>
+                            <th rowspan="2">Garantie</th>
+                            <th colspan="2">Plafond</th>
+                            <th colspan="2">Franchise**</th>
+                            <th rowspan="2">Seuil d'intervention</th>
+                            <td rowspan="4" class="margin right"></td>
+                        </tr>
+                        <tr>
+
+                            <th>En €</th>
+                            <th>En mois</th>
+                            <th>En €</th>
+                            <th>En mois</th>
+                        </tr>
+                        <tr>
+                            <td>Manquement du locataire à ses obligations locatives</td>
+                            <td>Néant</td>
+                            <td>3 mois*</td>
+                            <td>Néant</td>
+                            <td>Néant</td>
+                            <td rowspan="2">Néant</td>
+                        </tr>
+                        <tr>
+                            <td>Frais de procédure contentieuse</td>
+                            <td>5.000 €</td>
+                            <td>Néant</td>
+                            <td>Néant</td>
+                            <td>Néant</td>
+                        </tr>
+                    </table>
+                    <p class="asterisk">
+                        * La garantie est plafonnée en € pour un montant équivalent à 3 mois de loyer hors charges et taxes.
+                        <br>
+                        ** Le cas échéant, la franchise est applicable une fois sur la première indemnisation.
+                    </p>
+                </td>
+            </tr>
+        </table>
+        <table class="table-content">
+            <tr>
+                <td class="box-content">
+                    <p style="margin: 5px">Le proposant :</p>
+                    <table>
+                        <tr>
+                            <td style="width:10px;vertical-align:top">-</td>
+                            <td style="padding-right:5px">
+                                Déclare que les réponses données ci-dessus sont conformes à la vérité et propose qu&#39;elles servent de base à l&#39;établissement du
+                                contrat
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:10px;vertical-align:top">-</td>
+                            <td style="padding-right:5px;font-weight:bold">
+                                Reconnaît avoir été informé que toute omission ou déclaration inexacte l'expose à supporter tout ou partie des conséquences
+                                d'un sinistre conformément aux articles L.113-8 (nullité du contrat) et L.113-9 (réduction des indemnités) du Code des Assurances
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:10px;vertical-align:top">-</td>
+                            <td style="padding-right:5px">
+                                Reconnaît avoir été informé que les garanties du contrat sont sans effet lorsqu'une interdiction de fournir un contrat ou un service
+                                d'assurance s'impose à l'assureur du fait de sanction, restriction ou prohibition prévues par les lois et règlements.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:10px;vertical-align:top">-</td>
+                            <td style="padding-right:5px">
+                                Reconnaît avoir été informé que les informations communiquées ne feront en aucun cas l'objet d'une quelconque utilisation par
+                                l'assureur, autre que celle nécessaire à la gestion, l'exécution du contrat, au suivi qualité et à la définition de la politique technico
+                                commerciale interne. Pour ces besoins, les destinataires des informations sont les différents services de l'assureur : informatiques,
+                                production, sinistres, commerciaux, contrôle, leurs sous-traitants, prestataires, intervenants, les assureurs, les réassureurs
+                                partenaires et organismes professionnels et de contrôle de l'assureur. Conformément à la Loi Informatique et Libertés du 6 janvier
+                                1978 modifiée en 2004, le proposant bénéficie d'un droit d'accès, de rectification et de suppression des informations le concernant,
+                                qui peut être exercé auprès du Service Relations Clientèle – Informations CNIL – 4 rue Scatisse 30934 Nîmes cedex 9 – Courriel :
+                                infocnil@sada.fr.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:10px;vertical-align:top">-</td>
+                            <td style="padding-right:5px">
+                                Reconnaît avoir été informé que pour répondre à ses obligations légales, l'assureur met en œuvre un traitement de surveillance ayant
+                                pour finalité la lutte contre le blanchiment de capitaux et le financement du terrorisme.
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <table class="table-content">
+            <tr>
+                <th class="title-box">COTISATION A LA CHARGE DU BAILLEUR</th>
+                <th class="width:262;display:none"></th>
+            </tr>
+            <tr>
+                <td colspan="2" class="box-content">
+                    <p>
+                        <br>
+                        <span style="font-weight:bold">Cotisation TTC (3) en pourcentage du montant du Dépôt de Garantie substitué.</span>
+                        <br>
+                        Garanties « Manquement du locataire à ses obligations locatives » et « Frais de procédure contentieuse » : 0 % HT (1) , soit 0 % TTC
+                        (2) du montant du Dépôt de Garantie substitué (1)
+                        <br>
+                        <span style="font-weight:bold">COTISATION à 0 €, adhésion liée à la souscription et au règlement par le locataire des services QuietRent proposés par
+                        INSOR.</span>
+                        <br>
+                        <span style="font-style:italic">(1) HT : Hors Taxes, hors frais de répertoire</span>
+                        <br>
+                        <span style="font-style:italic">(2) TTC : y compris les taxes et frais de répertoire au jour du quittancement, Taxe sur les Conventions d'Assurance (TCA)</span>
+                    </p>
+                </td>
+            </tr>
+        </table>
+        <table class="table-content">
+            <tr>
+                <td class="box-content">
+                    <p style="font-weight:bold">
+                        <br>
+                        L'adhésion demandée suit la vie du contrat du souscripteur auquel elle est attachée. L'adhésion demandée a une durée de vie égale à la
+                        durée du bail sauf dénonciation par l'adhérent ou le souscripteur par lettre recommandée au moins deux mois avant la date d'échéance
+                        anniversaire de l'adhésion, fixée au 1 er janvier de chaque année.
+                    </p>
+                    <p style="font-weight:bold">Le Propriétaire s'engage à informer Insor en cas de résiliation du bail désigné sur la présente adhésion.</p>
+                </td>
+            </tr>
+        </table>
+
+        <pdf:nextpage>
+
+        <table class="table-content">
+            <tr>
+                <td class="box-content">
+                    <table>
+                        <tr>
+                            <td style="width:50px;vertical-align:top">Fait à</td>
+                            <td style="width:350px"></td>
+                            <td><p>Signature du propriétaire ou de l'éventuel mandataire précédée de la mention « lu et approuvé »</p></td>
+                        </tr>
+                        <tr style="height:150px">
+                            <td style="vertical-align:top">Le</td>
+                            <td></td>
+                        </tr>    
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </body>
+</html>

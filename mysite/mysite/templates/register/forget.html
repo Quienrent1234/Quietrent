@@ -1,0 +1,71 @@
+{% extends 'register/content.html' %}
+
+{% block logo %}
+<img class="light-logo" src="../../static/register/assets/images/logo.png" alt="">
+<img class="dark-logo" src="../../static/register/assets/images/logo-dark.png" alt="">
+{% endblock logo %}
+
+{% block content1 %}
+<div class="ugf-content pt270">
+  <h2>Reset Password</h2>
+  <p>We'll send you an email with a link to reset the password to your account</p>
+  <form action="#">
+    <div class="form-group">
+      <label for="inputMail">Eamil Address</label>
+      <input type="email" placeholder="example@domain.com" class="form-control" id="inputMail">
+    </div>
+    <button class="btn">Get Reset Link</button>
+  </form>
+</div>
+{% endblock %}
+
+{% block content2 %}
+<div class="alternet-access">
+  <p>Remembered your password? <a href="../login">Log in now!</a></p>
+</div>
+{% endblock %} 
+
+{% block content3 %}
+<div class="ugf-sidebar flex-bottom ugf-sidebar-bg">
+  <!-- <div class="testimonial-carousel owl-carousel">
+    <div class="item">
+      <div class="quote">
+        <img src="../../static/register/assets/images/quote.png" alt="">
+      </div>
+      <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+      <h5 class="name">Ronna E. Gomez</h5>
+      <span class="designation">CEO, Google</span>
+    </div>
+    <div class="item">
+      <div class="quote">
+        <img src="../../static/register/assets/images/quote.png" alt="">
+      </div>
+      <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+      <h5 class="name">Ronna E. Gomez</h5>
+      <span class="designation">CEO, Google</span>
+    </div>
+    <div class="item">
+      <div class="quote">
+        <img src="../../static/register/assets/images/quote.png" alt="">
+      </div>
+      <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+      <h5 class="name">Ronna E. Gomez</h5>
+      <span class="designation">CEO, Google</span>
+    </div>
+  </div> -->
+  <div class="clients">
+    <div class="client">
+      <img src="../../static/register/assets/images/client/1.png" class="img-fluid" alt="">
+    </div>
+    <div class="client">
+      <img src="../../static/register/assets/images/client/2.png" class="img-fluid" alt="">
+    </div>
+    <div class="client">
+      <img src="../../static/register/assets/images/client/3.png" class="img-fluid" alt="">
+    </div>
+    <div class="client">
+      <img src="../../static/register/assets/images/client/4.png" class="img-fluid" alt="">
+    </div>
+  </div>
+</div>
+{% endblock %}

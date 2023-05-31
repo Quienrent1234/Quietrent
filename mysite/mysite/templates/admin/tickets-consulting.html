@@ -1,0 +1,336 @@
+{% extends 'admin/content.html' %}
+
+{% block content2 %}
+    <link href="../../static/admin/assets/css/popup.css" rel="stylesheet" type="text/css">
+
+<div class="row justify-content-center">
+    <div class="col-12">
+        <div class="card overflow-hidden">
+            <div class="row g-0">
+                <div class="col-md-6 col-lg-3 border-b border-e border-bo">
+                    <div class="card-body">
+                        <div class="row d-flex justify-content-center">
+                            <div class="col">
+                                <div class="media">
+                                    <div class="bg-light-alt d-flex justify-content-center align-items-center thumb-md  rounded-circle">
+                                        <i data-feather="tag" class="align-self-center text-muted icon-sm"></i>
+                                    </div>
+                                    <div class="media-body align-self-center ms-2">
+                                        <p class="text-dark mb-1 fw-semibold">Nombre de tickets</p>
+                                    </div><!--end media body-->
+                                </div><!--end media-->
+                            </div><!--end col-->
+                            <div class="col-auto align-self-center">
+                                <h4 class="my-1">{{ tickets.count }}</h4>
+                            </div><!--end col-->
+                        </div><!--end row-->
+                    </div><!--end card-body-->
+                </div> <!--end col-->
+                <div class="col-md-6 col-lg-3 border-b border-e border-bo">
+                    <div class="card-body">
+                        <div class="row d-flex justify-content-center">
+                            <div class="col">
+                                <div class="media">
+                                    <div class="bg-light-alt d-flex justify-content-center align-items-center thumb-md  rounded-circle">
+                                        <i data-feather="package" class="align-self-center text-muted icon-sm"></i>
+                                    </div>
+                                    <div class="media-body align-self-center ms-2">
+                                        <p class="text-dark mb-1 fw-semibold">Tickets en cours</p>
+                                    </div><!--end media body-->
+                                </div><!--end media-->
+                            </div><!--end col-->
+                            <div class="col-auto align-self-center">
+                                <h4 class="my-1">{{ open_tickets.count }}</h4>
+                            </div><!--end col-->
+                        </div><!--end row-->
+                    </div><!--end card-body-->
+                </div> <!--end col-->
+                <div class="col-md-6 col-lg-3 border-b border-e">
+                    <div class="card-body">
+                        <div class="row d-flex justify-content-center">
+                            <div class="col">
+                                <div class="media">
+                                    <div class="bg-light-alt d-flex justify-content-center align-items-center thumb-md  rounded-circle">
+                                        <i data-feather="zap" class="align-self-center text-muted icon-sm"></i>
+                                    </div>
+                                    <div class="media-body align-self-center ms-2">
+                                        <p class="text-dark mb-1 fw-semibold">Résolus</p>
+                                    </div><!--end media body-->
+                                </div><!--end media-->
+                            </div><!--end col-->
+                            <div class="col-auto align-self-center">
+                                <h4 class="my-1">{{ done_tickets.count }}</h4>
+                            </div><!--end col-->
+                        </div><!--end row-->
+                    </div><!--end card-body-->
+                </div> <!--end col-->
+                <div class="col-md-6 col-lg-3 ps-lg-0">
+                    <div class="card-body">
+                        <div class="row d-flex justify-content-center">
+                            <div class="col">
+                                <div class="media">
+                                    <div class="bg-light-alt d-flex justify-content-center align-items-center thumb-md  rounded-circle">
+                                        <i data-feather="lock" class="align-self-center text-muted icon-sm"></i>
+                                    </div>
+                                    <div class="media-body align-self-center ms-2">
+                                        <p class="text-dark mb-1 fw-semibold">Clos</p>
+                                    </div><!--end media body-->
+                                </div><!--end media-->
+                            </div><!--end col-->
+                            <div class="col-auto align-self-center">
+                                <h4 class="my-1">{{ closed_tickets.count }}</h4>
+                            </div><!--end col-->
+                        </div><!--end row-->
+                    </div><!--end card-body-->
+                </div> <!--end col-->
+            </div><!--end row-->
+        </div><!--end card-->
+    </div><!--end col-->
+</div><!--end row-->
+<div class="row">
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-7 align-self-center">
+                        <h4 class="card-title">Espace tickets</h4>
+                         <div class="bg-light-alt d-flex justify-content-center align-items-center thumb-md  rounded-circle mb-2">
+                            <i class="mdi mdi-ticket-account font-24 align-self-center text-dark icon-sm"></i>
+                        </div>
+                        <h4 class="mt-0 text-truncate font-14 mb-0">Une question sur une de vos demandes ?</h4>
+                        <h4 class="mt-2 text-truncate font-14 mb-0">Nous sommes là pour vous !</h4>
+                    </div><!--end col-->
+                    <div class="col-5 align-self-center">
+                        <div class="apexchart-wrapper">
+                            <div id="dash_spark_2" class="chart-gutters"></div>
+                        </div>
+                    </div><!--end col-->
+                </div><!--end row-->
+            </div><!--end card-body-->
+        </div><!--end card-->
+    </div><!--end col-->
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <h4 class="card-title">Mes tickets</h4>
+                    </div><!--end col-->
+                </div>  <!--end row-->
+            </div><!--end card-header-->
+            <div class="card-body">
+                <div class="d-flex justify-content-around">
+                    <div class="align-self-center">
+                        <h4 class="mt-0 mb-1 text-dark">{{ tickets.count }}</h4>
+                        <h4 class="mt-0 text-truncate font-14 mb-0">Tickets</h4>
+                    </div>
+                    <div>
+                        <ul class="list-unstyled mb-2">
+                            <li class="mb-2">
+                                <i class="fas fa-minus text-pink"></i>
+                                <span>Tickets en cours</span>
+                            </li>
+                            <li class="mb-2">
+                                <i class="fas fa-minus text-primary"></i>
+                                <span>Tickets résolus</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-minus text-success"></i>
+                                <span>Tickets clos</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary" role="progressbar" style="width: {{ closed_percent }}%" aria-valuenow="{{ closed_percent }}" aria-valuemin="0" aria-valuemax="100">{{ closed_percent}}%</div>
+                    <div class="progress-bar bg-pink" role="progressbar" style="width: {{ open_percent }}%" aria-valuenow="{{ open_percent }}" aria-valuemin="0" aria-valuemax="100">{{ open_percent }}%</div>
+                    <div class="progress-bar bg-success" role="progressbar" style="width: {{ done_percent }}%" aria-valuenow="{{ done_percent }}" aria-valuemin="0" aria-valuemax="100">{{ done_percent }}%</div>
+                </div>
+            </div><!--end card-body-->
+        </div><!--end card-->
+    </div><!--end col-->
+</div><!--end row-->
+<div class="row">
+    <div class="col">
+        <div class="card">
+            <div class="card-header">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <h4 class="card-title">Mes tickets</h4>
+                    </div><!--end col-->
+                    <div class="col-auto">
+                        <div class="dropdown">
+                            <button type="button" class="btn btn-de-info" data-bs-toggle="modal" data-bs-target="#exampleModalLarge">Nouveau ticket +</button>
+                            <div class="modal fade" id="exampleModalLarge" tabindex="-1" role="dialog" aria-labelledby="exampleModalSuccess1" aria-hidden="true">
+                                                <div class="modal-dialog modal-lg" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header"  style="background-color: #4C9082;">
+                                                            <h6 class="modal-title m-0 text-white" id="exampleModalSuccess1">Nouveau ticket</h6>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div><!--end modal-header-->
+                                                        <div class="modal-body">
+                                                            <div class="row">
+                                                                <div class="text-center align-self-center">
+                                                                    <img src="../../static/admin/assets/images/logoonly.png" alt="" class="img-fluid">
+                                                                </div><!--end col-->
+                                                                <div class="">
+                                                                    <h4 class="text-center mb-3">Quel est le type de service concerné par votre demande ?</h4>
+                                                                        <form class="pb-70" method="post" action="../new-ticket/">
+                                                                            {% csrf_token %}
+                                                                             <div class="cards-listi">
+                                                                                <label class="text-dark" for="dg">
+                                                                                    <div id="elem1" class="cardi 1">
+                                                                                      <div class="card_image"> <img src="../../static/admin/assets/images/whitescreen.webp" /> </div>
+                                                                                      <div class="card_title title-black">
+                                                                                        DG
+                                                                                        <input id="dg" type="radio" value="DG" name="service" required>
+                                                                                      </div>
+                                                                                    </div>
+                                                                                </label>
+                                                                                <label class="text-dark" for="gapd">
+                                                                                    <div id="elem2" class="cardi 1">
+                                                                                      <div class="card_image"> <img src="../../static/admin/assets/images/whitescreen.webp" /> </div>
+                                                                                      <div class="card_title title-black">
+                                                                                        GAPD
+                                                                                        <input id="gapd" type="radio" value="GAPD" name="service" required>
+                                                                                      </div>
+                                                                                    </div>
+                                                                                </label>
+                                                                                 </div>
+
+                                                                            <h4 class="text-center mt-5 ">Au sujet de quelle demande souhaitez-vous créer un ticket ?</h4>
+                                                                            <div style="display: flex; justify-content: center; align-items: center;">
+                                                                            <select style="background-color: #4C9082; font-size: medium; width: 100%" class="select" name="demande" id="demande" required>
+                                                                                <option class="" value="">Choisissez votre demande</option>
+                                                                                {% for demande in demandes %}
+                                                                                <option value="{{ demande.id }}">Demande N°{{ demande.id}} : {{ demande.inputAddress }}</option>
+                                                                                {% endfor %}
+                                                                            </select>
+                                                                            </div>
+                                                                            <h4 class="text-center mt-5 ">Quelle est la catégorie de votre réclamation ?</h4>
+                                                                            <div class="cards-listi">
+                                                                               <label for="info">
+                                                                                <div id="elem3" class="cardi 1">
+                                                                                  <div class="card_image"> <img src="../../static/admin/assets/images/whitescreen.webp" /> </div>
+                                                                                  <div class="card_title title-white flex">
+                                                                                    <input id="info" type="radio" name="type" value="info" required>
+                                                                                      <i style="font-size: xx-large;" class="fas fa-info-circle text-success"></i><br><span class="text-dark font-15">Demande d'information</span>
+                                                                                  </div>
+                                                                                </div>
+                                                                               </label>
+                                                                                <label for="tech">
+                                                                                 <div id="elem4" class="cardi 1">
+                                                                                  <div class="card_image"> <img src="../../static/admin/assets/images/whitescreen.webp" /> </div>
+                                                                                  <div class="card_title title-white flex">
+                                                                                    <input id="tech" type="radio" name="type" value="tech" required>
+                                                                                    <i style="font-size: xx-large;" class="mdi mdi-headset text-success"></i><br><span class="text-dark font-15">Assistance technique</span>
+                                                                                  </div>
+                                                                                </div>
+                                                                                </label>
+                                                                                <label for="admin">
+                                                                                <div id="elem5" class="cardi 1">
+                                                                                  <div class="card_image"> <img  src="../../static/admin/assets/images/whitescreen.webp" /> </div>
+                                                                                  <div class="card_title title-white flex">
+                                                                                    <input id="admin" type="radio" name="type" value="admin" required>
+                                                                                      <i class="fas fa-money-check text-success" style="font-size: x-large;"></i><br><span class="text-dark font-15">Administratif et financier</span>
+                                                                                </div>
+                                                                                </div>
+                                                                                </label>
+                                                                            </div>
+                                                                            <h4 class="text-center mt-5">Veuillez rédiger votre réclamation ci-dessous :</h4>
+                                                                            <div class="">
+                                                                                <div class="mb-3">
+                                                                                    <input type="text" name="objet" class="form-control font-18" id="subject" required placeholder="Objet..." required>
+                                                                                </div>
+                                                                            </div>
+                                                                                <div class="col-md-12">
+                                                                                    <div class="mb-1">
+                                                                                        <textarea class="form-control font-18" rows="5" id="message" name="contenu" placeholder="Rédiger votre demande..." required></textarea>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-sm-12 text-end">
+                                                                                    <button type="reset" class="btn btn-de-danger px-4 font-15">Annuler</button>
+                                                                                    <button type="submit" class="btn btn-de-info px-4 font-15">Envoyer mon ticket</button>
+                                                                                </div>
+                                                                        </form>
+                                                                </div><!--end col-->
+                                                            </div><!--end row-->
+                                                        </div><!--end modal-body-->
+                                                    </div><!--end modal-content-->
+                                                </div><!--end modal-dialog-->
+                                            </div><!--end modal-->
+                                            </div>
+                                        </div><!--end col-->
+                                    </div>  <!--end row-->
+                                </div><!--end card-header-->
+                                <div class="card-body p-0">
+                {% for ticket in tickets %}
+                <div class="modal fade" id="exampleModalCenter{{ ticket.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header" style="background-color: #4C9082;">
+                                <h6 class="modal-title m-0" id="exampleModalCenterTitle">Mon ticket</h6>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div><!--end modal-header-->
+                            <div class="modal-body">
+                                <div class="card mt-3">
+                                    <div class="card-body">
+                                        <div class="media mb-4">
+                                            <div class="media-body align-self-center">
+                                                <h5 class="font-14 m-0">{{ request.user.first_name }} {{ request.user.last_name }}</h5>
+                                                <small class="text-muted">{{ request.user.email }}</small>
+                                            </div>
+                                        </div>
+
+                                        <h4 class="mt-0 font-15">Objet : {{ ticket.objet }}</h4>
+
+                                        <p>{{ ticket.contenu }}</p>
+                                    </div>
+                                </div>
+                            </div><!--end modal-body-->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-de-danger btn-sm" data-bs-dismiss="modal">Fermer</button>
+                            </div><!--end modal-footer-->
+                        </div><!--end modal-content-->
+                    </div><!--end modal-dialog-->
+                </div><!--end modal-->
+                {% endfor %}
+                <div class="p-3" style="height: 425px;" data-simplebar>
+                    <div class="activity">
+                        {% for ticket in tickets %}
+                        <div class="activity-info">
+                            <div class="icon-info-activity">
+                                <i class="mdi mdi-ticket-account" style="color: #4C9082;"></i>
+                            </div>
+                            <div class="activity-info-text">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div style="width: 50%; display: flex; flex-direction: column;">
+                                    <p class="text-muted mb-0 font-13 w-75"><span>{{ ticket.service }} -</span>
+                                        {{ ticket.objet }} (le {{ ticket.date }})
+                                    </p>
+                                    <p>Demande N°{{ ticket.demande.id }} - {{ ticket.demande.inputAddress }}
+                                        <div class="">
+                                         <button type="button" class="btn btn-de-info btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModalCenter{{ ticket.id }}">
+                                        Voir mon ticket
+                                        </button>
+                                        </div>
+                                    </p>
+                                    </div>
+                                    <small class="text-muted"> {% if ticket.etat == '0' %}<button class="badge badge-soft-info border-0 font-12">Clos</button>{% endif %}{% if ticket.etat == '1' %}<button class="badge badge-soft-pink border-0 font-12">En cours</button>{% endif %}{% if ticket.etat == '2' %}<button class="badge badge-soft-success border-0 font-12">Résolu</button>{% endif %}</small>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div><!--end activity-->
+                </div><!--end analytics-dash-activity-->
+            </div>  <!--end card-body-->
+        </div><!--end card-->
+    </div><!--end col-->
+</div><!--end row-->
+{% endblock %}
+
+{% block js %}
+<script src="../../static/admin/assets/plugins/apexcharts/apexcharts.min.js"></script>
+<script src="../../static/admin/assets/pages/helpdesk-index.init.js"></script>
+<script src="../../static/admin/assets/js/popup.js"></script>
+{% endblock %}

@@ -1,0 +1,49 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>QuietRent</title>
+    <base href=".">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+    <meta content="" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- App favicon -->
+    <link rel="icon" type="image/png" href="{% static 'base/assets/images/favicon.png' %}">
+    
+
+    {% block css %}
+    {% endblock %}
+
+    <!-- App css -->
+    <link href="../../../static/admin/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="../../../static/admin/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="../../../static/admin/assets/css/app.min.css" rel="stylesheet" type="text/css" />
+    <!-- Sweet Alert -->
+    <link href="../../static/admin/assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css">
+    <link href="../../static/admin/assets/plugins/animate/animate.min.css" rel="stylesheet" type="text/css">
+</head>
+
+<body class="text-dark">
+    {% block content %}
+    {% endblock %}
+
+    <!-- Javascript -->
+    {% block js %}
+    {% endblock %}
+
+    <!-- App js -->
+    <script src="../../../static/admin/assets/js/app.js"></script>
+    <!-- Sweet-Alert  -->
+    <script src="../../static/admin/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
+    <script src="../../static/admin/assets/pages/sweet-alert.init.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous">
+    </script>
+</body>

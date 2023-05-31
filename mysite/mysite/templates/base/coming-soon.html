@@ -1,0 +1,29 @@
+{% extends 'base/header.html' %}
+{% block content %}
+<!-- Start Coming Soon Area -->
+<div class="coming-soon-area">
+    <div class="d-table">
+        <div class="d-table-cell">
+            <div class="coming-soon-content">
+                <h2>Le produit générique arrive</h2>
+                
+                <form class="newsletter-form" data-toggle="validator">
+                    <p>Vous avez un projet concret ? Vous souhaitez changer ? <br/> Entrez votre e-mail.</p>
+                    &nbsp;
+                    <div class="form-group">
+                        <input type="email" class="input-newsletter" placeholder="Enter your email" name="EMAIL" required autocomplete="off">
+                    </div>
+                    <button type="submit" class="default-btn">
+                        <span>
+                            nvoyer
+                            <i class="flaticon-next"></i>
+                        </span>
+                    </button>
+                    <div id="validator-newsletter" class="form-result"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Coming Soon Area -->
+{% endblock %}

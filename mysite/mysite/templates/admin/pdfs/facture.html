@@ -1,0 +1,81 @@
+{% extends 'admin/pdfs/header.html' %}
+{% load static %}
+{% load poll_extras %}
+
+{% block content %}
+
+{% if demande.substitution == '0' %}
+    {% define "d'un dépot de garantie," as substitution %}
+    {% define demande.garantie as montant_HT %}
+{% elif demande.substitution == '1' %}
+    {% define "d'une garantie à la première demande," as substitution %}
+    {% define demande.caution as montant_HT %}
+{% elif demande.substitution == '2' %}
+    {% define "d'un dépot de garantie et d'une garantie à la première demande," as substitution %}
+    {% define demande.garantie|add:demande.caution as montant_HT }
+{% endif %}
+
+{% widthratio montant_HT 100 20 as TVA %}
+{% define montant_HT|add:TVA as montant_TTC %}
+{% define '-120' as certification %}
+
+<div class="header-left">
+    <table>
+        <tr>
+            <td style="width: 400px;">
+                <table class="header-left-2">
+                    {% block header_left_2 %}
+                    {% endblock %}
+                    <tr></tr>
+                    <tr>
+                        <td class="frst-column">Bail: </td>
+                        <td class="second-column">28 bis bd Sébastopol 75004 PARIS</td>
+                    </tr>
+                </table>
+            </td>
+            <td class="header-right-2">{{ demande.social_reason }} <br> {{ demande.gender }} {{ demande.inputFirstName }} {{ demande.inputName }} <br> {{ demande.inputAddress }} <br> {{ demande.inputCode }} {{ demande.inputCity }} </td>
+        </tr>
+    </table>
+</div>
+
+<div class="content">
+    {% block content1 %}
+    <p>La cotisation est payable par virement sur le compte suivant :</p>
+    <table>
+        <tr>
+            <td style="width: 100px;"></td>
+            <td style="width: 40px;">Titulaire :</td>
+            <td>INSOR – délégation SADA</td>
+        </tr>
+        <tr>
+            <td style="width: 100px;"></td>
+            <td style="width: 45px;">IBAN :</td>
+            <td style="width: 200px">FR76 3007 6020 4223 5529 0020 034</td>
+            <td>Code BIC : NORDFRPP</td>
+        </tr>
+        <tr></tr>
+        <tr>
+            <td style="width: 100px;"></td>
+            <td colspan="3" style="width: 500px;">Merci d'adresser la confirmation de votre virement à l'adresse : <a href="compta@insor.com">compta@insor.com</a></td>
+        </tr>
+    </table>
+    <p>
+        <span style="font-weight: bold">L'attestation d'assurance confirmant la mise en place du dispositif est adressée à réception de votre virement.</span>
+        <br>
+        Nous restons à votre disposition pour toute précision complémentaire,
+        <br>
+        Salutations distinguées.
+    </p>
+    {% endblock %}
+    <p class="title-signature">Pour la société,</p>
+    <p class="signature">
+        Olivier ATLAN
+        <br>
+        L.D.: 01.44.40.84.42
+        <br>
+        quietrent@insor.com
+    </p>
+    {% block content2 %}
+    {% endblock %}
+</div>
+{% endblock %}

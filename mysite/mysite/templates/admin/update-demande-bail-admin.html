@@ -1,0 +1,193 @@
+{% extends 'admin/content-admin.html' %}
+{% load static %}
+{% block content2 %}
+
+<!--    Links pour les templates de register    -->
+    <link rel="stylesheet" type="text/css" href="../../static/register/assets/css/main.css">
+    <link rel="stylesheet" type="text/css" href="../../static/register/assets/css/card.css">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../../static/register/assets/css/bootstrap.min.css">
+
+    <!-- External Css -->
+    <link rel="stylesheet" href="../../static/register/assets/css/line-awesome.min.css">
+    <!--<link rel="stylesheet" href="../../static/register/assets/css/owl.carousel.min.css" />-->
+
+    <!-- Custom Css -->
+    <link rel="stylesheet" type="text/css" href="../../static/register/assets/css/main.css">
+    <link rel="stylesheet" type="text/css" href="../../static/register/assets/css/theme-1.css">
+    <link rel="stylesheet" type="text/css" href="../../static/register/assets/css/kyc-2.css">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+
+    <!-- Favicon -->
+    <link rel="icon" href="../../static/register/assets/images/favicon.png">
+    <link rel="apple-touch-icon" href="../../static/register/assets/images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="../../static/register/assets/images/icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="../../static/register/assets/images/icon-114x114.png">
+
+<div class="ugf-content">
+  <a href="../return-loc/{{ demande.id }}/" class="prev-page">Retour</a>
+  <h2>Le Bail</h2>
+  <p>Entrez les informations de votre bail</p>
+  <form action="" class="account-form" method="post" id="form-bail" novalidate>
+    {% csrf_token %}
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+        <label for="inputAddress">Adresse de la location</label>
+        <input type="text" placeholder="e.g. Smith" class="form-control" id="inputAddress" name="inputAddress" value="{{ demande.inputAddress }}">
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="inputCode">Code Postal</label>
+          <input type="text" placeholder="e.g. Smith" class="form-control" id="inputCode" name="inputCode" value="{{ demande.inputCode }}">
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="inputCity">Ville</label>
+          <input type="text" placeholder="e.g. Smith" class="form-control" id="inputCity" name="inputCity" value="{{ demande.inputCity }}">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group" id="lease-effective-date">
+          <label for="inputDate">Date d'effet du bail</label>
+          <div class="birth-date">
+            <div class="select-input birth-date-input">
+              <span></span>
+              <select id="inputDate" class="form-control" name="mois">
+                <option value="" selected disabled hidden>mois</option>
+                <option {% if demande.mois == '1' %} selected {% endif %} value=1>01</option>
+                <option {% if demande.mois == '2' %} selected {% endif %} value=2>02</option>
+                <option {% if demande.mois == '3' %} selected {% endif %} value=3>03</option>
+                <option {% if demande.mois == '4' %} selected {% endif %} value=4>04</option>
+                <option {% if demande.mois == '5' %} selected {% endif %} value=5>05</option>
+                <option {% if demande.mois == '6' %} selected {% endif %} value=6>06</option>
+                <option {% if demande.mois == '7' %} selected {% endif %} value=7>07</option>
+                <option {% if demande.mois == '8' %} selected {% endif %} value=8>08</option>
+                <option {% if demande.mois == '9' %} selected {% endif %} value=9>09</option>
+                <option {% if demande.mois == '10' %} selected {% endif %} value=10>10</option>
+                <option {% if demande.mois == '11' %} selected {% endif %} value=11>11</option>
+                <option {% if demande.mois == '12' %} selected {% endif %} value=12>12</option>
+              </select>
+            </div>
+            <div class="select-input birth-date-input">
+              <span></span>
+              <select id="inputDate" class="form-control" name="annee">
+                <option value="" selected disabled hidden>année</option>
+                <option {% if demande.annee == '2015' %}selected{% endif %} value=2015>2015</option>
+                <option {% if demande.annee == '2016' %}selected{% endif %} value=2016>2016</option>
+                <option {% if demande.annee == '2017' %}selected{% endif %} value=2017>2017</option>
+                <option {% if demande.annee == '2018' %}selected{% endif %} value=2018>2018</option>
+                <option {% if demande.annee == '2019' %}selected{% endif %} value=2019>2019</option>
+                <option {% if demande.annee == '2020' %}selected{% endif %} value=2020>2020</option>
+                <option {% if demande.annee == '2021' %}selected{% endif %} value=2021>2021</option>
+                <option {% if demande.annee == '2022' %}selected{% endif %} value=2022>2022</option>
+                <option {% if demande.annee == '2023' %}selected{% endif %} value=2023>2023</option>
+                <option {% if demande.annee == '2024' %}selected{% endif %} value=2024>2024</option>
+                <option {% if demande.annee == '2025' %}selected{% endif %} value=2025>2025</option>
+                <option {% if demande.annee == '2026' %}selected{% endif %} value=2026>2026</option>
+                <option {% if demande.annee == '2027' %}selected{% endif %} value=2027>2027</option>
+                <option {% if demande.annee == '2028' %}selected{% endif %} value=2028>2028</option>
+                <option {% if demande.annee == '2029' %}selected{% endif %} value=2029>2029</option>
+              </select>
+            </div>
+          </div>
+          <label>
+            <input type="checkbox" name="negotiation" id="negotiation">
+            <span>Bail en cours de négociation</span>
+          </label>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="loyer">Montant du loyer annuel HT HC</label>
+          <input type="text" placeholder="e.g. Smith" class="form-control" id="loyer" name="loyer" value="{{ demande.loyer }}">
+        </div>
+      </div>
+      <div class="col-sm-6">
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="garantie">Montant du dépôt de garantie initialement prévu</label>
+          <input type="text" placeholder="e.g. Smith" class="form-control" id="garantie" name="garantie" value="{{ demande.garantie }}">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="garantieMois">Soit en mois de loyers<br> &nbsp</label>
+          <div class="birth-date">
+            <div class="select-input birth-date-input">
+              <span></span>
+              <select id="loyerMois" class="form-control" name="garantieMois">
+                <option {% if demande.garantieMois == '0' %}selected{% endif %} value=0>0</option>
+                <option {% if demande.garantieMois == '1' %}selected{% endif %} value=1>1</option>
+                <option {% if demande.garantieMois == '2' %}selected{% endif %} value=2>2</option>
+                <option {% if demande.garantieMois == '3' %}selected{% endif %} value=3>3</option>
+                <option {% if demande.garantieMois == '4' %}selected{% endif %} value=4>4</option>
+                <option {% if demande.garantieMois == '5' %}selected{% endif %} value=5>5</option>
+                <option {% if demande.garantieMois == '6' %}selected{% endif %} value=6>6</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="caution">Montant de la caution bancaire initialement prévue</label>
+          <input type="text" placeholder="e.g. Smith" class="form-control" id="caution" name="caution" value="{{ demande.caution }}">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="cautionMois">Soit en mois de loyers <br> &nbsp</label>
+          <div class="birth-date">
+            <div class="select-input birth-date-input">
+              <span></span>
+              <select id="cautionMois" class="form-control" name="cautionMois">
+                <option {% if demande.cautionMois == '0' %}selected{% endif %} value=0>0</option>
+                <option {% if demande.cautionMois == '1' %}selected{% endif %} value=1>1</option>
+                <option {% if demande.cautionMois == '2' %}selected{% endif %} value=2>2</option>
+                <option {% if demande.cautionMois == '3' %}selected{% endif %} value=3>3</option>
+                <option {% if demande.cautionMois == '4' %}selected{% endif %} value=4>4</option>
+                <option {% if demande.cautionMois == '5' %}selected{% endif %} value=5>5</option>
+                <option {% if demande.cautionMois == '6' %}selected{% endif %} value=6>6</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+        </div>
+      </div>
+    </div>
+    <button type="submit" class="btn"><span>Suivant</span> <i class="las la-arrow-right"></i></button>
+  </form>
+</div>
+{% endblock %}
+
+{% block js %}
+<script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous">
+    </script>
+<!--        Links pour les templates de register            -->
+    <script src="../../static/register/assets/js/popper.min.js"></script>
+    <script src="../../static/register/assets/js/bootstrap.min.js"></script>
+
+    <!--<script src="../../static/register/assets/js/owl.carousel.min.js"></script>-->
+
+    <script src="../../static/register/assets/js/custom.js"></script>
+    <script src="../../static/register/assets/js/upload.js"></script>
+    <script type="module" src="{% static 'register/assets/js/landlord.js' %}" defer></script>>
+{% endblock %}

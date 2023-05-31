@@ -1,0 +1,63 @@
+{% extends 'register/content.html' %}
+{% load poll_extras %}
+{% load static %}
+{% block logo %}
+<img class="navbar-brand" src="{% static 'register/assets/images/logoQuietRent.png' %}" alt="logo">
+{% endblock %}
+
+{% block content1 %}
+<div class="ugf-content pt340">
+  <a href="../return/" class="prev-page">Retour</a>
+  <h2>Garantie Souhaitée</h2>
+  <p>Quel type de substitution souhaitez-vous mettre en place ?</p>
+
+  <!--{% define '0' as type %}
+  <p>{{type}}</p> -->
+  <form class="account-category" id="form-garantie" method="post" action="">
+    {% csrf_token %}
+    <div id="garantie">
+      <input name="substitution" hidden>
+      <label class="account-type" style="height: 240px;"> 
+        <span class="account-icon"><img src="{% static 'register/assets/images/diplome-de-fin-detudes.png' %}" alt=""></span>
+        <p>DG</p>
+        <small>Dépot de Garantie</small> <br/>
+        <input type="checkbox" name="DG" {%if substitution == '0' or substitution == '2' %}checked{%endif%}>
+      </label>
+      <label class="account-type" style="height: 240px;">
+        <span class="account-icon"><img src="{% static 'register/assets/images/guarantee.png' %}" alt=""></span>
+        <p>GAPD</p>
+        <small>Garantie à la Première Demande</small><br/>
+        <input type="checkbox" name="GAPD" {%if substitution == '1' or substitution == '2' %}checked{%endif%}>
+      </label>
+    </div>
+    <button style= "margin-left: 20%;" class="btn"><span>Suivant</span> <i class="las la-arrow-right"></i></button>
+  </form>
+</div>
+{% endblock %}
+
+{% block content2 %}
+<div class="ugf-sidebar flex-bottom ugf-sidebar-bg-4 sidebar-steps">
+  <div class="steps">
+    <div class="step complete-step">
+      <span>1</span>
+      <p>Locataire</p>
+    </div>
+    <div class="step complete-step">
+      <span>2</span>
+      <p>Bailleur</p>
+    </div>
+    <div class="step step-onprocess">
+      <span>3</span>
+      <p>Type de garanties</p>
+    </div>
+    <div class="step">
+      <span>4</span>
+      <p>Questionnaire d'eligibilité</p>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block js %}
+<script type="module" src="{% static 'register/assets/js/guarantee.js' %}" defer></script>
+{% endblock %}

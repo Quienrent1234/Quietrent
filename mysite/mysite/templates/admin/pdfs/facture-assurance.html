@@ -1,0 +1,86 @@
+{% extends 'admin/pdfs/facture.html' %}
+
+{% block style %}
+    @page {
+        size: a4 portrait;
+        @frame header_frame {           /* Static Frame */
+            -pdf-frame-content: header_content;
+            left: 25pt; width: 547pt; top: 20pt; height: 107pt;
+        }
+        @frame content_frame {          /* Content Frame */
+            left: 25pt; width: 547pt; top: 150pt; height: 632pt;
+        }
+        @frame footer_frame {           /* Another static Frame */
+            -pdf-frame-content: footer_content;
+            left: 25pt; width: 547pt; top: 762pt; height: 80pt;
+        }
+    }
+{% endblock %}
+
+{% block header_left_2 %}
+<tr>
+    <td class="frst-column">Police n°</td>
+    <td class="second-column">3PFF00001/0013</td>
+</tr>
+<tr>
+    <td class="frst-column">Assureur</td>
+    <td class="second-column">SADA Assurances</td>
+</tr>
+<tr>
+    <td class="frst-column">Contrat</td>
+    <td class="second-column">QuietRent Pro</td>
+</tr>
+{% endblock %}
+
+{% block content1 %}
+<p style="font-weight:bold">Objet : Avis d'échéance</p>
+<p>{{ demande.inputCity }} le {% now "j F Y" %}</p>
+<p>Madame, Monsieur,</p>
+<p>
+    Dans le cadre du contrat cité en référence, nous vous remettons le présent avis d’échéance , établi
+    pour une période triennale.
+</p>
+</p>
+{{ block.super }}
+{% endblock %}
+
+{% block content2 %}
+<p class="title" style="border-bottom:2px solid #ff6600">AVIS D'ÉCHÉANCE</p>
+<table>
+    <tr>
+        <td style="width:350px"><p>Echéance du : 01-03-2022</p></td>
+        <td style="width:400px"><p>Pour la période du 01-03-2022 au 28-02-2025</p></td>
+    </tr>
+</table>
+<p>
+    <table>
+        <tr><td colspan="2">Garanties QuietRent accordées :</td></tr>
+        <tr>
+            <td style="width:10px;vertical-align:top">-</td>
+            <td>Substitution d'une garantie à première demande d'un montant de 18810,00 €</td>
+        </tr>
+        <tr>
+            <td style="width:10px;vertical-align:top">-</td>
+            <td>Frais de procédure contentieuse (plafond 5000,00 €)</td>
+        </tr>
+    </table>
+</p>
+<table class="avis-echeance">
+    <tr>
+        <th>Cotisation nette HT</th>
+        <th>Taxes d'assurances</th>
+        <th class="background-graw">Cotisation TTC</th>
+        <th rowspan="2" class="margin"></th>
+        <th>Indice ILAT</th>
+        <th>Fractionnement</th>
+    </tr>
+    <tr>
+        <td>Indice ILAT</td>
+        <td>Fractionnement</td>
+        <td class="text-bold background-graw">1.2 &#xD7; Indice ILAT</td>
+        <td>119,70</td>
+        <td>3 ans</td>
+    </tr>
+</table>
+<p style="font-weight:bold">Référence à rappeler lors de votre virement : C15072</p>
+{% endblock %}

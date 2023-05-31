@@ -1,0 +1,386 @@
+{% extends 'admin/content.html' %}
+
+{% block css %}
+<link href="../../static/admin/assets/plugins/lightpicker/litepicker.css" rel="stylesheet" type="text/css"/>
+{% endblock %}
+
+{% block content2 %}
+<div class="card">
+    <div class="card-body text-center font-20" style="color: #4c9082; font-weight: bold;">
+        Ravi de vous revoir {{ user.first_name }} !
+    </div>
+</div>
+<div class="row justify-content-center">
+    <div class="col-md-6 col-lg-3">
+        <div class="card report-card">
+            <a href="../demandes/">
+            <div class="card-body">
+                <div class="row d-flex justify-content-center">
+                    <div class="col">
+                        <p class="text-dark mb-1 fw-semibold">Mes demandes</p>
+                        <h4 class="my-1">{{ demandes.count }}</h4>
+                        <p class="mb-0 text-truncate text-muted"><span class="text-success"><i class="mdi mdi-checkbox-marked-circle-outline me-1"></i></span>{{ demandes_ok.count }} demandes validées</p>
+                    </div>
+                    <div class="col-auto align-self-center">
+                        <div class="bg-light-alt d-flex justify-content-center align-items-center thumb-md  rounded-circle">
+                            <i data-feather="layers" class="align-self-center text-muted icon-sm"></i>
+                        </div>
+                    </div>
+                </div>
+            </div><!--end card-body-->
+            </a>
+        </div><!--end card-->
+    </div> <!--end col-->
+    <div class="col-md-6 col-lg-3">
+        <div class="card report-card">
+            <a href="../contrats-certificats/">
+            <div class="card-body">
+                <div class="row d-flex justify-content-center">
+                    <div class="col">
+                        <p class="text-dark mb-1 fw-semibold">Mes contrats</p>
+                        <h4 class="my-1">{{ contrats.count }}</h4>
+                        <p class="mb-0 text-truncate text-muted">DG et GAPD</p>
+                    </div>
+                    <div class="col-auto align-self-center">
+                        <div class="bg-light-alt d-flex justify-content-center align-items-center thumb-md  rounded-circle">
+                            <i data-feather="check-square" class="align-self-center text-muted icon-sm"></i>
+                        </div>
+                    </div>
+                </div>
+            </div><!--end card-body-->
+            </a>
+        </div><!--end card-->
+    </div> <!--end col-->
+    <div class="col-md-6 col-lg-3">
+        <div class="card report-card">
+            <a href="../tickets-consulting/">
+            <div class="card-body">
+                <div class="row d-flex justify-content-center">
+                    <div class="col">
+                        <p class="text-dark mb-1 fw-semibold">Mes tickets</p>
+                        <h4 class="my-1">{{ tickets.count }}</h4>
+                        <p class="mb-0 text-truncate text-muted">{{ open_tickets.count }} tickets en cours</p>
+                    </div>
+                    <div class="col-auto align-self-center">
+                        <div class="bg-light-alt d-flex justify-content-center align-items-center thumb-md  rounded-circle">
+                            <i data-feather="clock" class="align-self-center text-muted icon-sm"></i>
+                        </div>
+                    </div>
+                </div>
+            </div><!--end card-body-->
+            </a>
+        </div><!--end card-->
+    </div> <!--end col-->
+    <div class="col-md-6 col-lg-3">
+        <div class="card report-card">
+            <div class="card-body">
+                <div class="row d-flex justify-content-center">
+                    <div class="col">
+                        <p class="text-dark mb-1 fw-semibold">Gain de trésorerie</p>
+                        <h4 class="my-1">$24100</h4>
+                        <p class="mb-0 text-truncate text-muted"><span class="text-dark">$14k</span> Total used budgets</p>
+                    </div>
+                    <div class="col-auto align-self-center">
+                        <div class="bg-light-alt d-flex justify-content-center align-items-center thumb-md  rounded-circle">
+                            <i data-feather="dollar-sign" class="align-self-center text-muted icon-sm"></i>
+                        </div>
+                    </div>
+                </div>
+            </div><!--end card-body-->
+        </div><!--end card-->
+    </div> <!--end col-->
+</div><!--end row-->
+<div class="row">
+    <div class="col-lg-4">
+        <div class="card">
+            <a href="../documents/">
+            <div class="card-body">
+                <div class="row">                                            
+                    <div class="col-7 align-self-center">
+                        <div class="bg-light-alt d-flex justify-content-center align-items-center thumb-md  rounded-circle mb-2">
+                            <i data-feather="file" style="color: #4c9082;" class="align-self-center icon-sm"></i>
+                        </div>                                              
+                        <h4 class="mt-0 text-dark">Documents persos</h4>
+                        <h4 class="mt-0 text-truncate font-14 mb-0"><br></h4>
+                        <p class="text-muted mb-0 text-truncate"><br></p>
+                    </div><!--end col-->
+                    <div class="col-5 align-self-center">
+                        <img style="width: 120px;" src="../../static/admin/assets/images/documents.jpg">
+                    </div><!--end col-->
+                </div><!--end row-->
+            </div><!--end card-body-->
+            </a>
+        </div><!--end card-->
+    </div><!--end col--> 
+    <div class="col-lg-4">                            
+        <div class="card">
+            <a href="../new-demande-loc/">
+            <div class="card-body">
+                <div class="row">                                            
+                    <div class="col-7 align-self-center">
+                        <div class="bg-light-alt d-flex justify-content-center align-items-center thumb-md  rounded-circle mb-2">
+                            <i style="color: #4c9082; font-size: 180%" class="mdi mdi-folder-plus"></i>
+                        </div>                                             
+                        <h4 class="mt-0 text-dark">Nouvelle demande <i class="mdi mdi-plus-circle" style="color: #4c9082;"></i></h4>
+                        <h4 class="mt-0 text-truncate font-14 mb-0"><br></h4>
+                        <p class="text-muted mb-0 text-truncate"><br></p>
+                    </div><!--end col-->
+                    <div class="col-5 align-self-center">
+                        <img style="width: 120px;" src="../../static/admin/assets/images/docs.webp">
+                    </div><!--end col-->
+                </div><!--end row-->
+            </div><!--end card-body-->
+            </a>
+        </div><!--end card-->
+    </div><!--end col-->   
+    <div class="col-lg-4">
+        <a href="../tickets-consulting/">
+        <div class="card">
+            <div class="card-header">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <h4 class="card-title">Mes tickets</h4>
+                    </div><!--end col-->
+                </div>  <!--end row-->
+            </div><!--end card-header-->
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div class="align-self-center">
+                        <h4 class="mt-0 mb-1 text-dark">{{ tickets.count }}</h4>
+                        <h4 class="mt-0 text-truncate font-14 mb-0">Tickets</h4>
+                    </div>
+                    <div>
+                        <ul class="list-unstyled mb-2">
+                            <li class="mb-2">
+                                <i class="fas fa-minus text-pink"></i>
+                                <span>Tickets en cours</span>
+                            </li>
+                            <li class="mb-2">
+                                <i class="fas fa-minus text-primary"></i>
+                                <span>Tickets résolus</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-minus text-success"></i>
+                                <span>Tickets clos</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary" role="progressbar" style="width: {{ closed_percent }}%" aria-valuenow="{{ closed_percent }}" aria-valuemin="0" aria-valuemax="100">{{ closed_percent}}%</div>
+                    <div class="progress-bar bg-pink" role="progressbar" style="width: {{ open_percent }}%" aria-valuenow="{{ open_percent }}" aria-valuemin="0" aria-valuemax="100">{{ open_percent }}%</div>
+                    <div class="progress-bar bg-success" role="progressbar" style="width: {{ done_percent }}%" aria-valuenow="{{ done_percent }}" aria-valuemin="0" aria-valuemax="100">{{ done_percent }}%</div>
+                </div>
+            </div><!--end card-body-->
+        </div><!--end card-->
+        </a>
+    </div><!--end col-->
+</div><!--end row-->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-5 text-center">
+                        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <div class="card-header"><div class="card-title">Actualités</div></div>
+                                    <div style="margin-left: 12%; width: 100%; background: url('../../static/admin/assets/images/fondblanc.jpg'); background-repeat: no-repeat;">
+                                        <div class="activity mt-3">
+                                            <div class="activity-info">
+                                            <div class="icon-info-activity">
+                                                <a target="_blank" href="{{ href1 }}"><img style="width: 45px; border-radius: 100%;" src="../../static/admin/assets/images/mqd.png"></a>
+                                            </div>
+                                            <div class="activity-info-text">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <p class="text-muted mb-0 font-13 w-75 text-decoration-underline"><a target="_blank" style="color: #4c9082; font-weight: bold;" href="{{ href1 }}">{{ title1 }}</a>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            </div>
+                                            <div class="activity-info">
+                                            <div class="icon-info-activity">
+                                                <a target="_blank" href="{{ href2 }}"><img style="width: 45px; border-radius: 100%;" src="../../static/admin/assets/images/figaro.png"></a>
+                                            </div>
+                                            <div class="activity-info-text">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <p class="text-muted mb-0 font-13 w-75 text-decoration-underline"><a target="_blank" style="color: #4c9082; font-weight: bold;" href="{{ href2 }}">{{ title2 }}</a>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            </div>
+                                            <div class="activity-info">
+                                            <div class="icon-info-activity">
+                                                <a target="_blank" href="{{ href3 }}"><img style="width: 45px; border-radius: 100%;" src="../../static/admin/assets/images/figaro.png"></a>
+                                            </div>
+                                            <div class="activity-info-text">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <p class="text-muted mb-0 font-13 w-75 text-decoration-underline"><a target="_blank" style="color: #4c9082; font-weight: bold;" href="{{ href3 }}">{{ title3 }}</a>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            </div>
+                                            <div class="activity-info">
+                                            <div class="icon-info-activity">
+                                                <a target="_blank" href="{{ href4 }}"><img style="width: 45px; border-radius: 100%;" src="../../static/admin/assets/images/monde.jpg"></a>
+                                            </div>
+                                            <div class="activity-info-text">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <p class="text-muted mb-0 font-13 w-75 text-decoration-underline"><a target="_blank" style="color: #4c9082; font-weight: bold;" href="{{ href4 }}">{{ title4 }}</a>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            </div>
+                                        </div>
+<!--                                        </ul>-->
+                                    </div>
+                                </div>
+                            </div>
+                            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-bs-slide="prev">
+                              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                              <span class="visually-hidden">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-bs-slide="next">
+                              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                              <span class="visually-hidden">Next</span>
+                            </a>
+                        </div>
+                    </div><!--end col-->
+                    <div class="col-lg-7">
+                        <div class="card" style="height: fit-content;">
+                            <div class="card-header">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <h4 class="card-title">Activité</h4>
+                                    </div><!--end col-->
+                                    <div class="col-auto">
+                                        <div class="dropdown">
+                                            <a href="#" class="btn btn-sm btn-outline-light dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                All<i class="las la-angle-down ms-1"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-end">
+                                                <a class="dropdown-item" href="#">Purchases</a>
+                                                <a class="dropdown-item" href="#">Emails</a>
+                                            </div>
+                                        </div>
+                                    </div><!--end col-->
+                                </div>  <!--end row-->
+                            </div><!--end card-header-->
+                            <div class="card-body">
+                                <div class="p-3" style="height: 230px;" data-simplebar>
+                                    <div class="activity">
+
+                                        <a href="../demandes/">
+                                            <div class="activity-info">
+                                            <div class="icon-info-activity">
+                                                <i class="las la-user-clock bg-soft-primary"></i>
+                                            </div>
+                                            <div class="activity-info-text">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <p class="text-muted mb-0 font-13"><span>Dernière demande</span>
+                                                        - {{ demandes.last.inputAddress }}
+                                                        {% if demandes.last.etat == 0 %}
+                                                        <span style="font-size: small; margin-left: 15px;" class="badge badge-soft-danger">
+                                                        Rejetée
+                                                        {% endif %}
+                                                        {% if demandes.last.etat == 1 %}
+                                                        <span style="font-size: small; margin-left: 15px;" class="badge badge-soft-info">
+                                                        <a href="../../base/contact-us/">Nous contacter</a>
+                                                        {% endif %}
+                                                        {% if demandes.last.etat == 2 %}
+                                                        <span style="font-size: small; margin-left: 15px;" class="badge badge-soft-purple">
+                                                        En cours
+                                                        {% endif %}
+                                                        {% if demandes.last.etat == 3 %}
+                                                        <form method="post" action="../upload-choice/">
+                                                            {% csrf_token %}
+                                                            <button style="font-size: small; margin-left: 15px; border: none;" class="badge badge-soft-blue" type="submit" value="{{ demandes.last.id }}" name="choice">Documents manquants</button>
+                                                        </form>
+                                                        {% endif %}
+                                                        {% if demandes.last.etat == 4 %}
+                                                        <form style="float: left; margin-left: 15px;" method="post" action="../update-choice/">
+                                                            {% csrf_token %}
+                                                            <button style="font-size: small; border: none;" class="badge badge-soft-pink" type="submit" value="{{ demandes.last.id }}" name="choice">Continuer ma demande</button>
+                                                        </form>
+                                                        <form style="float: left; margin-left: 3px;" method="post" action="{% url 'delete-demande' demandes.last.id %}">
+                                                            {% csrf_token %}
+                                                            <button style="font-size: small; border: none;" class="badge badge-soft-danger" type="submit" value="{{ demandes.last.id }}" name="choice">Annuler ma demande</button>
+                                                        </form>
+                                                        {% endif %}
+                                                        {% if demandes.last.etat == 5 %}
+                                                        <td><span style="font-size: small; margin-left: 15px;" class="badge badge-soft-success">
+                                                        Validée
+                                                        {% endif %}
+                                                        </span>
+                                                    </p>
+                                                    <small class="text-muted">{{ demandes.last.date_demande }}</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </a>
+                                        <a href="../tickets-consulting/">
+                                       <div class="activity-info">
+                                            <div class="icon-info-activity">
+                                                <i class="las la-user-clock bg-soft-primary"></i>
+                                            </div>
+                                            <div class="activity-info-text">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <p class="text-muted mb-0 font-13"><span>Dernier ticket</span>
+                                                        - {{ tickets.last.service}}-{{ tickets.last.objet }}
+                                                        <small class="text-muted" style="margin-left: 15px;"> {% if tickets.last.etat == '0' %}<button class="badge badge-soft-info border-0 font-12">Clos</button>{% endif %}{% if tickets.last.etat == '1' %}<button class="badge badge-soft-pink border-0 font-12">En cours</button>{% endif %}{% if tickets.last.etat == '2' %}<button class="badge badge-soft-success border-0 font-12">Résolu</button>{% endif %}</small>
+                                                    </p>
+                                                    <small class="text-muted">{{ tickets.last.date }}</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </a>
+                                        <a href="../contrats-certificats/">
+                                        <div class="activity-info">
+                                            <div class="icon-info-activity">
+                                                <i class="las la-user-clock bg-soft-primary"></i>
+                                            </div>
+                                            <div class="activity-info-text">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <p class="text-muted mb-0 font-13 w-75"><span>Dernier contrat</span>
+                                                        - {{ contrats.last.type}} lié à la Demande N°{{ demandes.last.id}}
+                                                    </p>
+                                                    <small class="text-muted">{{ contrats.last.date }}</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </a>
+                                        <a href="../factures/">
+                                       <div class="activity-info">
+                                            <div class="icon-info-activity">
+                                                <i class="las la-user-clock bg-soft-primary"></i>
+                                            </div>
+                                            <div class="activity-info-text">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <p class="text-muted mb-0 font-13"><span>Dernière facture</span>
+                                                        - {{ factures.last.name }} liée au contrat N° {{ contrats.last.id }}
+                                                        <small class="text-muted" style="margin-left: 15px;"> {% if factures.last.etat == '0' %}<button class="badge badge-soft-info border-0 font-12">Clos</button>{% endif %}{% if factures.last.etat == '1' %}<button class="badge badge-soft-pink border-0 font-12">En cours</button>{% endif %}{% if factures.last.etat == '2' %}<button class="badge badge-soft-success border-0 font-12">Résolu</button>{% endif %}</small>
+                                                    </p>
+                                                    <small class="text-muted">{{ factures.last.date }}</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </a>
+                                    </div><!--end activity-->
+                                </div><!--end analytics-dash-activity-->
+                            </div>  <!--end card-body-->
+                        </div><!--end card-->
+                    </div><!--end col-->
+                </div><!--end row-->
+            </div><!--end card-body-->
+        </div><!--end card-->
+    </div><!--end col-->
+</div><!--end row-->
+{% endblock %}
+
+{% block js %}
+<script src="../../static/admin/assets/plugins/apexcharts/apexcharts.min.js"></script>
+<script src="../../static/admin/assets/pages/helpdesk-index.init.js"></script>
+<script src="../../static/admin/assets/plugins/lightpicker/litepicker.js"></script>
+<script src="../../static/admin/assets/pages/projects-index.init.js"></script>
+{% endblock %}

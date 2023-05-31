@@ -1,0 +1,73 @@
+{% extends 'admin/content-admin.html' %}
+
+{% load static %}
+
+{% block content2 %}
+    <div class="col-lg-12">
+        <div class="card">
+              <div class="card-header">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <h4 class="card-title">Mes factures</h4>
+                    </div><!--end col-->
+                </div><!--end row-->
+              </div><!--end card-header-->
+        </div><!--end card-->
+        <div class="table-responsive">
+            <table class="table table-bordered mb-0 table-centered">
+                <thead>
+                    <tr>
+                        <th>N° Facture</th>
+                        <th>Nom de la société</th>
+                        <th>Type de la facture</th>
+                        <th>Date de la facture</th>
+                        <th>Statut de la facture</th>
+                        <th class="text-end">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for facture in factures %}
+                    <tr id="tr-{{ facture.id }}">
+                        <td>{{ facture.id }}</td>
+                        <td>{{ facture.demande.social_reason }}</td>
+                        <td>{{ facture.type }}</td>
+                        <td>{{ facture.date }}</td>
+                        <td>
+                            {% if facture.payed %}
+                                <span style="font-size: small" class="badge badge-soft-success">Payée</span>
+                            {% else %} 
+                                <span style="font-size: small" class="badge badge-soft-danger">impayée</span>
+                            {% endif %}
+                        </td>
+                        <td class="text-end flex flex-row-reverse">
+                            <form style="float:right" method="post" action="../consulting-docs/">
+                                {% csrf_token %}
+                                <a title="Télécharger ma facture"><button style="margin-left:10px" class="btn btn-de-light shadow-dark" type="submit" value="{{ facture.adresse_doc }}" name="file_name"><img style="width: 25px;" src="../../static/admin/assets/images/down-arrow.png"></button></a>
+                            </form>
+                            {% if not facture.payed %}
+                                <button style="margin-left:10px" class="btn btn-de-light shadow-dark" onclick="checkInvoice('{{ facture.id }}')"><img style="width:25px" src="../../static/admin/assets/images/check.png"></button>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table><!--end /table-->
+        </div><!--end /tableresponsive-->
+    </div> <!-- end col -->
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script>
+    function checkInvoice(invoiceId) {
+        $.ajax({
+            url: '../check-invoice/',
+            method: 'post',
+            data: {'choice': invoiceId},
+            headers: {'X-CSRFToken': document.cookie.substring(document.cookie.indexOf('csrftoken=') + 10, document.cookie.length)},
+        }).done(e => {
+            $(`#tr-${invoiceId}`).load(`${location.href} #tr-${invoiceId} > *`)
+        })
+    }
+</script>
+{% endblock %}

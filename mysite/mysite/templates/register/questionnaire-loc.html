@@ -1,0 +1,139 @@
+{% extends 'register/content.html' %}
+{% load static %}
+{% block logo %}
+<img class="navbar-brand" src="{% static 'register/assets/images/logoQuietRent.png' %}" alt="logo">
+{% endblock %}
+
+{% block content1 %}
+
+<div class="ugf-content pt150">
+  <a href="../return/" class="prev-page">Retour</a>
+  <h2>Le Locataire</h2>
+  <p> Entrez vos informations ici</p>
+  <form action="" class="account-form" method="post" id="form-loc" novalidate>
+    {% csrf_token %}
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="inputSIREN">SIRET</label>
+          <input type="text" placeholder="82763650700036" id="inputSIREN" class="form-control" id="inputSIREN" name="inputSIREN" value="{{inputSIREN}}">
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <br/>
+        <button type="button" id="buttonInsee" style="width: 85%; text-align:center;" class="btn text-center">completer automatiquement
+        </button>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group check-gender" style="display:flow-root">
+          <label for="physical-moral">Capacité juridique</label>
+          <div style="display:inline-flex" id="physical_moral">
+            <div class="custom-radio">
+              <input type="radio" name="physical_moral" class="custom-control-input" id="physical" value="physical" {% if physical_moral == "physical" %} checked {%endif%}>
+              <label class="custom-control-label" for="physical">Personne Physique</label>
+            </div>
+            <div class="custom-radio">
+              <input type="radio" name="physical_moral" class="custom-control-input" id="moral" value="moral" {% if physical_moral == "moral" %} checked {%endif%}>
+              <label class="custom-control-label" for="moral">Personne Morale</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="juridical_form">Forme juridique</label>
+          <select id="juridical_form" class="form-control" name="juridical_form" required>
+            <option selected disabled hidden>Choisississez une réponse...</option>
+            <option {% if juridical_form == "EI" %} selected {%endif%} id="EI" value= "EI" >Entreprise individuelle</option>
+            <option {% if juridical_form == "EIRL" %} selected {%endif%} id="EIRL" value= "EIRL" >Entreprise individuelle à responsabilité limitée</option>
+            <option {% if juridical_form == "EURL" %} selected {%endif%} id="EURL" value= "EURL" >Entreprise unipersonnelle à responsabilité limitée</option>
+            <option {% if juridical_form == "SC" %} selected {%endif%} id="SC" value= "SC" >Société de capitaux</option> fait
+            <option {% if juridical_form == "SNC" %} selected {%endif%} id="SNC" value= "SNC" >Société en nom collectif</option> fait
+          </select>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="social_reason">Raison sociale</label>
+          <input type="text" placeholder="QuietRent" class="form-control" id="social_reason" name="social_reason" value="{{social_reason}}">
+        </div>
+      </div>
+      <div class="col-sm-6" >
+        <div class="form-group check-gender" style="display:flow-root">
+          <label for="gender">Genre</label>
+          <div style="display:inline-flex" id="gender">
+            <div class="custom-radio">
+              <input type="radio" name="gender" class="custom-control-input" id="Gmale" value="M" required {% if gender == "M" %} checked {%endif%}>
+              <label class="custom-control-label" for="Gmale">Monsieur</label>
+            </div>
+            <div class="custom-radio">
+              <input type="radio" name="gender" class="custom-control-input" id="Gfemale" value="Mme" required {% if gender == "Mme" %} checked {%endif%} >
+              <label class="custom-control-label" for="Gfemale">Madame</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="inputName">Nom</label>
+          <input type="text" placeholder="e.g. Smith" class="form-control" id="inputName" name="inputName" value="{{inputName}}">
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="inputFirstName">Prénom</label>
+          <input type="text" placeholder="e.g. John" class="form-control" id="inputFirstName" name="inputFirstName" value="{{inputFirstName}}">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="inputPhone">Numéro de téléphone</label>
+          <input type="text" placeholder="e.g. 0753671129" class="form-control" id="inputPhone" name="inputPhone" value="{{inputPhone}}">
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="inputActivity">Secteur d'Activité</label>
+          <input type="text" placeholder="e.g. Assurance" class="form-control" id="inputActivity" name="inputActivity" value="{{inputActivity}}">
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="inputWebSite">Site internet</label>
+          <input type="text" placeholder="e.g. www.quietrent.com" class="form-control" id="inputWebSite" name="inputWebSite" value="{{inputWebSite}}">
+        </div>
+      </div>
+      <div class="col-md-6">
+      </div>
+    </div>
+    <button type="submit" class="btn"><span>Suivant</span> <i class="las la-arrow-right"></i></button>
+  </form>
+</div>
+{% endblock %}
+
+{% block content3 %}
+<div class="ugf-sidebar flex-bottom ugf-sidebar-bg-4 sidebar-steps">
+  <div class="steps">
+    <div class="step step-onprocess">
+      <span>1</span>
+      <p>Locataire</p>
+    </div>
+    <div class="step">
+      <span>2</span>
+      <p>Bailleur</p>
+    </div>
+    <div class="step ">
+      <span>3</span>
+      <p>Type de garanties</p>
+    </div>
+    <div class="step">
+      <span>4</span>
+      <p>Questionnaire d'eligibilité</p>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block js %}
+<script type="module" src="{% static 'register/assets/js/tenant.js' %}" defer></script>
+{% endblock %}

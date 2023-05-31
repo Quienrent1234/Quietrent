@@ -1,0 +1,72 @@
+{% extends 'admin/content.html' %}
+{% load static %}
+{% block content2 %}
+<!--    Links pour les templates de register    -->
+    <link rel="stylesheet" type="text/css" href="{% static 'register/assets/css/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'register/assets/css/card.css' %}">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'register/assets/css/bootstrap.min.css' %}">
+
+    <!-- External Css -->
+    <link rel="stylesheet" href="{% static 'register/assets/css/line-awesome.min.css' %}">
+    
+    <!-- Custom Css -->
+    <link rel="stylesheet" type="text/css" href="{% static 'register/assets/css/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'register/assets/css/theme-1.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'register/assets/css/kyc-2.css' %}">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'register/assets/images/favicon.png' %}">
+    <link rel="apple-touch-icon" href="{% static 'register/assets/images/apple-touch-icon.png' %}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{% static 'register/assets/images/icon-72x72.png' %}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{% static 'register/assets/images/icon-114x114.png' %}">
+
+<div class="final-content">
+    <a href="../new-demande-eligibilite/" class="prev-page">Retour</a>
+    {% if etat == 0 %}
+    <img class="result" src="{% static 'register/assets/images/big-red-cross.png' %}" alt="">
+    {% elif etat == 1 %}
+    <img class="result" src="{% static 'register/assets/images/contact.png' %}" alt="">
+    {% elif etat == 3 %}
+    <img class="result" src="{% static 'register/assets/images/big-green-check.png' %}" alt="">
+    {% endif %}
+  <br/>&nbsp;<br/>
+    {% if etat == 0 %}
+    <h3>Malheureusement vous n'êtes pas éligible</h3>
+    <a href="../demandes/" class="btn">Voir mes demandes</a>
+    {% elif etat == 1 %}
+    <h3>On vous recontactera</h3>
+    <p>Veuillez vous rediriger vers un formulaire de contact</p>
+    <a href="../../contact-us/" class="btn">nous contacter</a>
+    {% elif etat == 3 %}
+    <h3>Vous êtes éligible !</h3>
+    <p>Veuillez transférer les documents nécéssaires pour valider votre demande</p>
+    <a href="../demandes/" class="btn">Voir mes demandes</a>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block js %}
+<script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous">
+    </script>
+<!--        Links pour les templates de register            -->
+    <script src="{% static 'register/assets/js/popper.min.js' %}"></script>
+    <script src="{% static 'register/assets/js/bootstrap.min.js' %}"></script>
+
+    <script src="{% static 'register/assets/js/owl.carousel.min.js' %}"></script>
+
+    <!--<script src="{% static 'register/assets/js/custom.js' %}"></script>-->
+    <script src="{% static 'register/assets/js/upload.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,82 @@
+{% extends 'register/content.html' %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'register/assets/css/complete.css' %}">
+{% endblock %}
+
+{% block logo %}
+<img class="navbar-brand" src="{% static 'register/assets/images/logoQuietRent.png' %}" alt="logo">
+{% endblock %}
+
+{% block content1 %}
+<div class="ugf-content pt150">
+  <a href="../return/" class="prev-page">Retour</a>
+  <div class="ugf-complete">
+    <div class="container">
+      <div class="row">
+        <div class="complete-wrap">
+          {% if state == 0 %}
+          <img class="result" src="{% static 'register/assets/images/big-red-cross.png' %}" alt="">
+          {% elif state == 1 %}
+          <img class="result" src="{% static 'register/assets/images/contact.png' %}" alt="">
+          {% elif state == 2 %}
+          <img class="result" src="{% static 'register/assets/images/big-green-check.png' %}" alt="">
+          {% endif %}
+          {% if state == 0 %}
+          <h3>Vous ne semblez pas éligible ...</h3>
+          <p>Pas de panique <br/> Notre équipe peut vous contacter pour trouver une solution</p>
+          <a href="../../base/contact-us/" class="button-reload">Me contacter</a>
+          <a href="../remove/" class="button-reload">Non merci</a>
+          {% elif state == 1 %}
+          <h3>Nous ne pouvons déterminer votre éligibilité pour le moment</h3>
+          <p>Pas de panique <br/> Notre équipe peut vous contacter pour trouver une solution</p>
+          <a href="../../base/contact-us/" class="button-reload">Me contacter</a>
+          <a href="../remove/" class="button-reload">Non merci</a>
+          {% elif state == 2 %}
+          <h3>Vous potentiellement êtes éligibles</h3>
+          <p>Veuillez vous inscrire afin de terminer la procédure</p>
+          <form action="" method="post">
+            {% csrf_token %}
+            <button type="submit" class="button-reload"><span>S'inscrire</span> <i class="las la-arrow-right"></i></button>
+          </form>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--
+  <div class="complete">
+    <h2>Merci à vous !</h2>
+    <p>Vous avez terminez votre questionnaire d'éligibilité</p>
+    {% if state == 0 %}
+    <h3>Vous ne semblez pas éligible, pas de panique, pas de panique</h3>
+    &nbsp;
+    <a href="../remove/" class="btn">terminer</a>
+    {% elif state == 1 %}
+    <h3>On vous recontactera</h3>
+    <p>Veuillez vous rediriger vers un formulaire de contact</p>
+    &nbsp;
+    <a href="../../base/contact-us/" class="btn">nous contacter</a>
+    {% elif state == 2 %}
+    <h3>Vous êtes éligible</h3>
+    <p>Veuillez vous enregistrez pour enregistrez votre dossier</p>
+    &nbsp;
+    <form action="" method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn"><span>S'inscrire</span> <i class="las la-arrow-right"></i></button>
+    </form>
+    {% endif %}
+  </div>
+  -->
+</div>
+{% endblock %}
+
+{% block content3 %}
+<div class="ugf-sidebar flex-bottom ugf-sidebar-bg-4 sidebar-steps">
+  <div class="steps">
+    <div class="step step-oncomplete">
+      <p>Résultat d'éligibilité</p>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'register/header.html' %}
+
+{% block content %}
+<div class="ugf-content-block">
+  <div class="logo">
+    {% block logo %}
+    {% endblock logo %}
+    </a>
+  </div>
+  <div class="container-md">
+    <div class="row">
+      <div class="col-lg-7 offset-lg-5">
+        {% block content1 %}
+        {% endblock %}
+      </div>
+    </div>
+  </div>
+    {% block content2 %}
+    {% endblock %}
+</div>
+{% block content3 %} 
+{% endblock %}
+{% endblock %}

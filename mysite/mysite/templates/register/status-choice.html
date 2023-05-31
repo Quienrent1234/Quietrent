@@ -1,0 +1,70 @@
+{% extends 'register/content.html' %}
+{% load static %}
+{% block logo %}
+<img class="light-logo" style="width: 250px;" src="../../static/register/assets/images/Logoblanc.png" alt="">
+{% endblock logo %}
+
+{% block content1 %}
+  <div class="ugf-wrapper flat-grey-bg">
+    <div class="ugf-content-block">
+      <div class="container-md">
+        <div class="row">
+          <div class="ugf-content pt270">
+            <h2>Bienvenue dans l'espace membre de QuietRent</h2>
+            <h6>Veuillez choisir votre type de compte pour passer à l'étape suivante :</h6>
+            <div class="account-category" style="display: flex;">
+                <a href="../../register/login-client/" class="account-type business">
+                    <span class="account-icon"><img src="../../static/register/assets/images/account-personal.png" alt=""></span>
+                    <p>Client</p>
+                    <span class="icon"><i class="las la-arrow-right"></i></span>
+                </a>
+                <a href="../../register/login-partner/" class="account-type personal">
+                    <span class="account-icon"><img src="../../static/register/assets/images/poignee-de-main_vert.png" width="100%"></span>
+                    <p>Partenaire</p>
+                    <span class="icon"><i class="las la-arrow-right"></i></span>
+                </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+{% block content3 %}
+<div class="ugf-sidebar flex-bottom" style="background-color: #4C9082;">
+  <div class="testimonial-carousel owl-carousel">
+    <div class="testimonial-carousel owl-carousel">
+      <div class="item">
+        <div class="quote">
+          <img src="{% static 'register/assets/images/review/via-sana.jpeg' %}" alt="">
+        </div>
+        <p>L'équipe QuietRent est réactive et sait s'adapter à nos besoins en continu. En limitant nos immobilisations de trésorerie, c'est un ...</p>
+        <h5 class="name">Louis Fosse</h5>
+        <span class="designation">Président Via Sana</span>
+      </div>
+      <div class="item">
+        <div class="quote">
+          <img src="{% static 'register/assets/images/review/we-are-Fojo.jpeg' %}" alt="">
+        </div>
+        <p>Parfaitement satisfait de Quiet Rent ! <br/> De vraies solutions utiles, adaptées, simples à mettre en œuvre, et qui permettent de fortes ...</p>
+        <h5 class="name">Lucas Narboni</h5>
+        <span class="designation">co-founder FOJO</span>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="clients">
+    <div class="client">
+      <img src="../../static/register/assets/images/client/1.png" class="img-fluid" alt="">
+    </div>
+    <div class="client">
+      <img src="../../static/register/assets/images/client/2.png" class="img-fluid" alt="">
+    </div>
+    <div class="client">
+      <img src="../../static/register/assets/images/client/3.png" class="img-fluid" alt="">
+    </div>
+    <div class="client">
+      <img src="../../static/register/assets/images/client/4.png" class="img-fluid" alt="">
+    </div>
+  </div> -->
+</div>
+{% endblock %}

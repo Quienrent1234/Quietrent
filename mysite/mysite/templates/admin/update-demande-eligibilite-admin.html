@@ -1,0 +1,229 @@
+{% extends 'admin/content-admin.html' %}
+{% load static %}
+{% block content2 %}
+<!--    Links pour les templates de register    -->
+    <link rel="stylesheet" type="text/css" href="../../static/register/assets/css/main.css">
+    <link rel="stylesheet" type="text/css" href="../../static/register/assets/css/card.css">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../../static/register/assets/css/bootstrap.min.css">
+
+    <!-- External Css -->
+    <link rel="stylesheet" href="../../static/register/assets/css/line-awesome.min.css">
+    <!--<link rel="stylesheet" href="../../static/register/assets/css/owl.carousel.min.css" />-->
+
+    <!-- Custom Css -->
+    <link rel="stylesheet" type="text/css" href="../../static/register/assets/css/main.css">
+    <link rel="stylesheet" type="text/css" href="../../static/register/assets/css/theme-1.css">
+    <link rel="stylesheet" type="text/css" href="../../static/register/assets/css/kyc-2.css">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+
+    <!-- Favicon -->
+    <link rel="icon" href="../../static/register/assets/images/favicon.png">
+    <link rel="apple-touch-icon" href="../../static/register/assets/images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="../../static/register/assets/images/icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="../../static/register/assets/images/icon-114x114.png">
+
+<div class="ugf-content">
+  <a href="../update-demande-garantie-admin/" class="prev-page">Retour</a>
+  <h2>Testez votre éligibilité</h2>
+  <p></p>
+  <form action="" class="account-form" method="post" id="eligibiliteSubmit" novalidate>
+    {% csrf_token %}
+    <div class="form-group check-gender" style="display:flow-root">
+      <label for="incident">Avez-vous fait l'objet d'incident de paiement ou litige avec votre bailleur (ou «un de vos bailleurs»), de quelque nature que ce soit, au cours des 12 derniers mois ?</label>
+      <div style="display:inline-flex" id="incident">
+        <div class="custom-radio">
+          <input type="radio" name="incident" class="custom-control-input" id="YIncident" value="yes" required>
+          <label class="custom-control-label" for="YIncident">Oui</label>
+        </div>
+        <div class="custom-radio">
+          <input type="radio" name="incident" class="custom-control-input" id="NIncident" value="no" required>
+          <label class="custom-control-label" for="NIncident">Non</label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group check-gender" style="display:flow-root">
+      <label for="difficulte">Correspondez-vous aux critères des sociétés en difficulté (fonds propres négatifs)</label>
+      <div style="display:inline-flex" id="difficulte">
+        <div class="custom-radio">
+          <input type="radio" name="difficulte" class="custom-control-input" id="YDifficulte" value="yes" required>
+          <label class="custom-control-label" for="YDifficulte">Oui</label>
+        </div>
+        <div class="custom-radio">
+          <input type="radio" name="difficulte" class="custom-control-input" id="NDifficulte" value="no" required>
+          <label class="custom-control-label" for="NDifficulte">Non</label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group check-gender" style="display:flow-root">
+      <label for="preavis">Avez-vous reçu ou avez-vous donné un préavis de congé portant sur le bail visé par la présente étude d'éligibilité ?</label>
+      <div style="display:inline-flex" id="preavis">
+        <div class="custom-radio">
+          <input type="radio" name="preavis" class="custom-control-input" id="YPreavis" value="yes" required>
+          <label class="custom-control-label" for="YPreavis">Oui</label>
+        </div>
+        <div class="custom-radio">
+          <input type="radio" name="preavis" class="custom-control-input" id="NPreavis" value="no" required>
+          <label class="custom-control-label" for="NPreavis">Non</label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group check-gender" style="display:flow-root">
+      <label for="echeance">Si l'étude concerne un bail en cours, avez-vous une échéance triennale au cours des 12 prochains mois ? (Non sinon) </label>
+      <div style="display:inline-flex" id="echeance">
+        <div class="custom-radio">
+          <input type="radio" name="echeance" class="custom-control-input" id="YEcheance" value="yes" required>
+          <label class="custom-control-label" for="YEcheance">Oui</label>
+        </div>
+        <div class="custom-radio">
+          <input type="radio" name="echeance" class="custom-control-input" id="NEcheance" value="no" required>
+          <label class="custom-control-label" for="NEcheance">Non</label>
+        </div>
+      </div>
+    </div>
+    <div id="ifYEcheance" style="display:none"> <!-- onload hide -->
+      <div class="form-group check-gender" style="display:flow-root">
+      <label for="renouveler">Si oui, souhaitez-vous renouveler ce contrat de bail ? </label>
+      <div style="display:inline-flex">
+        <div class="custom-radio">
+          <input type="radio" name="renouveler" class="custom-control-input" id="YRenouveler" value="yes">
+          <label class="custom-control-label" for="YRenouveler">Oui</label>
+        </div>
+        <div class="custom-radio">
+          <input type="radio" name="renouveler" class="custom-control-input" id="NRenouveler" value="no">
+          <label class="custom-control-label" for="NRenouveler">Non</label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <div class="form-group check-gender" style="display:flow-root">
+      <label for="plusDeuxAns">Votre entreprise à t'elle plus de deux ans ?</label>
+      <div style="display:inline-flex" id="plusDeuxAns">
+        <div class="custom-radio">
+          <input type="radio" name="plusDeuxAns" class="custom-control-input" id="YplusDeuxAns" value="yes" required>
+          <label class="custom-control-label" for="YplusDeuxAns">Oui</label>
+        </div>
+        <div class="custom-radio">
+          <input type="radio" name="plusDeuxAns" class="custom-control-input" id="NplusDeuxAns" value="no" required>
+          <label class="custom-control-label" for="NplusDeuxAns">Non</label>
+        </div>
+      </div>
+    </div>
+    <div id="ifYplusDeuxAns" style="display:none">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="ca2021">CA 2021</label>
+            <input type="text" placeholder="e.g. Smith" class="form-control" id="ca2021" name="ca2021">
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="beneficePerte2021">Benefice / Perte	</label>
+            <input type="text" placeholder="e.g. Smith" class="form-control" id="beneficePerte2021" name="beneficePerte2021">
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="ca2020">CA 2020</label>
+            <input type="text" placeholder="e.g. Smith" class="form-control" id="ca2020" name="ca2020">
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="beneficePerte2020">Benefice / Perte	</label>
+            <input type="text" placeholder="e.g. Smith" class="form-control" id="beneficePerte2020" name="beneficePerte2020">
+          </div>
+        </div>
+
+        <div class="col-sm-6">
+          <div class="form-group check-gender" style="display:flow-root">
+            <label for="conges">Avez vous des congés sur vos locaux actuellement loué ?</label>
+            <div style="display:inline-flex">
+              <div class="custom-radio">
+                <input type="radio" name="conges" class="custom-control-input" id="Yconges" value="yes" >
+                <label class="custom-control-label" for="Yconges">Oui</label>
+              </div>
+              <div class="custom-radio">
+                <input type="radio" name="conges" class="custom-control-input" id="Nconges" value="no" >
+                <label class="custom-control-label" for="Nconges">Non</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6" id="ifYconges" style="display:none">
+          <div class="form-group">
+            <label for="CC">Quel est le loyer CC ?</label>
+            <input type="text" placeholder="e.g. Smith" class="form-control" id="CC" name="CC">
+          </div>
+        </div>
+
+    </div>
+  </div>
+    <div id="ifNplusDeuxAns" style="display:none" >
+      <div class="form-group check-gender" style="display:flow-root">
+        <label for="cautionPerso">Avez-vous la possibilité d'emettre une caution personelle ou d'une entreprise de plus de 2 ans solvable ?</label>
+        <div style="display:inline-flex" id="cautionPerso">
+          <div class="custom-radio">
+            <input type="radio" name="cautionPerso" class="custom-control-input" id="YcautionPerso" value="yes" >
+            <label class="custom-control-label" for="YcautionPerso">Oui</label>
+          </div>
+          <div class="custom-radio">
+            <input type="radio" name="cautionPerso" class="custom-control-input" id="NcautionPerso" value="no">
+            <label class="custom-control-label" for="NcautionPerso">Non</label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group check-gender" style="display:flow-root">
+      <label for="QuietSolution">Votre bailleur a-t-il déjà accepté la solution QuietRent ?</label>
+      <div style="display:inline-flex" id="QuietSolution">
+        <div class="custom-radio">
+          <input type="radio" name="QuietSolution" class="custom-control-input" id="YQuietSolution" value="yes" >
+          <label class="custom-control-label" for="YQuietSolution">Oui</label>
+        </div>
+        <div class="custom-radio">
+          <input type="radio" name="QuietSolution" class="custom-control-input" id="NQuietSolution" value="no">
+          <label class="custom-control-label" for="NQuietSolution">Non</label>
+        </div>
+      </div>
+    </div>
+<!-- <div class="form-group pass-group">
+  <label for="inputPass">Password</label>
+  <input type="password" placeholder="8+ Characters" class="form-control" id="inputPass">
+  <div class="pass-toggler-btn">
+    <i id="eye" class="lar la-eye"></i>
+    <i id="eye-slash" class="lar la-eye-slash"></i>
+  </div>-->
+
+    <button type="submit" class="btn"><span>Suivant</span> <i class="las la-arrow-right"></i></button>
+  </form>
+</div>
+{% endblock %}
+
+{% block js %}
+<script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous">
+    </script>
+<!--        Links pour les templates de register            -->
+    <script src="../../static/register/assets/js/popper.min.js"></script>
+    <script src="../../static/register/assets/js/bootstrap.min.js"></script>
+
+    <!--<script src="../../static/register/assets/js/owl.carousel.min.js"></script>-->
+
+    <script src="../../static/register/assets/js/custom.js"></script>
+    <script src="../../static/register/assets/js/upload.js"></script>
+    <script src="{% static 'admin/assets/plugins/sweet-alert2/sweetalert2.min.js' %}"></script>
+    <script type="module" src="{% static 'register/assets/js/eligibility.js' %}" defer></script>
+{% endblock %}

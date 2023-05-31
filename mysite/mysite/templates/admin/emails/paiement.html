@@ -1,0 +1,77 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>QuietRent</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description">
+    <meta content="" name="author">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+</head>
+<body>
+    <p>Madame, Monsieur,</p>
+    <p>Nous vous remercions de nous avoir interrogés pour la mise en place d'une garantie <span style="font-weight:bold">QuietRent</span> pour votre prochain bail :</p>
+    <p style="margin-left:30px">
+        Candidat locataire : DOC AUTO SARL – Siret {{ deamnde.inputSIREN }}
+        <br>
+        Adresse du bail : {{ demande.inputAddress }}
+        <br>
+        Loyer annuel hc ht : {{ demande.loyer }} € (Merci de confirmer le montant car ce sera définitif)
+    </p>
+    <p>Après étude des pièces reçues, nous avons le plaisir de vous confirmer que <span style="font-weight:bold">votre dossier est éligible à la garantie</span>, pour la substitution d'une somme <span style="font-weight:bold">jusqu'à jusqu'à 28.325 EUR</span> (soit 6 mois de loyer HT HC) au titre d'une 
+        {% if demande.sustitusion == '0' %}
+            d'un dépot de garantie,
+        {% elif demande.substitution == '1' %}
+            d'une garantie à la première demande,
+        {% elif demande.substitution == '2' %}
+            d'un dépot de garantie et d'une garantie à la première demande,
+        {% endif %}
+        ou garantie bancaire, avec versement d'un dépôt de garantie de {{ demande.garantieMois }} mois de loyers hc ht.</p>
+    <p>Le coût du dispositif s'élève à :</p>
+    <ul style="margin-left:30px">
+        <li><span style="font-weight:bold">Cotisation unique pour trois années de garantie</span> (renouvelables) : 3,70 % TTC x 28.325 € x 3 ans = <span style="font-weight:bold">3.144,08 EUR Taxes d'assurances incluses</span></li>
+        <li><span style="font-weight:bold">Frais de dossier</span> à la mise en place de la garantie : 3,70 % HT x 28.325 € = 1.048,03 € HT, soit <span style="font-weight:bold">1.257,63 € TTC (dont TVA 209,61 €)</span></li>
+    </ul>
+    <p style="color:#4885db;font-weight:bold">Quelles sont les prochaines étapes ?</p>
+    <ol>
+        <li>
+            <p style="font-weight:bold">Etablissement du Certificat d'éligibilité</p>
+            <p>
+                Cette acceptation de l'assureur est confirmée par un Certificat d'éligibilité délivré par Insor, courtier gestionnaire délégataire de l'assureur, à réception de votre règlement.
+                <br>
+                Lien de paiement sécurisé / Frais de Certification (120 € TTC) : <a href="https://secure.payplug.com/p/ju6i2GW">"https://secure.payplug.com/p/ju6i2GW"</a>
+                <br>
+                Veuillez préciser cette réference lors du paiement : <span style="color:blue;text-decoration-line:underline">C14734</span>
+                <br>
+                NB : Cette somme de 120 € TTC sera déduite des Frais de dossier lors de la mise en place de la garantie QuietRent.
+                <br>
+                Le Certificat Provisoire d'éligibilité QuietRent Pro sera à remettre au propriétaire ou son mandataire.
+            </p>
+        </li>
+        <li>
+            <p style="font-weight:bold">Etablissement des documents précontractuels</p>
+            <p>Vous seront également adressés les documents précontractuels suivants :</p>
+            <ul style="list-style:circle">
+                <li>Le Contrat de Prestation de Service (CPS) correspondant aux engagements réciproques,</li>
+                <li>
+                    L'avenant au bail proposé au Gestionnaire du bien actant la mise en place du dispositif de substitution,
+                    <br>
+                    NB : le bail ne doit pas contenir de référence au dispositif QuietRent, afin qu'en cas de retrait du dispositif QR, les dispositions initialement prévues par le bailleur puissent revenir en vigueur (les effets de l'avenant QR seront alors annulés par un nouvel avenant).  
+                </li>
+                <li>Bulletin d'adhésion du Propriétaire (ou son Mandataire) pour recueillir son accord.</li>
+                <li>Conditions Générales du contrat QuietRent applicables.</li>
+            </ul>
+        </li>
+        <li>
+            <p style="font-weight:bold">Acceptation du dispositif par le propriétaire ou son mandataire</p>
+            <p>Elle se concrétise par : </p>
+            <ul style="list-style:circle">
+                <li>le retour du Bulletin d'adhésion complété et signé par le Propriétaire ou son Mandataire,</li>
+                <li>les règlements de la cotisation et du solde des frais de dossier.</li>
+            </ul>
+            <p>A réception, Insor, le mandataire de l'assureur, établit l'Attestation de Garantie, destinée au Propriétaire ou son Mandataire, permettant la signature du bail.</p>
+        </li>
+    </ol>
+    <p>Restant à votre disposition pour toute information complémentaire, et dans l'attente de votre retour,</p>
+    <p>Bien cordialement.</p>
+</body>
+</html>

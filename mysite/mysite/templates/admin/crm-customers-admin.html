@@ -1,0 +1,137 @@
+{% extends 'admin/content-admin.html' %}
+
+{% load poll_extras %}
+
+{% block content2 %}
+{% define 0 as type %}
+
+{% for user in AllUser %}
+
+
+{% if user.type == '0' %}
+{% if type == 0 %}
+<div class="row">
+{% endif %}
+
+<div class="col-lg-4">                            
+    <div class="card">                               
+        <div class="card-body"> 
+            <div class="media mb-3">
+                <span class="thumb-xl justify-content-center d-flex align-items-center bg-soft-info rounded-circle me-2" style="text-transform: uppercase;">{{ user.first_name|first }}{{ user.last_name|first }}</span>
+                                    
+                <!-- <img src="../../static/admin/assets/images/users/user-1.jpg" class="me-3 thumb-lg align-self-center rounded-circle" alt="..."> -->
+                <div class="media-body align-self-center"> 
+                    <h4 class="mt-0 mb-0 font-16">{{user.first_name}} {{user.last_name}} 
+                        <!-- <span class="badge badge-soft-warning font-12">
+                            4.8 <i class="mdi mdi-star text-warning ms-1"></i>
+                        </span> -->
+                    </h4>
+                    <p class="text-muted mb-0 font-12">{{user.code_postal}}, {{user.pays}}</p>                                                                                                                                      
+                </div><!--end media body-->                                            
+            </div> <!--end media-->                                    
+            <ul class="list-unstyled mb-2">
+                <li class=""><i data-feather="calendar" class="align-self-center icon-xs icon-dual me-1"></i> <b>Date d'inscription</b> : {{user.date_joined}}</li>
+                <li class="mt-2"><i data-feather="phone" class="align-self-center icon-xs icon-dual me-1"></i> <b> phone </b> : {{user.mobile}}</li>
+                <li class="mt-2"><i data-feather="mail" class="align-self-center icon-xs icon-dual me-1"></i> <b> Email </b> : {{user.email}} </li>                                        
+            </ul>                                    
+            <p class="text-muted  mt-3">
+                <!-- <span class="text-dark font-weight-semibold">Informations complementaires :</span> -->
+                <ul class="list-unstyled mb-2">
+                    <li class=""><b>Entreprise</b> :{% for entreprise in AllEntreprise %} {% if entreprise.user == user.id %} {{entreprise.social_reason}}{% endif %}{% endfor %}</li>
+                    <!-- <li class="mt-2"><b> siteweb </b> : <a href="{{user.siteweb}}"> {{user.siteweb}}</a></li>                                         -->
+                </ul>   
+            </p>    
+            <br/>                                
+            <div>
+                <form method="post" action="../modify-user-super-admin-choice/">
+                    {% csrf_token %}
+                    <button type="submit" name="choice" class="btn btn-sm btn-de-primary" value="{{ user.id }}">Changer l'utilisateur </button></a>
+                </form>
+                &nbsp;
+                <form method="post" action="../message-choice/">
+                    {% csrf_token %}
+                    <button type="submit" name="choice_user" class="btn btn-sm btn-de-primary" value="{{ user.id }}">Envoyer un message </button></a>
+                </form>
+            </div>
+        </div><!--end card-body-->                                                                     
+    </div>  <!--end card-->                          
+</div><!--end col-->
+{% if type == 0 %}
+    {% define 1 as type %}
+{% else %}
+    {% if type == 1 %}
+    {% define 2 as type %}
+    {% else %}
+        {% define 0 as type %}
+        </div>
+    {% endif %}
+{% endif %}
+
+{%endif%}
+
+
+{% if user.type == '2' %}
+
+{% if type == 0 %}
+<div class="row">
+{% endif %}
+
+<div class="col-lg-4">                            
+    <div class="card">                               
+        <div class="card-body"> 
+            <div class="media mb-3">
+                <span class="thumb-xl justify-content-center d-flex align-items-center bg-soft-info rounded-circle me-2" style="text-transform: uppercase;">{{ user.first_name|first }}{{ user.last_name|first }}</span>
+                                    
+                <!-- <img src="../../static/admin/assets/images/users/user-1.jpg" class="me-3 thumb-lg align-self-center rounded-circle" alt="..."> -->
+                <div class="media-body align-self-center"> 
+                    <h4 class="mt-0 mb-0 font-16">{{user.first_name}} {{user.last_name}} 
+                        <!-- <span class="badge badge-soft-warning font-12">
+                            4.8 <i class="mdi mdi-star text-warning ms-1"></i>
+                        </span> -->
+                    </h4>
+                    <p class="text-muted mb-0 font-12">{{user.code_postal}}, {{user.pays}}</p>                                                                                                                                      
+                </div><!--end media body-->                                            
+            </div> <!--end media-->                                    
+            <ul class="list-unstyled mb-2">
+                <li class=""><i data-feather="calendar" class="align-self-center icon-xs icon-dual me-1"></i> <b>Date d'inscription</b> : {{user.date_joined}}</li>
+                <li class="mt-2"><i data-feather="phone" class="align-self-center icon-xs icon-dual me-1"></i> <b> phone </b> : {{user.mobile}}</li>
+                <li class="mt-2"><i data-feather="mail" class="align-self-center icon-xs icon-dual me-1"></i> <b> Email </b> : {{user.email}} </li>                                        
+            </ul>                                    
+            <p class="text-muted  mt-3">
+                <!-- <span class="text-dark font-weight-semibold">Informations complementaires :</span> -->
+                <ul class="list-unstyled mb-2">
+                    <li class=""><b>Entreprise</b> :{% for entreprise in AllEntreprise %} {% if entreprise.user == user.id %} {{entreprise.social_reason}}{% endif %}{% endfor %}</li>
+                    <!-- <li class="mt-2"><b> siteweb </b> : <a href="{{user.siteweb}}"> {{user.siteweb}}</a></li>                                         -->
+                </ul>   
+            </p>    
+            <br/>                                
+            <div>
+                <form method="post" action="../modify-user-super-admin-choice/">
+                    {% csrf_token %}
+                    <button type="submit" name="choice" class="btn btn-sm btn-de-primary" value="{{ user.id }}">Changer l'utilisateur </button></a>
+                </form>
+                &nbsp;
+                <form method="post" action="../message-choice/">
+                    {% csrf_token %}
+                    <button type="submit" name="choice_user" class="btn btn-sm btn-de-primary" value="{{ user.id }}">Envoyer un message </button></a>
+                </form>
+            </div>
+        </div><!--end card-body-->                                                                     
+    </div>  <!--end card-->                          
+</div><!--end col-->
+{% if type == 0 %}
+    {% define 1 as type %}
+{% else %}
+    {% if type == 1 %}
+    {% define 2 as type %}
+    {% else %}
+        {% define 0 as type %}
+        </div>
+    {% endif %}
+{% endif %}
+
+{%endif%}
+
+
+{% endfor %}
+{% endblock %}

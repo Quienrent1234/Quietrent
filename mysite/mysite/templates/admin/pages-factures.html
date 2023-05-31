@@ -1,0 +1,55 @@
+{% extends 'admin/content.html' %}
+
+{% block css %}
+<link href="../../static/admin/assets/plugins/hopscotch/hopscotch.css" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block content2 %}
+    <div class="col-lg-12">
+        <div class="card">
+              <div class="card-header">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <h4 class="card-title">Mes factures</h4>
+                    </div><!--end col-->
+                </div><!--end row-->
+              </div><!--end card-header-->
+        </div><!--end card-->
+        <div class="table-responsive">
+            <table class="table table-bordered mb-0 table-centered">
+                <thead>
+                    <tr>
+                        <th>N° Facture</th>
+                        <th>Nom de la société</th>
+                        <th>Type de la facture</th>
+                        <th>Date de la facture</th>
+                        <th>Statut de la facture</th>
+                        <th class="text-end">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for facture in factures %}
+                    <tr>
+                        <td>{{ facture.id }}</td>
+                        <td>{{ facture.demande.social_reason }}</td>
+                        <td>{{ facture.type }}</td>
+                        <td>{{ facture.date }}</td>
+                        <td><span style="font-size: small" class="badge badge-soft-success">{% if facture.payed %} Payée {% else %} impayée {% endif %}</span></td>
+                        <td class="text-end flex flex-row-reverse">
+                            <form method="post" action="../consulting-docs/">
+                                {% csrf_token %}
+                                <a title="Télécharger ma facture"><button style="margin-left:10px" class="btn btn-de-light shadow-dark" type="submit" value="{{ facture.adresse_doc }}" name="file_name"><img style="width: 25px;" src="../../static/admin/assets/images/down-arrow.png"></button></a>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table><!--end /table-->
+        </div><!--end /tableresponsive-->
+    </div> <!-- end col -->
+{% endblock %}
+
+{% block js %}
+<script src="../../static/admin/assets/plugins/hopscotch/hopscotch.js"></script>
+<script src="../../static/admin/assets/pages/tour.init.js"></script>
+{% endblock %}
